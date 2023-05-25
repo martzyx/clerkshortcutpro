@@ -3,12 +3,15 @@ document.addEventListener('keydown', function(event) {
     var saveAndExitbutton = document.querySelector('[click="saveDesign(true)"] > button');
     var deleteButton = document.querySelector('[click="deleteDesign()"] > button');
     var confirmButton = document.querySelector('[click="$root.uiConfirmConfirm()"] > button');
+    var leavePage = document.querySelector('[click="hideUnsavedModal(true)"] > button');
     if (saveAndExitbutton) {
       saveAndExitbutton.click();
     } else if (deleteButton) {
       deleteButton.click();
     } else if (confirmButton) {
       confirmButton.click();
+    } else if (leavePage) {
+      leavePage.click();
     }
   }
 });
