@@ -4,6 +4,7 @@ document.addEventListener('keydown', function(event) {
     var deleteButton = document.querySelector('[click="deleteDesign()"] > button');
     var confirmButton = document.querySelector('[click="$root.uiConfirmConfirm()"] > button');
     var leavePage = document.querySelector('[click="hideUnsavedModal(true)"] > button');
+    var saveCopy = document.querySelector('[click="saveDuplicateDesign(designToDuplicate)"] > button');
     if (saveAndExitbutton) {
       saveAndExitbutton.click();
     } else if (deleteButton) {
@@ -12,6 +13,8 @@ document.addEventListener('keydown', function(event) {
       confirmButton.click();
     } else if (leavePage) {
       leavePage.click();
+    } else if (saveCopy) {
+      saveCopy.click();
     }
   }
 });
