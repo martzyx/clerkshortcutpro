@@ -1,15 +1,19 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "ClerkShortcutPro",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Pressing Enter and Escape key navigates through my.clerk.io UI",
   "icons": {
     "512": "thumbnail.png"
   },
   "content_scripts": [
     {
-      "matches": ["https://my.clerk.io/*"],
-      "js": ["content.js"],
+      "matches": [
+        "https://my.clerk.io/*"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_end"
     }
   ]
