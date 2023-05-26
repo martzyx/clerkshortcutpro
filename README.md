@@ -19,6 +19,8 @@ If using chrome, simply go to chrome > extensions > load unpacked > select the '
 If using firefox:
 Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and select the .zip file in the `firefox/web-ext-artifacts` directory.
 
+If updating chrome manifest, use `node convertManifest.js` to update firefox manifest
+
 ## Contributing
 
 Please submit a pull request if you'd like to contribute.

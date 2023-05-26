@@ -5,6 +5,8 @@ const archiver = require('archiver');
 
 const chromeManifestPath = path.join(__dirname, 'chrome', 'manifest.json');
 const firefoxManifestPath = path.join(__dirname, 'firefox', 'manifest.json');
+const chromeContentJSPath = path.join(__dirname, 'chrome', 'content.js');
+const firefoxContentJSPath = path.join(__dirname, 'firefox', 'content.js');
 const outputZipPath = path.join(__dirname, 'firefox', 'extension.zip');
 
 // Read the Chrome manifest file
@@ -29,20 +31,30 @@ fs.readFile(chromeManifestPath, 'utf8', (err, data) => {
 
     console.log('Firefox manifest file has been successfully generated.');
 
-    // Create the ZIP file
-    const output = fs.createWriteStream(outputZipPath);
-    const archive = archiver('zip', { zlib: { level: 9 } });
+    // Copy the content.js file
+    fs.copyFile(chromeContentJSPath, firefoxContentJSPath, err => {
+      if (err) {
+        console.error('Error copying content.js file:', err);
+        return;
+      }
 
-    output.on('close', () => {
-      console.log('Firefox extension ZIP file has been successfully created.');
+      console.log('content.js file has been successfully copied to the Firefox directory.');
+
+      // Create the ZIP file
+      const output = fs.createWriteStream(outputZipPath);
+      const archive = archiver('zip', { zlib: { level: 9 } });
+
+      output.on('close', () => {
+        console.log('Firefox extension ZIP file has been successfully created.');
+      });
+
+      archive.on('error', err => {
+        console.error('Error creating the Firefox extension ZIP file:', err);
+      });
+
+      archive.pipe(output);
+      archive.directory(path.join(__dirname, 'firefox'), false);
+      archive.finalize();
     });
-
-    archive.on('error', err => {
-      console.error('Error creating the Firefox extension ZIP file:', err);
-    });
-
-    archive.pipe(output);
-    archive.directory(path.join(__dirname, 'firefox'), false);
-    archive.finalize();
   });
 });
