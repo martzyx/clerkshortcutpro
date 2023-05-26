@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const archiver = require('archiver');
 
 const chromeManifestPath = path.join(__dirname, 'chrome', 'manifest.json');
 const firefoxManifestPath = path.join(__dirname, 'firefox', 'manifest.json');
@@ -28,15 +29,20 @@ fs.readFile(chromeManifestPath, 'utf8', (err, data) => {
 
     console.log('Firefox manifest file has been successfully generated.');
 
-    // Run zip command to create the .zip file
-    exec(`zip -r "${outputZipPath}" firefox/*`, (err, stdout, stderr) => {
-      if (err) {
-        console.error('Error creating the Firefox extension .zip file:', err);
-        return;
-      }
+    // Create the ZIP file
+    const output = fs.createWriteStream(outputZipPath);
+    const archive = archiver('zip', { zlib: { level: 9 } });
 
-      console.log(stdout);
-      console.log('Firefox extension .zip file has been successfully created.');
+    output.on('close', () => {
+      console.log('Firefox extension ZIP file has been successfully created.');
     });
+
+    archive.on('error', err => {
+      console.error('Error creating the Firefox extension ZIP file:', err);
+    });
+
+    archive.pipe(output);
+    archive.directory(path.join(__dirname, 'firefox'), false);
+    archive.finalize();
   });
 });
