@@ -4,6 +4,7 @@ const { exec } = require('child_process');
 
 const chromeManifestPath = path.join(__dirname, 'chrome', 'manifest.json');
 const firefoxManifestPath = path.join(__dirname, 'firefox', 'manifest.json');
+const outputZipPath = path.join(__dirname, 'firefox', 'extension.zip');
 
 // Read the Chrome manifest file
 fs.readFile(chromeManifestPath, 'utf8', (err, data) => {
@@ -27,15 +28,15 @@ fs.readFile(chromeManifestPath, 'utf8', (err, data) => {
 
     console.log('Firefox manifest file has been successfully generated.');
 
-    // Run web-ext build command
-    exec('web-ext build --source-dir firefox --artifacts-dir firefox/web-ext-artifacts', (err, stdout, stderr) => {
+    // Run zip command to create the .zip file
+    exec(`zip -r "${outputZipPath}" firefox/*`, (err, stdout, stderr) => {
       if (err) {
-        console.error('Error building the Firefox extension:', err);
+        console.error('Error creating the Firefox extension .zip file:', err);
         return;
       }
 
       console.log(stdout);
-      console.log('Firefox extension has been successfully built and is located in the firefox/web-ext-artifacts directory.');
+      console.log('Firefox extension .zip file has been successfully created.');
     });
   });
 });
