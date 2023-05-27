@@ -12,7 +12,6 @@ function setKeyboardShortcut(shortcut1) {
   console.log("Setting up event listener for shortcut: " + shortcut1);
 
   document.addEventListener("keydown", function (event) {
-    console.log("Key pressed: " + event.key);
     if (event.key === shortcut1) {
       console.log("Shortcut key pressed");
       var saveAndExitbutton = document.querySelector('[click="saveDesign(true)"] > button');
