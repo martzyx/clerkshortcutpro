@@ -37,9 +37,10 @@ If updating chrome manifest, use `node convertManifest.js` to update firefox man
 
 Please submit a pull request if you'd like to contribute.
 
-## TODO
+## Todo:
 - Make backspace shortcut to go back a page
 - Make button that deletes all automatically generated 'best practice' content/designs
+- Remove cmd-z functionality on designs
 
 ## License
 
