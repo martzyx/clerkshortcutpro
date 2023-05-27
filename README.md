@@ -1,8 +1,18 @@
-# ClerkShortcutPro
+# Keyboard Shortcuts Script for my.clerk.io UI
 
-Pressing Enter and Escape key navigates through the Clerk.io UI.
+This user-friendly script facilitates interaction with the my.clerk.io user interface by enabling keyboard shortcuts. It is designed to enhance your efficiency and make navigation smoother. The following keyboard shortcuts are currently available:
 
-## Usage
+- Enter Key: Confirm and Proceed
+- Escape Key: Cancel and Return
+
+## How to Use
+The Enter Key: While interacting with dialogue boxes, pressing the 'Enter' key on your keyboard will allow you to confirm your inputs and proceed. This eliminates the need for manually clicking on the 'Confirm' or 'Proceed' buttons, thus saving you time.
+
+The Escape Key: If you wish to cancel an action or close a dialogue box, simply press the 'Escape' key. This will act similarly to clicking the 'Cancel' or 'Close' button.
+
+Remember, these shortcuts are meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
+
+## Installation
 
 If using chrome:
 1. Open Chrome: Start Google Chrome. In the top-right corner of the browser, click on the three vertical dots to open the main menu.
@@ -29,7 +39,7 @@ Please submit a pull request if you'd like to contribute.
 
 ## TODO
 - Make backspace shortcut to go back a page
-- Make button that deletes all content/designs
+- Make button that deletes all automatically generated 'best practice' content/designs
 
 ## License
 
