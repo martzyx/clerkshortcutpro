@@ -1,30 +1,21 @@
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Enter') {
-    var saveAndExitbutton = document.querySelector('[click="saveDesign(true)"] > button');
-    var deleteButton = document.querySelector('[click="deleteDesign()"] > button');
-    var confirmButton = document.querySelector('[click="$root.uiConfirmConfirm()"] > button');
-    var leavePage = document.querySelector('[click="hideUnsavedModal(true)"] > button');
-    var saveCopy = document.querySelector('[click="saveDuplicateDesign(designToDuplicate)"] > button');
-    if (saveAndExitbutton) {
-      saveAndExitbutton.click();
-    } else if (deleteButton) {
-      deleteButton.click();
-    } else if (confirmButton) {
-      confirmButton.click();
-    } else if (leavePage) {
-      leavePage.click();
-    } else if (saveCopy) {
-      saveCopy.click();
-    }
-  }
-});
-//chrome update test
+var s = document.createElement('script');
+s.src = chrome.runtime.getURL('injected.js');
+(document.head || document.documentElement).appendChild(s);
+s.onload = function() {
+    s.remove();
+};
 
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    var closeModal = document.querySelector('[ng-click="closeModal()"]');
-    if (closeModal) {
-      closeModal.click();
-    } 
+chrome.storage.sync.get({
+  shortcut1: 'Enter', // Default value is 'Enter'
+}, function(items) {
+  window.postMessage({ type: "FROM_CONTENT_SCRIPT", shortcut1: items.shortcut1 }, "*");
+});
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  for (var key in changes) {
+      if (key === 'shortcut1') {
+          window.postMessage({ type: "FROM_CONTENT_SCRIPT", shortcut1: changes.shortcut1.newValue }, "*");
+      }
+      // Handle other shortcuts here
   }
 });
