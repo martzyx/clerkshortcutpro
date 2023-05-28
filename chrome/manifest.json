@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ClerkShortcutPro",
   "version": "0.2.2",
-  "description": "Provides intuitive keyboard shortcuts to navigate through my.clerk.io UI",
+  "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
   "permissions": ["storage"],
   "web_accessible_resources": [
     {

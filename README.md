@@ -1,9 +1,12 @@
-# Keyboard Shortcuts Script for my.clerk.io UI
+# Shortcuts for my.clerk.io UI
 
-This user-friendly script facilitates interaction with the my.clerk.io user interface by enabling keyboard shortcuts. It is designed to enhance your efficiency and make navigation smoother. The following keyboard shortcuts are currently available:
+This user-friendly extension facilitates interaction with the my.clerk.io user interface by enabling keyboard shortcuts and workflow automation. It is designed to enhance your efficiency and make navigation smoother. The following keyboard shortcuts are currently available:
 
-- Enter Key: Confirm and Proceed
-- Escape Key: Cancel and Return
+- Confirm and Proceed (default key is 'Enter')
+- Cancel and Return (default key is 'Escape')
+
+The following workflow automation is available:
+- Delete standard search designs
 
 ## Installation
 
@@ -22,11 +25,11 @@ If using chrome:
 
 
 If using firefox:
-Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and select the .zip file in the `firefox/web-ext-artifacts` directory.
+Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and select the extension.zip file in the firefox directory. I am currently waiting for approval from Moz for a full permanent release.
 
 If updating chrome manifest, use `node convertManifest.js` to update firefox manifest
 
-## How to Customize keybinds (Chrome only)
+## How to Customize options and keybinds (Chrome only)
 
 You can customize the keyboard shortcuts according to your preference by following these steps:
 
@@ -38,16 +41,23 @@ Enable or disable the desired shortcuts by toggling the corresponding checkboxes
 
 To change the default keyboard shortcuts, click on the input field for the shortcut you want to modify and press the desired key. The input field will be automatically updated with the selected key.
 
+To enable/disable the Delete Search Designs button, click on the checkbox.
+
 Click the "Save Settings" button to save your changes.
 
-Remember, these shortcuts are meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
+Remember, this extension is meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
+
+## Usage of Delete Search Designs
+
+Head over to the options section of the extension > enable the delete button for search designs.
+Now, whenever you are on my.clerk.io > search designs, refresh the page, and you should see a button at the bottom.
+When clicking this button, it deletes all designs that match the names of the default designs.
 
 ## Contributing
 
 Please submit a pull request if you'd like to contribute.
 
 ## Todo:
-- Make backspace shortcut to go back a page
 - Make button that deletes all automatically generated 'best practice' content/designs
 - Remove cmd-z functionality on designs
 
