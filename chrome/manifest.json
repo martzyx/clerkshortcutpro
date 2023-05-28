@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "ClerkShortcutPro",
-  "version": "0.1.6",
-  "description": "Pressing Enter and Escape key navigates through my.clerk.io UI",
+  "version": "0.2.1",
+  "description": "Provides intuitive keyboard shortcuts to navigate through my.clerk.io UI",
   "permissions": ["storage"],
   "web_accessible_resources": [
     {

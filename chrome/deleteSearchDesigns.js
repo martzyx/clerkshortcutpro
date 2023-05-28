@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
       // Check the URL pattern
       const urlPattern = /^https:\/\/my.clerk.io\/#\/store\/\w+\/search\/designs$/;
       if (urlPattern.test(window.location.href)) {
-        console.log('found search designssssssssss');
         // Find the c-card element
         const cardElement = document.querySelector('c-card[headline-title="Design"]');
         
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (cardElement) {
           // Create a new button element
           const btn = document.createElement("button");
-          btn.innerHTML = "Click me!";
+          btn.innerHTML = "Delete standard crap!";
           
           // Append the button to the card element
           cardElement.appendChild(btn);
