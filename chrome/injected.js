@@ -10,7 +10,7 @@ function setKeyboardShortcut(shortcut1, enableShortcut1) {
   if (enableShortcut1) {
     document.addEventListener("keydown", function (event) {
       if (event.key === shortcut1) {
-        console.log("Proceed shorcut pressed: " + shortcut1);
+        console.log("Proceed shortcut pressed: " + shortcut1);
         var saveAndExitbutton = document.querySelector('[click="saveDesign(true)"] > button');
         var deleteButton = document.querySelector('[click="deleteDesign()"] > button');
         var confirmButton = document.querySelector('[click="$root.uiConfirmConfirm()"] > button');

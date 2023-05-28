@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": ["https://my.clerk.io/*"],
-      "js": ["content.js", "injected.js"],
+      "js": ["content.js", "injected.js", "deleteSearchDesigns.js"],
       "run_at": "document_start"
     }
   ]  
