@@ -63,6 +63,7 @@ function save_options(e) {
       enableShortcut1: document.getElementById("enable-shortcut1").checked,
       shortcut2: shortcut2Value,
       enableShortcut2: document.getElementById("enable-shortcut2").checked,
+
       // Add other shortcuts and their enable/disable values here
     },
     function () {
@@ -132,8 +133,7 @@ chrome.storage.sync.get(
     });
 
     if (items.enableDeleteDesigns) {
-      // Call your deleteSearchDesigns function here
-      deleteSearchDesigns();
+
     }
   }
 );
