@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   restore_options();
   assignProceedShortcutListener();
-  assignCloseModalShortcutListener()
+  assignCloseModalShortcutListener();
   // When form is submitted, save settings
   document.getElementById('shortcut-form').addEventListener('submit', function(e) {
     save_options(e);
@@ -43,6 +43,12 @@ document.getElementById('enable-shortcut2').addEventListener('change', function(
   document.getElementById('shortcut2').disabled = !enableShortcut;
 });
 
+// Enable/Disable Delete Designs Function
+document.getElementById('enable-delete-designs').addEventListener('change', function() {
+  var enableDeleteDesigns = document.getElementById('enable-delete-designs').checked;
+  chrome.storage.sync.set({ enableDeleteDesigns: enableDeleteDesigns });
+});
+
 // Saves options to chrome.storage.sync
 function save_options(e) {
   e.preventDefault();
@@ -50,12 +56,7 @@ function save_options(e) {
 
   var shortcut1Value = document.getElementById("shortcut1").value;
   var shortcut2Value = document.getElementById("shortcut2").value;
-/*
-  console.log("Shortcut1 value:", shortcut1Value);
-  console.log("Enable Shortcut1:", document.getElementById("enable-shortcut1").checked);
-  console.log("Shortcut2 value:", shortcut2Value);
-  console.log("Enable Shortcut2:", document.getElementById("enable-shortcut2").checked);
-*/
+
   chrome.storage.sync.set(
     {
       shortcut1: shortcut1Value,
@@ -80,6 +81,7 @@ function restore_options() {
       enableShortcut1: true, // default value
       shortcut2: "Escape", // default value
       enableShortcut2: true, // default value
+      enableDeleteDesigns: false // default value
       // Add other shortcuts and their enable/disable values here
     },
     function (items) {
@@ -90,6 +92,8 @@ function restore_options() {
       document.getElementById("shortcut2").value = items.shortcut2;
       document.getElementById("enable-shortcut2").checked = items.enableShortcut2;
       document.getElementById("shortcut2").disabled = !items.enableShortcut2;
+
+      document.getElementById("enable-delete-designs").checked = items.enableDeleteDesigns;
 
       // Set the default shortcut values without waiting for keydown event
       if (items.shortcut1 === "Enter") {
@@ -111,6 +115,7 @@ chrome.storage.sync.get(
     enableShortcut1: false, // default value
     shortcut2: "default shortcut", // default value
     enableShortcut2: false, // default value
+    enableDeleteDesigns: false // default value
     // Add other shortcuts and their enable/disable values here
   },
   function (items) {
@@ -125,5 +130,10 @@ chrome.storage.sync.get(
       }
       // Handle other shortcuts here
     });
+
+    if (items.enableDeleteDesigns) {
+      // Call your deleteSearchDesigns function here
+      deleteSearchDesigns();
+    }
   }
 );
