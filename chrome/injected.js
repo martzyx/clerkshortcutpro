@@ -1,18 +1,16 @@
 window.addEventListener("message", function (event) {
   if (event.source !== window) return;
   if (event.data.type && event.data.type === "FROM_CONTENT_SCRIPT") {
-    console.log("Received message from content script: " + event.data.shortcut1);
-    console.log('is shortcut enabled? ' + event.data.enableShortcut1);
     setKeyboardShortcut(event.data.shortcut1, event.data.enableShortcut1);
+    setKeyboardShortcut2(event.data.shortcut2, event.data.enableShortcut2);
   }
 });
 
 function setKeyboardShortcut(shortcut1, enableShortcut1) {
-  console.log("Setting up event listener for shortcut: " + shortcut1);
   if (enableShortcut1) {
     document.addEventListener("keydown", function (event) {
       if (event.key === shortcut1) {
-        console.log("Shortcut key pressed");
+        console.log("Proceed shorcut pressed: " + shortcut1);
         var saveAndExitbutton = document.querySelector('[click="saveDesign(true)"] > button');
         var deleteButton = document.querySelector('[click="deleteDesign()"] > button');
         var confirmButton = document.querySelector('[click="$root.uiConfirmConfirm()"] > button');
@@ -41,13 +39,17 @@ function setKeyboardShortcut(shortcut1, enableShortcut1) {
   }
 }
 
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
-    console.log("Escape key pressed");
-    var closeModal = document.querySelector('[ng-click="closeModal()"]');
-    if (closeModal) {
-      console.log("Clicking closeModal");
-      closeModal.click();
-    }
+function setKeyboardShortcut2(shortcut2, enableShortcut2) {
+  if (enableShortcut2) {
+    document.addEventListener("keydown", function (event) {
+      if (event.key === shortcut2) {
+        console.log("closeModal shortcut pressed: " + shortcut2);
+        var closeModal = document.querySelector('[ng-click="closeModal()"]');
+        if (closeModal) {
+          console.log("Clicking closeModal");
+          closeModal.click();
+        }
+      }
+    });
   }
-});
+}
