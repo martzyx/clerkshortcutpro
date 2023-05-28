@@ -1,12 +1,26 @@
-<script src="settings.js"></script>
-
+<!DOCTYPE html>
 <html>
+
+<head>
+    <title>Shortcut Settings</title>
+</head>
+
 <body>
-    <h1>Settings</h1>
+    <h1>Shortcut Settings</h1>
     <form id="shortcut-form">
-        <label for="shortcut1">Shortcut 1:</label><br>
-        <input type="text" id="shortcut1" name="shortcut1"><br>
-        <input type="submit" value="Save">
+        <label for="enable-shortcut1">Enable proceed/confirm shortcut:</label>
+        <input type="checkbox" id="enable-shortcut1" name="enable-shortcut1">
+        <br>
+        <label for="shortcut1">Map the key you want to use (default is 'enter'):</label>
+        <input type="text" id="shortcut1" name="shortcut1">
+
+
+
+        <br>
+        <button type="submit">Save Settings</button>
     </form>
+
+    <script src="settings.js"></script>
 </body>
+
 </html>
