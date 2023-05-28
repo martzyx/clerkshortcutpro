@@ -5,10 +5,18 @@ This user-friendly script facilitates interaction with the my.clerk.io user inte
 - Enter Key: Confirm and Proceed
 - Escape Key: Cancel and Return
 
-## How to Use
-The Enter Key: While interacting with dialogue boxes, pressing the 'Enter' key on your keyboard will allow you to confirm your inputs and proceed. This eliminates the need for manually clicking on the 'Confirm' or 'Proceed' buttons, thus saving you time.
+## How to Customize keybinds (Chrome only)
+You can customize the keyboard shortcuts according to your preference by following these steps:
 
-The Escape Key: If you wish to cancel an action or close a dialogue box, simply press the 'Escape' key. This will act similarly to clicking the 'Cancel' or 'Close' button.
+Open the Clerk.io extension options by clicking on the extension icon in your browser toolbar.
+
+In the options page, you will find the settings for the keyboard shortcuts.
+
+Enable or disable the desired shortcuts by toggling the corresponding checkboxes.
+
+To change the default keyboard shortcuts, click on the input field for the shortcut you want to modify and press the desired key. The input field will be automatically updated with the selected key.
+
+Click the "Save Settings" button to save your changes.
 
 Remember, these shortcuts are meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
 
