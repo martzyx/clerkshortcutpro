@@ -5,21 +5,6 @@ This user-friendly script facilitates interaction with the my.clerk.io user inte
 - Enter Key: Confirm and Proceed
 - Escape Key: Cancel and Return
 
-## How to Customize keybinds (Chrome only)
-You can customize the keyboard shortcuts according to your preference by following these steps:
-
-Open the Clerk.io extension options by clicking on the extension icon in your browser toolbar.
-
-In the options page, you will find the settings for the keyboard shortcuts.
-
-Enable or disable the desired shortcuts by toggling the corresponding checkboxes.
-
-To change the default keyboard shortcuts, click on the input field for the shortcut you want to modify and press the desired key. The input field will be automatically updated with the selected key.
-
-Click the "Save Settings" button to save your changes.
-
-Remember, these shortcuts are meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
-
 ## Installation
 
 If using chrome:
@@ -40,6 +25,22 @@ If using firefox:
 Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and select the .zip file in the `firefox/web-ext-artifacts` directory.
 
 If updating chrome manifest, use `node convertManifest.js` to update firefox manifest
+
+## How to Customize keybinds (Chrome only)
+
+You can customize the keyboard shortcuts according to your preference by following these steps:
+
+Open the Clerk.io extension options by clicking on the extension icon in your browser toolbar.
+
+In the options page, you will find the settings for the keyboard shortcuts.
+
+Enable or disable the desired shortcuts by toggling the corresponding checkboxes.
+
+To change the default keyboard shortcuts, click on the input field for the shortcut you want to modify and press the desired key. The input field will be automatically updated with the selected key.
+
+Click the "Save Settings" button to save your changes.
+
+Remember, these shortcuts are meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
 
 ## Contributing
 
