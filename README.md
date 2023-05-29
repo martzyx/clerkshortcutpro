@@ -60,6 +60,7 @@ Please submit a pull request if you'd like to contribute.
 ## Todo:
 - Make button that deletes all automatically generated 'best practice' content/designs (done on search designs for chrome)
 - Make delete search button functionality for firefox too
+- Make OB designs available to be copy/pasted easily
 
 ## License
 
