@@ -25,6 +25,7 @@ If using chrome:
 
 
 If using firefox:
+
 Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and select the extension.zip file in the firefox directory. I am currently waiting for approval from Moz for a full permanent release.
 
 If updating chrome manifest, use `node convertManifest.js` to update firefox manifest
@@ -61,6 +62,7 @@ Please submit a pull request if you'd like to contribute.
 - Make button that deletes all automatically generated 'best practice' content/designs (done on search designs for chrome)
 - Make delete search button functionality for firefox too
 - Make OB designs available to be copy/pasted easily
+- Add shortcuts for buttons with new design flow
 
 ## License
 
