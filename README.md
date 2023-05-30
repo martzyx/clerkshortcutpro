@@ -25,8 +25,8 @@ If using chrome:
 
 
 If using firefox:
-
-Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and select the extension.zip file in the firefox directory. I am currently waiting for approval from Moz for a full permanent release.
+1. Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and 
+2. select the extension.zip file in the ClerkShortcutPro/firefox directory. I am currently waiting for approval from Moz for a full permanent release.
 
 If updating chrome manifest, use `node convertManifest.js` to update firefox manifest
 
