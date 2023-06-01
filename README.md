@@ -28,7 +28,7 @@ If using firefox:
 1. Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and 
 2. select the extension.zip file in the ClerkShortcutPro/firefox directory. I am currently waiting for approval from Moz for a full permanent release.
 
-If updating chrome manifest, use `node convertManifest.js` to update firefox manifest
+If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
 
 ## How to Customize options and keybinds (Chrome only)
 
@@ -63,6 +63,8 @@ Please submit a pull request if you'd like to contribute.
 - Make delete search button functionality for firefox too
 - Make OB designs available to be copy/pasted easily
 - Add shortcuts for buttons with new design flow
+- Update firefox extension with verified release
+- Work on porting functionality to Firefox
 
 ## License
 
