@@ -19,14 +19,24 @@ If using chrome:
 
 4. Load Unpacked Extension: Click on the Load unpacked button which will appear after you have enabled Developer Mode. This will open a file dialogue box.
 
-5. Select the Extension Folder: In the file dialogue box, navigate to the location where you installed this repo. Select the folder "chrome" and click Open or Select Folder (the exact wording may vary depending on your operating system).
+5. Select the chrome Extension Folder: In the file dialogue box, navigate to the location where you installed this repo. Select the folder "chrome" and click Open or Select Folder.
 
 6. Verify the Extension: Your extension should now be listed among your other installed extensions. You should see its name, version, and a few options to manage it. Check if the extension icon appears in your Chrome extensions.
 
 
 If using firefox:
-1. Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and 
-2. select the firefox-clerkshorcutpro-x.x.x.zip file in the ClerkShortcutPro/firefox directory. I am currently waiting for approval from Moz for a full permanent release.
+1. In Firefox, click on the menu button (three horizontal lines) located in the top-right corner of the browser window.
+
+2. From the menu, select Add-ons. This will open the Firefox Add-ons Manager.
+
+3. In the Add-ons Manager, click on the gear icon (⚙) located in the top-right corner of the page.
+
+4. From the dropdown menu, choose Install Add-on From File.
+
+5. Navigate to the location where you downloaded the firefox-clerkshortcutpro-x.x.x.xpi file. Select the file and click on the Open button.
+
+6. The Clerk Shortcut Pro extension is now ready to use. You may need to restart Firefox for the extension to take effect.
+
 
 If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
 
