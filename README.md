@@ -26,7 +26,7 @@ If using chrome:
 
 If using firefox:
 1. Load the extension into your Firefox browser by navigating to `about:debugging`, clicking "This Firefox", then "Load Temporary Add-on...", and 
-2. select the extension.zip file in the ClerkShortcutPro/firefox directory. I am currently waiting for approval from Moz for a full permanent release.
+2. select the firefox-clerkshorcutpro-x.x.x.zip file in the ClerkShortcutPro/firefox directory. I am currently waiting for approval from Moz for a full permanent release.
 
 If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
 
@@ -62,7 +62,6 @@ Please submit a pull request if you'd like to contribute.
 - Make button that deletes all automatically generated 'best practice' content/designs (done on search designs for chrome)
 - Make delete search button functionality for firefox too
 - Make OB designs available to be copy/pasted easily
-- Add shortcuts for buttons with new design flow
 - Update firefox extension with verified release
 - Work on porting functionality to Firefox
 
