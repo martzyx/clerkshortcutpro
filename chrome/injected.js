@@ -15,9 +15,9 @@ function setKeyboardShortcut(shortcut1, enableShortcut1) {
         var deleteButton = document.querySelector('[click="deleteDesign()"] > button');
         var confirmButton = document.querySelector('[click="$root.uiConfirmConfirm()"] > button');
         var leavePage = document.querySelector('[click="hideUnsavedModal(true)"] > button');
-        var saveCopy = document.querySelector(
-          '[click="saveDuplicateDesign(designToDuplicate)"] > button'
-        );
+        var saveCopy = document.querySelector('[click="saveDuplicateDesign(designToDuplicate)"] > button');
+        var nextButton = document.querySelector('[ng-click="selectIndex($index, \'next\')"] > button');
+        var createDesign = document.querySelector('[ng-click="submitEvent(config)"] > button');
         if (saveAndExitbutton) {
           console.log("Clicking saveAndExitbutton");
           saveAndExitbutton.click();
@@ -33,6 +33,12 @@ function setKeyboardShortcut(shortcut1, enableShortcut1) {
         } else if (saveCopy) {
           console.log("Clicking saveCopy");
           saveCopy.click();
+        } else if (nextButton) {
+          console.log("Clicking nextButton");
+          nextButton.click();
+        } else if (createDesign) {
+          console.log("Clicking create design button");
+          createDesign.click();
         }
       }
     });
@@ -45,9 +51,13 @@ function setKeyboardShortcut2(shortcut2, enableShortcut2) {
       if (event.key === shortcut2) {
         console.log("closeModal shortcut pressed: " + shortcut2);
         var closeModal = document.querySelector('[ng-click="closeModal()"]');
+        var exitDesignCreation = document.querySelector('[ng-click="design.exit()"] > button');
         if (closeModal) {
           console.log("Clicking closeModal");
           closeModal.click();
+        } else if (exitDesignCreation) {
+          console.log("Clicking exit new design flow");
+          exitDesignCreation.click();
         }
       }
     });
