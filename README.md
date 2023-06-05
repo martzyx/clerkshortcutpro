@@ -25,20 +25,16 @@ If using chrome:
 
 
 If using firefox:
-1. In Firefox, click on the menu button (three horizontal lines) located in the top-right corner of the browser window.
+Add the extension from the add-on store: https://addons.mozilla.org/en-US/firefox/addon/clerkshortcutpro/
 
-2. From the menu, select Add-ons. This will open the Firefox Add-ons Manager.
-
-3. In the Add-ons Manager, click on the gear icon (⚙) located in the top-right corner of the page.
-
-4. From the dropdown menu, choose Install Add-on From File.
-
-5. Navigate to the location where you downloaded the firefox-clerkshortcutpro-x.x.x.xpi file. Select the file and click on the Open button.
-
-6. The Clerk Shortcut Pro extension is now ready to use. You may need to restart Firefox for the extension to take effect.
+~~1. In Firefox, click on the menu button (three horizontal lines) located in the top-right corner of the browser window.~~
+~~2. From the menu, select Add-ons. This will open the Firefox Add-ons Manager.~~
+~~3. In the Add-ons Manager, click on the gear icon (⚙) located in the top-right corner of the page.~~
+~~4. From the dropdown menu, choose Install Add-on From File.~~
+~~5. Navigate to the location where you downloaded the firefox-clerkshortcutpro-x.x.x.xpi file. Select the file and click on the Open button.~~
+~~6. The Clerk Shortcut Pro extension is now ready to use. You may need to restart Firefox for the extension to take effect.~~
 
 
-If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
 
 ## How to Customize options and keybinds (Chrome only)
 
@@ -69,7 +65,7 @@ When clicking this button, it deletes all designs that match the names of the de
 Please submit a pull request if you'd like to contribute.
 
 ## Todo:
-- Make button that deletes all automatically generated 'best practice' content/designs (done on search designs for chrome)
+- Make shortcuts for setup guide flow
 - Make delete search button functionality for firefox too
 - Make OB designs available to be copy/pasted easily
 - Update firefox extension with verified release
@@ -78,3 +74,6 @@ Please submit a pull request if you'd like to contribute.
 ## License
 
 See the LICENSE file for license rights and limitations.
+
+## Note to self
+If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
