@@ -10,7 +10,7 @@ The following workflow automation is available:
 
 ## Installation
 
-If using chrome:
+**If using chrome:**
 1. Open Chrome: Start Google Chrome. In the top-right corner of the browser, click on the three vertical dots to open the main menu.
 
 2. Navigate to Extensions: In the dropdown menu, select More Tools > Extensions. This will open a new tab that shows all your installed extensions.
@@ -24,7 +24,7 @@ If using chrome:
 6. Verify the Extension: Your extension should now be listed among your other installed extensions. You should see its name, version, and a few options to manage it. Check if the extension icon appears in your Chrome extensions.
 
 
-If using firefox:
+**If using firefox:**
 Add the extension from the add-on store: https://addons.mozilla.org/en-US/firefox/addon/clerkshortcutpro/
 
 ~~1. In Firefox, click on the menu button (three horizontal lines) located in the top-right corner of the browser window.~~
@@ -54,7 +54,7 @@ Click the "Save Settings" button to save your changes.
 
 Remember, this extension is meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
 
-## Usage of Delete Search Designs
+## Usage of Delete Search Designs (Only Chrome)
 
 Head over to the options section of the extension > enable the delete button for search designs.
 Now, whenever you are on my.clerk.io > search designs, refresh the page, and you should see a button at the bottom.
@@ -68,8 +68,8 @@ Please submit a pull request if you'd like to contribute.
 - Make shortcuts for setup guide flow
 - Make delete search button functionality for firefox too
 - Make OB designs available to be copy/pasted easily
-- Update firefox extension with verified release
 - Work on porting functionality to Firefox
+- Get logo on Firefox
 
 ## License
 
