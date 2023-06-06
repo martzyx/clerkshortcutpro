@@ -1,47 +1,42 @@
 document.addEventListener("keydown", function (event) {
   if (event.key === 'Enter') {
-    var saveAndExitbutton = document.querySelector('[click="saveDesign(true)"] > button');
-    var deleteButton = document.querySelector('[click="deleteDesign()"] > button');
-    var confirmButton = document.querySelector('[click="$root.uiConfirmConfirm()"] > button');
-    var leavePage = document.querySelector('[click="hideUnsavedModal(true)"] > button');
-    var saveCopy = document.querySelector('[click="saveDuplicateDesign(designToDuplicate)"] > button');
-    var nextButton = document.querySelector('[ng-click="selectIndex($index, \'next\')"] > button');
-    var createDesign = document.querySelector('[ng-click="submitEvent(config)"] > button');
-    if (saveAndExitbutton) {
-      console.log("Clicking saveAndExitbutton");
-      saveAndExitbutton.click();
-    } else if (deleteButton) {
-      console.log("Clicking deleteButton");
-      deleteButton.click();
-    } else if (confirmButton) {
-      console.log("Clicking confirmButton");
-      confirmButton.click();
-    } else if (leavePage) {
-      console.log("Clicking leavePage");
-      leavePage.click();
-    } else if (saveCopy) {
-      console.log("Clicking saveCopy");
-      saveCopy.click();
-    } else if (nextButton) {
-      console.log("Clicking nextButton");
-      nextButton.click();
-    } else if (createDesign) {
-      console.log("Clicking create design button");
-      createDesign.click();
+    const buttons = [
+      { selector: '[click="saveDesign(true)"] > button', message: 'Clicking saveAndExitbutton' },
+      { selector: '[click="deleteDesign()"] > button', message: 'Clicking deleteButton' },
+      { selector: '[click="$root.uiConfirmConfirm()"] > button', message: 'Clicking confirmButton' },
+      { selector: '[click="hideUnsavedModal(true)"] > button', message: 'Clicking leavePage' },
+      { selector: '[click="saveDuplicateDesign(designToDuplicate)"] > button', message: 'Clicking saveCopy' },
+      { selector: '[ng-click="selectIndex($index, \'next\')"] > button', message: 'Clicking nextButton' },
+      { selector: '[ng-click="submitEvent(config)"] > button', message: 'Clicking create design button' },
+      { selector: '[ng-view] .green.button', message: 'Clicking green button in setup flow' },
+      // Add more buttons here 
+    ];
+
+    for (let button of buttons) {
+      const element = document.querySelector(button.selector);
+      if (element) {
+        console.log(button.message);
+        element.click();
+        break;  // Exit the loop as soon as we find a button that exists
+      }
     }
   }
 });
 
 document.addEventListener("keydown", function (event) {
   if (event.key === 'Escape') {
-    var closeModal = document.querySelector('[ng-click="closeModal()"]');
-    var exitDesignCreation = document.querySelector('[ng-click="design.exit()"] > button');
-    if (closeModal) {
-      console.log("Clicking closeModal");
-      closeModal.click();
-    } else if (exitDesignCreation) {
-      console.log("Clicking exit new design flow");
-      exitDesignCreation.click();
+    const buttons = [
+      { selector: '[ng-click="closeModal()"]', message: 'Clicking closeModal' },
+      { selector: '[ng-click="design.exit()"] > button', message: 'Clicking exit new design flow' },
+      { selector: '[ng-view] .gray.button', message: 'Clicking back in setup flow' },
+    ]
+    for (let button of buttons) {
+      const element = document.querySelector(button.selector);
+      if (element) {
+        console.log(button.message);
+        element.click();
+        break;  // Exit the loop as soon as we find a button that exists
+      }
     }
   }
 });

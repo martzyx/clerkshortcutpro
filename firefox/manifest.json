@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ClerkShortcutPro",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Pressing Enter and Escape key navigates through my.clerk.io UI",
   "icons": {
     "512": "thumbnail.png"
