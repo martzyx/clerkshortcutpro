@@ -65,11 +65,11 @@ When clicking this button, it deletes all designs that match the names of the de
 Please submit a pull request if you'd like to contribute.
 
 ## Todo:
-- Make shortcuts for setup guide flow
 - Make delete search button functionality for firefox too
 - Make OB designs available to be copy/pasted easily
 - Work on porting functionality to Firefox
 - Get logo on Firefox
+- Make settings open in tooltip/popup instead of new tab (chrome)
 
 ## License
 
