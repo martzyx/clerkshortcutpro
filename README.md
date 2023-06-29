@@ -71,6 +71,7 @@ Please submit a pull request if you'd like to contribute.
 - Make settings open in tooltip/popup instead of new tab (chrome)
 - Make shortcut for exit content, and exit side popup for selecting products (document.querySelector('.visible .fal.fa-times'))
 - redo selector for exit design flow ('[ng-view] .header > .gray.button')
+- remove shortcut on make new store flow
 
 ## License
 
