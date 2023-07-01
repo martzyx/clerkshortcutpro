@@ -20,7 +20,7 @@ function setKeyboardShortcut(shortcut1, enableShortcut1) {
           { selector: '[click="saveDuplicateDesign(designToDuplicate)"] > button', message: 'Clicking saveCopy' },
           { selector: '[ng-click="selectIndex($index, \'next\')"] > button', message: 'Clicking nextButton' },
           { selector: '[ng-click="submitEvent(config)"] > button', message: 'Clicking create design button' },
-          { selector: '[ng-view] .green.button', message: 'Clicking green button in setup flow' },
+          { selector: '[ng-view] .body .green.button', message: 'Clicking green button in setup flow' },
           // Add more buttons here 
         ];
 
