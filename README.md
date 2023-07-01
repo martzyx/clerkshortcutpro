@@ -11,30 +11,10 @@ The following workflow automation is available:
 ## Installation
 
 **If using chrome:**
-1. Open Chrome: Start Google Chrome. In the top-right corner of the browser, click on the three vertical dots to open the main menu.
-
-2. Navigate to Extensions: In the dropdown menu, select More Tools > Extensions. This will open a new tab that shows all your installed extensions.
-
-3. Enable Developer Mode: On the Extensions page, look for a toggle switch at the top-right corner labeled Developer Mode. If it's not already enabled, click on the toggle to enable it.
-
-4. Load Unpacked Extension: Click on the Load unpacked button which will appear after you have enabled Developer Mode. This will open a file dialogue box.
-
-5. Select the chrome Extension Folder: In the file dialogue box, navigate to the location where you installed this repo. Select the folder "chrome" and click Open or Select Folder.
-
-6. Verify the Extension: Your extension should now be listed among your other installed extensions. You should see its name, version, and a few options to manage it. Check if the extension icon appears in your Chrome extensions.
-
+https://chrome.google.com/webstore/detail/clerkshortcutpro/cgacjinjmhilbalfehjefkebkjlomkhl
 
 **If using firefox:**
-Add the extension from the add-on store: https://addons.mozilla.org/en-US/firefox/addon/clerkshortcutpro/
-
-~~1. In Firefox, click on the menu button (three horizontal lines) located in the top-right corner of the browser window.~~
-~~2. From the menu, select Add-ons. This will open the Firefox Add-ons Manager.~~
-~~3. In the Add-ons Manager, click on the gear icon (⚙) located in the top-right corner of the page.~~
-~~4. From the dropdown menu, choose Install Add-on From File.~~
-~~5. Navigate to the location where you downloaded the firefox-clerkshortcutpro-x.x.x.xpi file. Select the file and click on the Open button.~~
-~~6. The Clerk Shortcut Pro extension is now ready to use. You may need to restart Firefox for the extension to take effect.~~
-
-
+https://addons.mozilla.org/en-US/firefox/addon/clerkshortcutpro/
 
 ## How to Customize options and keybinds (Chrome only)
 
@@ -54,7 +34,7 @@ Click the "Save Settings" button to save your changes.
 
 Remember, this extension is meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
 
-## Usage of Delete Search Designs (Only Chrome)
+## Usage of Delete Search Designs (Chrome only)
 
 Head over to the options section of the extension > enable the delete button for search designs.
 Now, whenever you are on my.clerk.io > search designs, refresh the page, and you should see a button at the bottom.
