@@ -31,27 +31,8 @@ if (window.location.href.includes("recommendations/content")) {
                 headlineElement.appendChild(button);
             }
         }
-
-        // shortcut to render translate buttons
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                console.log("entered for translations");
-                insertButtons();
-                var dkButton = document.querySelector(".translateDK");
-                var inputValue = headlineInput.value;
-                dkButton.addEventListener("click", () => {
-                    for (var i = 0; i < translation.length; i++) {
-                        if (translation[i].origin === inputValue) {
-                            headlineInput.value = translation[i].dk;
-                            break;
-                        }
-                    }
-                });
-            }
-        });
-
         //translation dictionary
-        var translation = [
+        const translations = [
             {
                 origin: "See These Checkout Offers",
                 dk: "Andre har også købt",
@@ -63,6 +44,24 @@ if (window.location.href.includes("recommendations/content")) {
                 se: "Mest populära produkter i denna kategori",
             },
         ];
+
+        // shortcut to render translate buttons
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                insertButtons();
+                var dkButton = document.querySelector(".translateDK");
+                var inputValue = headlineInput.value;
+                dkButton.addEventListener("click", () => {
+                    for (var i = 0; i < translations.length; i++) {
+                        if (translations[i].origin === inputValue) {
+                            headlineInput.value = translations[i].dk;
+                            break;
+                        }
+                    }
+                });
+            }
+        });
+
 
     } else {
         // Parent label not found
