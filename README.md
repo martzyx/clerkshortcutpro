@@ -50,6 +50,7 @@ Please submit a pull request if you'd like to contribute.
 - Make settings open in tooltip/popup instead of new tab (chrome)
 - Make quick translations
 - Trigger deletion of search designs appear on enter keypress
+- Add license file
 
 ## License
 
