@@ -54,5 +54,6 @@ Please submit a pull request if you'd like to contribute.
 
 See the LICENSE file for license rights and limitations.
 
-## Note to self
-If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
+## Notes to self
+- If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
+- To package firefox: Use command web-ext build 
