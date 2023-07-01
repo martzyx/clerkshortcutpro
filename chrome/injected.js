@@ -47,6 +47,8 @@ function setKeyboardShortcut2(shortcut2, enableShortcut2) {
           { selector: '[ng-click="closeModal()"]', message: 'Clicking closeModal' },
           { selector: '[ng-click="design.exit()"] > button', message: 'Clicking exit new design flow' },
           { selector: '[ng-view] .gray.button', message: 'Clicking back in setup flow' },
+          { selector: '[ng-click="content.exit()"] > button', message: 'Exiting new content flow'},
+          { selector: '.sidebar.visible .sidebar-close', message: 'Exiting side modal for selecting products'}
         ]
         for (let button of buttons) {
           const element = document.querySelector(button.selector);
