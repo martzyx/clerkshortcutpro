@@ -6,15 +6,15 @@ if (window.location.href.includes("recommendations/content")) {
             // Button data: class and innerHTML
             var buttonStyling = "margin: 0 2px;border: 1px solid;padding: 0 2px;";
             var buttonData = [
-                { class: "translateEN", text: "EN", style: buttonStyling },
-                { class: "translateDK", text: "DK", style: buttonStyling },
-                { class: "translateSE", text: "SE", style: buttonStyling },
-                { class: "translateNO", text: "NO", style: buttonStyling },
-                { class: "translateNL", text: "NL", style: buttonStyling },
-                { class: "translateFR", text: "FR", style: buttonStyling },
-                { class: "translateDE", text: "DE", style: buttonStyling },
-                { class: "translateIT", text: "IT", style: buttonStyling },
-                { class: "translateES", text: "ES", style: buttonStyling },
+                { class: "translateEN", text: "EN", style: buttonStyling, id: "en" },
+                { class: "translateDK", text: "DK", style: buttonStyling, id: "dk" },
+                { class: "translateSE", text: "SE", style: buttonStyling, id: "se"  },
+                { class: "translateNO", text: "NO", style: buttonStyling, id: "no"  },
+                { class: "translateNL", text: "NL", style: buttonStyling, id: "nl"  },
+                { class: "translateFR", text: "FR", style: buttonStyling, id: "fr"  },
+                { class: "translateDE", text: "DE", style: buttonStyling, id: "de"  },
+                { class: "translateIT", text: "IT", style: buttonStyling, id: "it"  },
+                { class: "translateES", text: "ES", style: buttonStyling, id: "es"  },
             ];
 
             // Loop through the button data
@@ -23,9 +23,10 @@ if (window.location.href.includes("recommendations/content")) {
                 var button = document.createElement("button");
 
                 // Set the class and innerHTML for each button
-                button.className = buttonData[i].class;
+                button.className = buttonData[i].class + " translateButton";
                 button.innerHTML = buttonData[i].text;
                 button.style = buttonData[i].style;
+                button.id = buttonData[i].id;
 
                 // Append the button to the headlineElement
                 headlineElement.appendChild(button);
@@ -34,12 +35,20 @@ if (window.location.href.includes("recommendations/content")) {
         //translation dictionary
         const translations = [
             {
-                origin: "See These Checkout Offers",
+                origin: "Cart / Others Also Bought",
+                en: "See These Checkout Offers",
                 dk: "Andre har også købt",
                 se: "Kolla in dessa erbjudanden!",
+                no: "Se Disse Kassetilbudene",
+                nl: "Misschien ook iets voor jou?",
+                fr: "D'autres clients ont aussi acheté",
+                de: "Kunden, die diesen Artikel gekauft haben, haben auch diese Artikel gekauft:",
+                it: "Altri clienti hanno comprato...",
+                es: "Comprados juntos habitualmente",
             },
             {
-                origin: "Most Popular In This Category",
+                origin: "Category Page / Popular",
+                en: "Most Popular In This Category",
                 dk: "Populære i denne kategori",
                 se: "Mest populära produkter i denna kategori",
             },
@@ -49,20 +58,24 @@ if (window.location.href.includes("recommendations/content")) {
         document.addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
                 insertButtons();
-                var dkButton = document.querySelector(".translateDK");
-                var inputValue = headlineInput.value;
-                dkButton.addEventListener("click", () => {
+                var contentName = document.querySelector(".text-main-headline").innerHTML;
+                var translationButtons = document.querySelectorAll(".translateButton");
+                function applyTranslation(contentName, translationID) {
                     for (var i = 0; i < translations.length; i++) {
-                        if (translations[i].origin === inputValue) {
-                            headlineInput.value = translations[i].dk;
+                        if (translations[i].origin === contentName) {
+                            headlineInput.value = translations[i][translationID];
                             break;
                         }
                     }
+                }
+                translationButtons.forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        var translationID = this.id;
+                        applyTranslation(contentName, translationID);
+                    });
                 });
             }
         });
-
-
     } else {
         // Parent label not found
         console.log("headline not found");
