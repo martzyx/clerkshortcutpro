@@ -2,13 +2,10 @@ let currentUrl = "";
 function checkUrl() {
     if (
         window.location.href.includes("recommendations/content/") &&
-        window.location.href !== currentUrl
+        window.location.href !== currentUrl &&
+        window.location.href.split("recommendations/content/")[1].length > 0
     ) {
         currentUrl = window.location.href;
-        var headlineInput = document.querySelector("#template-variable-headline");
-        var headlineElement = headlineInput.parentNode;
-        console.log(headlineInput + headlineElement + " yuppp");
-
         var headlineInput = document.querySelector("#template-variable-headline");
         var headlineElement = headlineInput.parentNode;
 
@@ -130,27 +127,22 @@ function checkUrl() {
             },
         ];
 
-        // shortcut to render translate buttons
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                insertButtons();
-                var contentName = document.querySelector(".text-main-headline").innerHTML;
-                var translationButtons = document.querySelectorAll(".translateButton");
-                function applyTranslation(contentName, translationID) {
-                    for (var i = 0; i < translations.length; i++) {
-                        if (translations[i].origin === contentName) {
-                            headlineInput.value = translations[i][translationID];
-                            break;
-                        }
-                    }
+        insertButtons();
+        var contentName = document.querySelector(".text-main-headline").innerHTML;
+        var translationButtons = document.querySelectorAll(".translateButton");
+        function applyTranslation(contentName, translationID) {
+            for (var i = 0; i < translations.length; i++) {
+                if (translations[i].origin === contentName) {
+                    headlineInput.value = translations[i][translationID];
+                    break;
                 }
-                translationButtons.forEach(function (button) {
-                    button.addEventListener("click", function () {
-                        var translationID = this.id;
-                        applyTranslation(contentName, translationID);
-                    });
-                });
             }
+        }
+        translationButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var translationID = this.id;
+                applyTranslation(contentName, translationID);
+            });
         });
     }
 }
