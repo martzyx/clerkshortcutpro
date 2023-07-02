@@ -1,20 +1,30 @@
-if (window.location.href.includes("recommendations/content")) {
-    var headlineInput = document.querySelector("#template-variable-headline");
-    var headlineElement = headlineInput.parentNode;
-    if (headlineElement) {
+let currentUrl = "";
+function checkUrl() {
+    if (
+        window.location.href.includes("recommendations/content/") &&
+        window.location.href !== currentUrl
+    ) {
+        currentUrl = window.location.href;
+        var headlineInput = document.querySelector("#template-variable-headline");
+        var headlineElement = headlineInput.parentNode;
+        console.log(headlineInput + headlineElement + " yuppp");
+
+        var headlineInput = document.querySelector("#template-variable-headline");
+        var headlineElement = headlineInput.parentNode;
+
         function insertButtons() {
             // Button data: class and innerHTML
             var buttonStyling = "margin: 0 2px;border: 1px solid;padding: 0 2px;";
             var buttonData = [
                 { class: "translateEN", text: "EN", style: buttonStyling, id: "en" },
                 { class: "translateDK", text: "DK", style: buttonStyling, id: "dk" },
-                { class: "translateSE", text: "SE", style: buttonStyling, id: "se"  },
-                { class: "translateNO", text: "NO", style: buttonStyling, id: "no"  },
-                { class: "translateNL", text: "NL", style: buttonStyling, id: "nl"  },
-                { class: "translateFR", text: "FR", style: buttonStyling, id: "fr"  },
-                { class: "translateDE", text: "DE", style: buttonStyling, id: "de"  },
-                { class: "translateIT", text: "IT", style: buttonStyling, id: "it"  },
-                { class: "translateES", text: "ES", style: buttonStyling, id: "es"  },
+                { class: "translateSE", text: "SE", style: buttonStyling, id: "se" },
+                { class: "translateNO", text: "NO", style: buttonStyling, id: "no" },
+                { class: "translateNL", text: "NL", style: buttonStyling, id: "nl" },
+                { class: "translateFR", text: "FR", style: buttonStyling, id: "fr" },
+                { class: "translateDE", text: "DE", style: buttonStyling, id: "de" },
+                { class: "translateIT", text: "IT", style: buttonStyling, id: "it" },
+                { class: "translateES", text: "ES", style: buttonStyling, id: "es" },
             ];
 
             // Loop through the button data
@@ -44,7 +54,7 @@ if (window.location.href.includes("recommendations/content")) {
                 fr: "D'autres clients ont aussi acheté",
                 de: "Kunden, die diesen Artikel gekauft haben, haben auch diese Artikel gekauft",
                 it: "Altri clienti hanno comprato",
-                es: "Comprados juntos habitualmente"
+                es: "Comprados juntos habitualmente",
             },
             {
                 origin: "Category Page / Popular",
@@ -56,7 +66,7 @@ if (window.location.href.includes("recommendations/content")) {
                 fr: "Les produits les plus populaires de cette catégorie",
                 de: "Bestseller in dieser Kategorie",
                 it: "I più popolari in questa categoria",
-                es: "Los más vendidos en esta categoria"
+                es: "Los más vendidos en esta categoria",
             },
             {
                 origin: "Home Page / Popular",
@@ -68,7 +78,7 @@ if (window.location.href.includes("recommendations/content")) {
                 fr: "Les produits les plus populaires",
                 de: "Bestseller",
                 it: "I nostri prodotti più popolari",
-                es: "Los más vendidos"
+                es: "Los más vendidos",
             },
             {
                 origin: "Home Page / Trending",
@@ -80,7 +90,7 @@ if (window.location.href.includes("recommendations/content")) {
                 fr: "Les articles tendance",
                 de: "Derzeitige Top Seller",
                 it: "I più venduti recentemente",
-                es: "Productos del momento"
+                es: "Productos del momento",
             },
             {
                 origin: "Home Page / Visitor Complementary",
@@ -92,7 +102,7 @@ if (window.location.href.includes("recommendations/content")) {
                 fr: "Nos meilleurs choix pour vous",
                 de: "Wir empfehlen",
                 it: "Prodotti scelti per te",
-                es: "Recomendamos según tus tendencias de compra"
+                es: "Recomendamos según tus tendencias de compra",
             },
             {
                 origin: "Product Page / Alternatives",
@@ -104,7 +114,7 @@ if (window.location.href.includes("recommendations/content")) {
                 fr: "Regardez ces produits alternatifs",
                 de: "Alternativen",
                 it: "Prodotti alternativi",
-                es: "Productos relacionados"
+                es: "Productos relacionados",
             },
             {
                 origin: "Product Page / Others Also Bought",
@@ -116,7 +126,7 @@ if (window.location.href.includes("recommendations/content")) {
                 fr: "D’autres clients ont aussi acheté",
                 de: "Kunden, die diesen Artikel gekauft haben, haben auch diese Artikel gekauft:",
                 it: "Altri clienti hanno comprato",
-                es: "Comprados juntos habitualmemnte"
+                es: "Comprados juntos habitualmemnte",
             },
         ];
 
@@ -142,8 +152,6 @@ if (window.location.href.includes("recommendations/content")) {
                 });
             }
         });
-    } else {
-        // Parent label not found
-        console.log("headline not found");
     }
 }
+setInterval(checkUrl, 1000); // Check every second
