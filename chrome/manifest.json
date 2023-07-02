@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ClerkShortcutPro",
-  "version": "1.1",
+  "version": "1.2.1",
   "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
   "permissions": ["storage"],
   "web_accessible_resources": [
@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": ["https://my.clerk.io/*"],
-      "js": ["content.js", "injected.js", "deleteSearchDesigns.js"],
+      "js": ["content.js", "injected.js", "deleteSearchDesigns.js", "translations.js"],
       "run_at": "document_start"
     }
   ]  
