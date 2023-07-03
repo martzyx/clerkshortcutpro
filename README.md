@@ -51,6 +51,7 @@ Please submit a pull request if you'd like to contribute.
 - Make quick translations
 - Trigger deletion of search designs appear on enter keypress
 - Add license file
+- Add styling of buttons (requested by mah)
 
 ## License
 
