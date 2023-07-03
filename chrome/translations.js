@@ -8,7 +8,6 @@ function checkUrl() {
     ) {
 
         const contentName = document.querySelector(".text-main-headline").innerHTML;
-        let foundTranslatableContent = false;
             //translation dictionary
             const translations = [
                 {
@@ -124,9 +123,22 @@ function checkUrl() {
         
                         // Set the class and innerHTML for each button
                         button.className = buttonData[i].class + " translateButton";
-                        button.innerHTML = buttonData[i].text;
-                        button.style = buttonData[i].style;
+                        button.textContent = buttonData[i].text;
                         button.id = buttonData[i].id;
+
+                        // Set the styling
+                        button.style.margin = '0px 2px';
+                        button.style.textDecoration = 'none';
+                        button.style.color = '#2e7ef9';
+                        button.style.borderBottom = '1px solid #2e7ef9';
+                        button.style.display = 'inline-block';
+                        button.style.marginLeft = '0.4em';
+                        button.style.padding = '0.2em 0.6em';
+                        button.style.border = '1px solid #2e7ef9';
+                        button.style.borderRadius = '5px';
+                        button.style.fontSize = '0.9em';
+                        button.style.fontWeight = 'bold';
+                        button.style.transition = 'all 0.2s';
         
                         // Append the button to the headlineElement
                         headlineElement.appendChild(button);
@@ -139,8 +151,42 @@ function checkUrl() {
                 function applyTranslation(contentName, translationID) {
                     for (var i = 0; i < translations.length; i++) {
                         if (translations[i].origin === contentName) {
-                            headlineInput.value = translations[i][translationID];
-                            event.preventDefault();
+                            
+                        // copy to clipboard
+                        navigator.clipboard.writeText(translations[i][translationID]).then(function() {
+                            // create a new div element 
+                            var tooltip = document.createElement("div");
+                            // and give it some content 
+                            var tooltipText = document.createTextNode("Copied to clipboard!"); 
+                            // add the text node to the newly created div
+                            tooltip.appendChild(tooltipText);  
+
+                            // Set some style
+                            tooltip.style.position = 'absolute';
+                            tooltip.style.borderLeft = '5px solid #16cc53';
+                            tooltip.style.bottom = '20px';
+                            tooltip.style.left = '0px';
+                            tooltip.style.minWidth = '400px';
+                            tooltip.style.maxWidth = '600px';
+                            tooltip.style.padding = '10px 20px';
+                            tooltip.style.textAlign = 'left';
+                            tooltip.style.borderRadius = '0 5px 5px 0';
+                            tooltip.style.backgroundColor = 'white';
+                            tooltip.style.color = '#1f3038';
+                            tooltip.style.boxShadow = '0 0 4px 1px rgba(0, 0, 0, 0.08)';
+                            tooltip.style.transition = 'all 0.5s';
+
+                            // add the newly created element and its content into the DOM 
+                            document.body.appendChild(tooltip);
+
+                            // hide the tooltip after 2 seconds
+                            setTimeout(function() {
+                                tooltip.style.display = 'none';
+                            }, 2000);
+
+                        }, function(err) {
+                            console.error('Could not copy text: ', err);
+                        });
                             break;
                         }
                     }
