@@ -140,6 +140,7 @@ function checkUrl() {
                     for (var i = 0; i < translations.length; i++) {
                         if (translations[i].origin === contentName) {
                             headlineInput.value = translations[i][translationID];
+                            event.preventDefault();
                             break;
                         }
                     }
