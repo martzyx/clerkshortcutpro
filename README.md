@@ -46,12 +46,9 @@ Please submit a pull request if you'd like to contribute.
 
 ## Todo:
 - Make delete search button functionality for firefox too
-- Make OB designs available to be copy/pasted easily
 - Make settings open in tooltip/popup instead of new tab (chrome)
-- Make quick translations
 - Trigger deletion of search designs appear on enter keypress
 - Add license file
-- Add styling of buttons (requested by mah)
 
 ## License
 
@@ -59,4 +56,4 @@ See the LICENSE file for license rights and limitations.
 
 ## Notes to self
 - If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
-- To package firefox: Use command web-ext build 
+- To package firefox: Use command `web-ext build`

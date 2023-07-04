@@ -195,6 +195,7 @@ function checkUrl() {
                     button.addEventListener("click", function () {
                         var translationID = this.id;
                         applyTranslation(contentName, translationID);
+                        headlineInput.value = '';
                     });
                 });
                 break; // Exit the loop since we found a match
