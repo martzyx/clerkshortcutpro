@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ClerkShortcutPro",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Pressing Enter and Escape key navigates through my.clerk.io UI",
   "icons": {
     "512": "thumbnail.png"
@@ -12,7 +12,7 @@
         "https://my.clerk.io/*"
       ],
       "js": [
-        "content.js","translations.js"
+        "content.js","translations.js","deleteSearchDesigns.js"
       ],
       "run_at": "document_end"
     }
