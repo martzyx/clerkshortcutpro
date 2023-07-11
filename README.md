@@ -42,20 +42,19 @@ When viewing best-practice content in Recommendations > Content in my.clerk.io, 
 *(Side note: I tried making it auto-fill, but Angular doesn't allow that to be saved. There needs to be some user input.)*
 
 
-## Usage of Delete Search Designs (Chrome only)
+## Usage of Delete Search Designs
 
-Head over to the options section of the extension > enable the delete button for search designs.
-Now, whenever you are on my.clerk.io > search designs, refresh the page, and you should see a button at the bottom.
+Whenever you are on my.clerk.io > search designs, refresh the page, and you should see a button at the bottom.
 When clicking this button, it deletes all designs that match the names of the default designs.
+In chrome, you can enable/disable this in the options section of the extension.
+![Example](/assets/deletesearchscreeny.png "Walah!")
 
 ## Contributing
 
 Please submit a pull request if you'd like to contribute.
 
 ## Todo:
-- Make delete search button functionality for firefox too
 - Make settings open in tooltip/popup instead of new tab (chrome)
-- Trigger deletion of search designs appear on enter keypress
 - Add license file
 
 ## License
