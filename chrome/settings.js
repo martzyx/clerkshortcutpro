@@ -82,7 +82,7 @@ function restore_options() {
       enableShortcut1: true, // default value
       shortcut2: "Escape", // default value
       enableShortcut2: true, // default value
-      enableDeleteDesigns: false // default value
+      enableDeleteDesigns: true // default value
       // Add other shortcuts and their enable/disable values here
     },
     function (items) {
@@ -116,7 +116,7 @@ chrome.storage.sync.get(
     enableShortcut1: false, // default value
     shortcut2: "default shortcut", // default value
     enableShortcut2: false, // default value
-    enableDeleteDesigns: false // default value
+    enableDeleteDesigns: true // default value
     // Add other shortcuts and their enable/disable values here
   },
   function (items) {
