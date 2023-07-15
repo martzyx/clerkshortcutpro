@@ -1,6 +1,8 @@
 function checkUrlSearchDesigns() {
     if (
-        window.location.href.includes("/search/designs")
+        window.location.href.indexOf("/search/designs") 
+        &&
+        window.location.href.indexOf('/search/designs/new') === -1
     ) {
         
         // Find the c-card element
@@ -97,9 +99,7 @@ function checkUrlSearchDesigns() {
 
             // Attach the function to the button click event
             btn.addEventListener("click", myFunction);
-        } else {
-            console.log("No c-card element with headline-title 'Design' found.");
-        }
+        }                
     }
 }
 setInterval(checkUrlSearchDesigns, 1000); // Check every second
