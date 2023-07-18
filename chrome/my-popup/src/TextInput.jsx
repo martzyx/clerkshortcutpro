@@ -10,7 +10,7 @@ const TextInput = ({ id, name, label }) => {
                 type="text"
                 id={id}
                 name={name}
-                className="bg-transparent border border-black px-3 text-center border-1"
+                className="bg-transparent border border-black px-3 text-center border-1 font-mono"
             />
         </div>
     );
