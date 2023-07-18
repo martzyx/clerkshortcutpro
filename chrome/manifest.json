@@ -1,24 +1,26 @@
 {
-  "manifest_version": 3,
-  "name": "ClerkShortcutPro",
-  "version": "1.2.6",
-  "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
-  "permissions": ["storage"],
-  "web_accessible_resources": [
-    {
-      "resources": ["injected.js"],
-      "matches": ["https://my.clerk.io/*"]
-    }
-  ],
-  "options_page": "settings.html",
-  "icons": {
-    "512": "thumbnail.png"
-  },
-  "content_scripts": [
-    {
-      "matches": ["https://my.clerk.io/*"],
-      "js": ["content.js", "injected.js", "deleteSearchDesigns.js", "translations.js"],
-      "run_at": "document_start"
-    }
-  ]  
+    "manifest_version": 3,
+    "name": "ClerkShortcutPro",
+    "version": "1.2.6",
+    "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
+    "permissions": ["storage"],
+    "web_accessible_resources": [
+        {
+            "resources": ["injected.js"],
+            "matches": ["https://my.clerk.io/*"]
+        }
+    ],
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": {
+            "512": "thumbnail.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://my.clerk.io/*"],
+            "js": ["content.js", "injected.js", "deleteSearchDesigns.js", "translations.js"],
+            "run_at": "document_start"
+        }
+    ]
 }
