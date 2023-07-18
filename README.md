@@ -60,6 +60,7 @@ Please submit a pull request if you'd like to contribute.
 -   Add license file
 -   Redo styling of translation buttons
 -   Always work on porting to Firefox :/
+-   Make tool for customers to see hidden designs
 
 ## License
 
