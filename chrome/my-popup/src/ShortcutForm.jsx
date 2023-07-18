@@ -2,6 +2,7 @@ import React from "react";
 import Heading2 from "./Heading2";
 import CheckboxInput from "./CheckBoxInput";
 import TextInput from "./TextInput";
+import Button from "./Button";
 
 const ShortcutForm = () => {
     return (
@@ -36,6 +37,7 @@ const ShortcutForm = () => {
                 name="enable-delete-designs"
                 label="Enable delete button for search designs:"
             />
+            <Button />
         </form>
     );
 };
