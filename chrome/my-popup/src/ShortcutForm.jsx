@@ -25,8 +25,8 @@ const ShortcutForm = () => {
                 label="Enable close modal shortcut:"
             />
             <TextInput
-                id="shorcut2"
-                name="shorcut2"
+                id="shortcut2"
+                name="shortcut2"
                 label="Map the key you want to use (default is 'esc'):"
             />
 
