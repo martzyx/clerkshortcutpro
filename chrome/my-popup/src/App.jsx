@@ -8,7 +8,9 @@ function App() {
         <>
             <Heading1 heading="ClerkShortCutPro Settings" />
             <ShortcutForm />
-            <button type="submit">Save Settings</button>
+            <button type="submit" className="mt-2 rounded-none">
+                Save Settings
+            </button>
         </>
     );
 }
