@@ -10,11 +10,9 @@
             "matches": ["https://my.clerk.io/*"]
         }
     ],
-    "action": {
-        "default_popup": "index.html",
-        "default_icon": {
-            "512": "thumbnail.png"
-        }
+    "options_page": "index.html",
+    "icons": {
+        "512": "thumbnail.png"
     },
     "content_scripts": [
         {
