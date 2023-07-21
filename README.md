@@ -57,7 +57,6 @@ Please submit a pull request if you'd like to contribute.
 ## Todo:
 
 -   Make settings open in tooltip/popup instead of new tab (chrome)
--   Add license file
 -   Redo styling of translation buttons
 -   Always work on porting to Firefox :/
 -   Make tool for customers to see hidden designs
