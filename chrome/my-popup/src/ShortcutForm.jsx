@@ -1,14 +1,18 @@
 import React from "react";
-import Heading2 from "./Heading2";
+import FormHeading from "./FormHeading";
 import CheckboxInput from "./CheckBoxInput";
 import TextInput from "./TextInput";
 import Button from "./Button";
 import HorizontalLine from "./HorizontalLine";
+import InfoIcon from "./InfoIcon";
 
 const ShortcutForm = () => {
     return (
         <form id="shortcut-form" className="text-center">
-            <Heading2 text="Proceed/Confirm Shortcut" tooltipText="helloooo" />
+            <div className="flex items-center gap-2 justify-center">
+                <FormHeading text="Proceed/Confirm Shortcut" />
+                <InfoIcon tooltipText="Proceeds with the modal or the current flow" />
+            </div>
             <CheckboxInput
                 id="enable-shortcut1"
                 name="enable-shortcut1"
@@ -21,8 +25,10 @@ const ShortcutForm = () => {
             />
 
             <HorizontalLine />
-
-            <Heading2 text="Escape/Close Modal Shortcut" />
+            <div className="flex items-center gap-2 justify-center">
+                <FormHeading text="Escape/Close Modal Shortcut" />
+                <InfoIcon tooltipText="Closes modal or exits the current flow" />
+            </div>
             <CheckboxInput
                 id="enable-shortcut2"
                 name="enable-shortcut2"
@@ -35,13 +41,18 @@ const ShortcutForm = () => {
             />
 
             <HorizontalLine />
-
-            <Heading2 text="Delete Search Designs Button" />
+            <div className="flex items-center gap-2 justify-center">
+                <FormHeading text="Delete Search Designs Button" />
+                <InfoIcon tooltipText="Creates delete all designs button in search designs page" />
+            </div>
             <CheckboxInput
                 id="enable-delete-designs"
                 name="enable-delete-designs"
                 label="Enable delete button for search designs:"
             />
+
+            <HorizontalLine />
+
             <Button />
         </form>
     );
