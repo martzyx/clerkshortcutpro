@@ -8,8 +8,9 @@ export default {
             },
             colors: {
                 darkMode: "#242424",
+                pasPurp: "#663399",
             },
         },
     },
-    plugins: [],
+    plugins: [require("daisyui")],
 };

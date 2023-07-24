@@ -3,11 +3,12 @@ import Heading2 from "./Heading2";
 import CheckboxInput from "./CheckBoxInput";
 import TextInput from "./TextInput";
 import Button from "./Button";
+import HorizontalLine from "./HorizontalLine";
 
 const ShortcutForm = () => {
     return (
-        <form id="shortcut-form">
-            <Heading2 text="Proceed/Confirm Shorcut" />
+        <form id="shortcut-form" className="text-center">
+            <Heading2 text="Proceed/Confirm Shortcut" tooltipText="helloooo" />
             <CheckboxInput
                 id="enable-shortcut1"
                 name="enable-shortcut1"
@@ -19,7 +20,9 @@ const ShortcutForm = () => {
                 label="Map the key you want to use (default is 'enter'):"
             />
 
-            <Heading2 text="Escape/Close Modal Shorcut" />
+            <HorizontalLine />
+
+            <Heading2 text="Escape/Close Modal Shortcut" />
             <CheckboxInput
                 id="enable-shortcut2"
                 name="enable-shortcut2"
@@ -30,6 +33,8 @@ const ShortcutForm = () => {
                 name="shortcut2"
                 label="Map the key you want to use (default is 'esc'):"
             />
+
+            <HorizontalLine />
 
             <Heading2 text="Delete Search Designs Button" />
             <CheckboxInput

@@ -2,15 +2,16 @@ import React from "react";
 
 const TextInput = ({ id, name, label }) => {
     return (
-        <div>
-            <label htmlFor={id} className="mr-1">
+        <div className="flex justify-between">
+            <label htmlFor={id} className="mr-1 text-sm">
                 {label}{" "}
             </label>
             <input
                 type="text"
                 id={id}
                 name={name}
-                className="bg-transparent border border-black px-3 text-center border-1 font-mono"
+                placeholder="Map key here"
+                className="input input-bordered rounded-none font-mono text-center"
             />
         </div>
     );
