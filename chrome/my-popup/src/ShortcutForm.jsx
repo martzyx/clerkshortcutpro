@@ -9,6 +9,7 @@ import InfoIcon from "./InfoIcon";
 const ShortcutForm = () => {
     return (
         <form id="shortcut-form" className="text-center">
+            <HorizontalLine />
             <div className="flex items-center gap-2 justify-center">
                 <FormHeading text="Proceed/Confirm Shortcut" />
                 <InfoIcon tooltipText="Proceeds with the modal or the current flow" />

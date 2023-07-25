@@ -1,17 +1,22 @@
 import { useState } from "react";
-import Heading1 from "./Heading1";
-import ShortcutForm from "./ShortCutForm";
-import HorizontalLine from "./HorizontalLine";
 import Footer from "./Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Settings from "./Settings";
+import Help from "./Help";
+import Heading1 from "./Heading1";
 
 function App() {
     return (
-        <div className="font-sans max-w-xl mx-auto min-w-max p-8 bg-white text-black dark:bg-darkMode dark:text-white">
-            <Heading1 heading="ClerkShortcutPro" />
-            <HorizontalLine />
-            <ShortcutForm />
-            <Footer />
-        </div>
+        <Router>
+            <div className="font-sans max-w-xl mx-auto min-w-xl h-screen p-8 bg-white text-black dark:bg-darkMode dark:text-white">
+                <Heading1 heading="ClerkShortcutPro" />
+                <Routes>
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/help" element={<Help />} />
+                </Routes>
+                <Footer />
+            </div>
+        </Router>
     );
 }
 

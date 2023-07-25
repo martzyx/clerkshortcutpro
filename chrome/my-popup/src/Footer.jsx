@@ -1,10 +1,11 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
     return (
         <footer>
             <div className="btm-nav max-w-xl mx-auto min-w-max dark:bg-darkMode">
-                <button className="active">
+                <NavLink to="/settings">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="19"
@@ -19,8 +20,8 @@ const Footer = () => {
                             strokeLinejoin="round"
                         />
                     </svg>
-                </button>
-                <button>
+                </NavLink>
+                <NavLink to="/help">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -35,7 +36,7 @@ const Footer = () => {
                             strokeLinejoin="round"
                         />
                     </svg>
-                </button>
+                </NavLink>
             </div>
         </footer>
     );
