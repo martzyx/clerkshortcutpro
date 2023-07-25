@@ -2,7 +2,7 @@ import React from "react";
 
 const TextInput = ({ id, name, label }) => {
     return (
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-2">
             <label htmlFor={id} className="mr-1 text-sm">
                 {label}{" "}
             </label>

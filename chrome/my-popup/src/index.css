@@ -5,3 +5,11 @@
 .input {
     @apply h-6 text-xs w-32;
 }
+
+.btm-nav > *:where(.active) {
+    background-color: #ebebeb;
+}
+
+.btm-nav > *:where(.active) {
+    @apply dark:bg-neutral-700;
+}

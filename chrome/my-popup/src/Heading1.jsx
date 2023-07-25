@@ -3,9 +3,9 @@ import React from "react";
 const Heading = ({ heading }) => {
     return (
         <div className="flex items-center">
-            <h1 className="text-4xl font-extrabold dark:text-white my-4">{heading}</h1>
+            <h1 className="text-3xl font-extrabold dark:text-white">{heading}</h1>
             <svg
-                className="w-6 h-6 text-gray-800 dark:text-white my-4 ml-1"
+                className="w-6 h-6 text-gray-800 dark:text-white ml-1"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

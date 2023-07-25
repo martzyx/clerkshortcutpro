@@ -13,16 +13,18 @@ const ShortcutForm = () => {
                 <FormHeading text="Proceed/Confirm Shortcut" />
                 <InfoIcon tooltipText="Proceeds with the modal or the current flow" />
             </div>
-            <CheckboxInput
-                id="enable-shortcut1"
-                name="enable-shortcut1"
-                label="Enable proceed/confirm shortcut:"
-            />
-            <TextInput
-                id="shortcut1"
-                name="shortcut1"
-                label="Map the key you want to use (default is 'enter'):"
-            />
+            <div>
+                <CheckboxInput
+                    id="enable-shortcut1"
+                    name="enable-shortcut1"
+                    label="Enable proceed/confirm shortcut:"
+                />
+                <TextInput
+                    id="shortcut1"
+                    name="shortcut1"
+                    label="Map the key you want to use (default is 'enter'):"
+                />
+            </div>
 
             <HorizontalLine />
             <div className="flex items-center gap-2 justify-center">

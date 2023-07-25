@@ -2,7 +2,7 @@ import React from "react";
 
 const CheckboxInput = ({ id, name, label }) => {
     return (
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-2">
             <label htmlFor={id} className="mr-2 text-sm">
                 {label}
             </label>
