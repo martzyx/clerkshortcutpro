@@ -10,6 +10,9 @@ export default {
                 darkMode: "#242424",
                 pasPurp: "#663399",
             },
+            width: {
+                128: "36rem",
+            },
         },
     },
     plugins: [require("daisyui")],

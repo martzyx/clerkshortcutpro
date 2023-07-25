@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer>
             <div className="btm-nav max-w-xl mx-auto min-w-max dark:bg-darkMode">
-                <NavLink to="/settings">
+                <NavLink to="/settings" id="settingsNav">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="19"
