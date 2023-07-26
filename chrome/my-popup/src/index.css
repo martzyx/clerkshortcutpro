@@ -13,3 +13,7 @@
 .btm-nav > *:where(.active) {
     @apply dark:bg-neutral-700;
 }
+
+.min-h-50em {
+    min-height: 50em;
+}
