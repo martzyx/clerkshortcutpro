@@ -12,55 +12,67 @@ function startObserver() {
             toggleDeleteDesignsListener();
 
             // When form is submitted, save settings
-            document.getElementById("shortcut-form").addEventListener("submit", function (e) {
-                console.log("form submitteddd");
-                save_options(e);
-            });
+            var shortcutForm = document.getElementById("shortcut-form");
+            if (shortcutForm) {
+                shortcutForm.addEventListener("submit", function (e) {
+                    save_options(e);
+                });
+            }
 
             // Assigns shortcut listener for shortcut1
             function assignProceedShortcutListener() {
                 var shortcut1 = document.getElementById("shortcut1");
-                shortcut1.addEventListener("keydown", function (event) {
-                    event.preventDefault(); // Prevent the default action
-                    document.getElementById("shortcut1").value = event.key; // Assign the pressed key
-                    return false; // Prevent the form from being submitted
-                });
+                if (shortcut1) {
+                    shortcut1.addEventListener("keydown", function (event) {
+                        event.preventDefault(); // Prevent the default action
+                        document.getElementById("shortcut1").value = event.key; // Assign the pressed key
+                        return false; // Prevent the form from being submitted
+                    });
+                }
             }
 
             // Assigns shortcut listener for shortcut2
             function assignCloseModalShortcutListener() {
                 var shortcut2 = document.getElementById("shortcut2");
-                shortcut2.addEventListener("keydown", function (event) {
-                    event.preventDefault(); // Prevent the default action
-                    document.getElementById("shortcut2").value = event.key; // Assign the pressed key
-                    return false; // Prevent the form from being submitted
-                });
+                if (shortcut2) {
+                    shortcut2.addEventListener("keydown", function (event) {
+                        event.preventDefault(); // Prevent the default action
+                        document.getElementById("shortcut2").value = event.key; // Assign the pressed key
+                        return false; // Prevent the form from being submitted
+                    });
+                }
             }
 
             function toggleProceedShortcutListener() {
                 // Enable/Disable Shortcut Function for shortcut1
-                document.getElementById("enable-shortcut1").addEventListener("change", function () {
-                    var enableShortcut = document.getElementById("enable-shortcut1").checked;
-                    document.getElementById("shortcut1").disabled = !enableShortcut;
-                });
+                var enableshortcut1 = document.getElementById("enable-shortcut1");
+                if (enableshortcut1) {
+                    enableshortcut1.addEventListener("change", function () {
+                        var enableShortcut = enableshortcut1.checked;
+                        document.getElementById("shortcut1").disabled = !enableShortcut;
+                    });
+                }
             }
             function toggleCloseModalShortcutListener() {
                 // Enable/Disable Shortcut Function for shortcut2
-                document.getElementById("enable-shortcut2").addEventListener("change", function () {
-                    var enableShortcut = document.getElementById("enable-shortcut2").checked;
-                    document.getElementById("shortcut2").disabled = !enableShortcut;
-                });
+                var enableShortcut2 = document.getElementById("enable-shortcut2");
+                if (enableShortcut2) {
+                    enableShortcut2.addEventListener("change", function () {
+                        var enableShortcut = enableShortcut2.checked;
+                        document.getElementById("shortcut2").disabled = !enableShortcut;
+                    });
+                }
             }
 
             function toggleDeleteDesignsListener() {
                 // Enable/Disable Delete Designs Function
-                document
-                    .getElementById("enable-delete-designs")
-                    .addEventListener("change", function () {
-                        var enableDeleteDesigns =
-                            document.getElementById("enable-delete-designs").checked;
+                var enableDeleteDesignsEl = document.getElementById("enable-delete-designs");
+                if (enableDeleteDesignsEl) {
+                    enableDeleteDesignsEl.addEventListener("change", function () {
+                        var enableDeleteDesigns = enableDeleteDesignsEl.checked;
                         chrome.storage.sync.set({ enableDeleteDesigns: enableDeleteDesigns });
                     });
+                }
             }
 
             // Saves options to chrome.storage.sync
@@ -99,26 +111,45 @@ function startObserver() {
                         enableDeleteDesigns: true, // default value
                         // Add other shortcuts and their enable/disable values here
                     },
-                    function (items) {
-                        document.getElementById("shortcut1").value = items.shortcut1;
-                        document.getElementById("enable-shortcut1").checked = items.enableShortcut1;
-                        document.getElementById("shortcut1").disabled = !items.enableShortcut1;
 
-                        document.getElementById("shortcut2").value = items.shortcut2;
-                        document.getElementById("enable-shortcut2").checked = items.enableShortcut2;
-                        document.getElementById("shortcut2").disabled = !items.enableShortcut2;
+                    function updateItems(items) {
+                        const shortcut1Element = document.getElementById("shortcut1");
+                        const enableShortcut1Element = document.getElementById("enable-shortcut1");
+                        const shortcut2Element = document.getElementById("shortcut2");
+                        const enableShortcut2Element = document.getElementById("enable-shortcut2");
+                        const enableDeleteDesignsElement =
+                            document.getElementById("enable-delete-designs");
 
-                        document.getElementById("enable-delete-designs").checked =
-                            items.enableDeleteDesigns;
+                        if (shortcut1Element) {
+                            shortcut1Element.value = items.shortcut1;
+                            shortcut1Element.disabled = !items.enableShortcut1;
+                        }
+
+                        if (enableShortcut1Element) {
+                            enableShortcut1Element.checked = items.enableShortcut1;
+                        }
+
+                        if (shortcut2Element) {
+                            shortcut2Element.value = items.shortcut2;
+                            shortcut2Element.disabled = !items.enableShortcut2;
+                        }
+
+                        if (enableShortcut2Element) {
+                            enableShortcut2Element.checked = items.enableShortcut2;
+                        }
+
+                        if (enableDeleteDesignsElement) {
+                            enableDeleteDesignsElement.checked = items.enableDeleteDesigns;
+                        }
 
                         // Set the default shortcut values without waiting for keydown event
-                        if (items.shortcut1 === "Enter") {
-                            document.getElementById("shortcut1").value = "Enter";
+                        if (items.shortcut1 === "Enter" && shortcut1Element) {
+                            shortcut1Element.value = "Enter";
                             chrome.storage.sync.set({ shortcut1: "Enter" });
                         }
 
-                        if (items.shortcut2 === "Escape") {
-                            document.getElementById("shortcut2").value = "Escape";
+                        if (items.shortcut2 === "Escape" && shortcut2Element) {
+                            shortcut2Element.value = "Escape";
                             chrome.storage.sync.set({ shortcut2: "Escape" });
                         }
                     }
