@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ShortcutForm from "./ShortCutForm";
-import HorizontalLine from "./HorizontalLine";
-import Footer from "./Footer";
 
 const Settings = () => {
+    useEffect(() => {
+        // var settingsNavEl = document.getElementById("settingsNav");
+        // if (settingsNavEl) {
+        //     document.getElementById("settingsNav").click();
+        // }
+
+        // Dispatch a custom event
+        const event = new CustomEvent("reactComponentLoaded", { detail: {} });
+        window.dispatchEvent(event);
+    }, []);
     return (
         <>
             <ShortcutForm />
-            <Footer />
         </>
     );
 };

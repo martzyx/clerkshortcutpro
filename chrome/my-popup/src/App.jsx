@@ -8,7 +8,9 @@ import Heading1 from "./Heading1";
 function App() {
     return (
         <Router>
-            <div className="font-sans max-w-xl mx-auto w-128 h-screen min-h-50em p-8 bg-white text-black dark:bg-darkMode dark:text-white">
+            <div
+                id="app-wrapper"
+                className="font-sans max-w-xl mx-auto w-128 h-screen min-h-50em p-8 bg-white text-black dark:bg-darkMode dark:text-white">
                 <Heading1 heading="ClerkShortcutPro" />
                 <Routes>
                     <Route path="/settings" element={<Settings />} />

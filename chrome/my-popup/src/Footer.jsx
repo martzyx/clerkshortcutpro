@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
+    useEffect(() => {
+        var settingsNavEl = document.getElementById("settingsNav");
+        if (settingsNavEl) {
+            document.getElementById("settingsNav").click();
+        }
+    }, []);
     return (
         <footer>
             <div className="btm-nav max-w-xl mx-auto min-w-max dark:bg-darkMode">
@@ -21,7 +27,7 @@ const Footer = () => {
                         />
                     </svg>
                 </NavLink>
-                <NavLink to="/help">
+                <NavLink id="helpNav" to="/help">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
