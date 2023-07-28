@@ -73,7 +73,6 @@ window.addEventListener("reactComponentLoaded", function (e) {
 
     // Saves options to chrome.storage.sync
     function save_options(e) {
-        e.preventDefault();
         console.log("Saving options...");
 
         var shortcut1Value = document.getElementById("shortcut1").value;
@@ -91,7 +90,6 @@ window.addEventListener("reactComponentLoaded", function (e) {
             function () {
                 // Update status to let user know options were saved.
                 console.log("Settings saved successfully");
-                alert("Settings saved");
             }
         );
     }

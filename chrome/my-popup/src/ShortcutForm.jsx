@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import FormHeading from "./FormHeading";
 import CheckboxInput from "./CheckBoxInput";
 import TextInput from "./TextInput";
-import Button from "./Button";
 import HorizontalLine from "./HorizontalLine";
 import InfoIcon from "./InfoIcon";
 
 const ShortcutForm = () => {
+    // Define state to hold display status
+    const [saveAlert, setSaveAlert] = useState(false);
+    const [fade, setFade] = useState(false);
+
+    const handleSubmit = (e) => {
+        // Prevent form from refreshing the page on submit
+        e.preventDefault();
+
+        // Show the save alert
+        setSaveAlert(true);
+
+        // Start the fade out after 2 seconds
+        setTimeout(() => {
+            setFade(true);
+
+            // Hide the alert after the transition ends
+            setTimeout(() => {
+                setSaveAlert(false);
+                setFade(false);
+            }, 1000); // This should match the transition duration
+        }, 2000);
+    };
     return (
-        <form id="shortcut-form" className="text-center">
+        <form id="shortcut-form" className="text-center" onSubmit={handleSubmit}>
             <HorizontalLine />
             <div className="flex items-center gap-2 justify-center">
                 <FormHeading text="Proceed/Confirm Shortcut" />
@@ -56,7 +77,31 @@ const ShortcutForm = () => {
 
             <HorizontalLine />
 
-            <Button />
+            <button
+                type="submit"
+                className="mt-2 rounded-none bg-black text-white hover:bg-pasPurp py-1.5 px-3 transition">
+                Save Settings
+            </button>
+            {saveAlert && (
+                <div
+                    className={`grid mx-2 grid-flow-col grid-cols-[auto,minmax(auto,1fr)] justify-items-start text-left alert alert-success fixed left-1/2 w-fit transform -translate-x-1/2 bottom-20 transition-opacity duration-1000 ${
+                        fade ? "opacity-0" : "opacity-100"
+                    }`}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="stroke-current shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24">
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                    <span>Settings saved</span>
+                </div>
+            )}
         </form>
     );
 };
