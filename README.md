@@ -69,4 +69,4 @@ See the LICENSE file for license rights and limitations.
 
 -   If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
 -   To package firefox: Use command `web-ext build`
--   When packaging chrome zip, use `zip -r chrome.zip chrome -x "chrome/my-popup/*"  `
+-   When packaging chrome zip, use `zip -r chrome.zip chrome -x "chrome/my-popup/*"`
