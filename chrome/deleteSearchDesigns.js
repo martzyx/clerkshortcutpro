@@ -2,20 +2,18 @@ chrome.storage.sync.get(function (items) {
     if (items.enableDeleteDesigns) {
         function checkUrlSearchDesigns() {
             if (
-                window.location.href.indexOf("/search/designs") 
-                &&
-                window.location.href.indexOf('/search/designs/new') === -1
+                window.location.href.indexOf("/search/designs") !== -1 &&
+                window.location.href.indexOf("/search/designs/new") === -1
             ) {
-                
                 // Find the c-card element
                 const cardElement = document.querySelector('c-card[headline-title="Design"]');
 
                 // Check if the element exists
-                if (cardElement && !document.querySelector('.martzDeleteButton')) {
+                if (cardElement && !document.querySelector(".martzDeleteButton")) {
                     // Create a new button element
                     const btn = document.createElement("button");
                     btn.textContent = "Delete standard crap!";
-                    btn.classList.add("c-btn", "rounded", "danger","martzDeleteButton");
+                    btn.classList.add("c-btn", "rounded", "danger", "martzDeleteButton");
 
                     // Append the button to the card element
                     cardElement.appendChild(btn);
@@ -101,7 +99,7 @@ chrome.storage.sync.get(function (items) {
 
                     // Attach the function to the button click event
                     btn.addEventListener("click", myFunction);
-                }                
+                }
             }
         }
         setInterval(checkUrlSearchDesigns, 1000); // Check every second
