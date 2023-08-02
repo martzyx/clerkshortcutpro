@@ -7,56 +7,64 @@ window.addEventListener("message", function (event) {
 
 function runDeleteSearchDesigns(enableDeleteDesigns) {
     if (enableDeleteDesigns) {
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new MutationObserver((mutations, observer) => {
+                checkUrlSearchDesigns();
+            });
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+            });
+        });
+
         function checkUrlSearchDesigns() {
+            let defaultDesignsDetected = false;
+            // Your values array
+            const values = [
+                "search_facets - Style 4",
+                "search_instant - Style 4",
+                "search_page - Style 4",
+                "search_instant - Style 2",
+                "search_instant - Style 1",
+                "search_facets - Style 1",
+                "search_facets - Style 3",
+                "search_facets - Style 2",
+                "search_page - Style 3",
+                "search_page - Style 1",
+                "search_page - Style 2",
+                "search_instant - Style 3",
+            ];
+
+            // Function to check if the given value is in the array
+            function isInArray(value, array) {
+                return array.indexOf(value) !== -1;
+            }
+
+            // Function to check the <td> elements against the values array
+            function checkTDValues() {
+                const tds = document.querySelectorAll("td");
+                let matchFound = false;
+
+                tds.forEach((td) => {
+                    const tdValue = td.textContent.trim();
+
+                    if (isInArray(tdValue, values)) {
+                        matchFound = true;
+                    }
+                });
+                if (matchFound) {
+                    defaultDesignsDetected = true;
+                    console.log("default designs detected - search");
+                }
+            }
+            // Call the function to check the <td> elements on page load
+            checkTDValues();
+
             if (
                 window.location.href.indexOf("/search/designs") !== -1 &&
-                window.location.href.indexOf("/search/designs/new") === -1
+                window.location.href.indexOf("/search/designs/new") === -1 &&
+                defaultDesignsDetected
             ) {
-                // Your values array
-                let values = [
-                    "search_facets - Style 4",
-                    "search_instant - Style 4",
-                    "search_page - Style 4",
-                    "search_instant - Style 2",
-                    "search_instant - Style 1",
-                    "search_facets - Style 1",
-                    "search_facets - Style 3",
-                    "search_facets - Style 2",
-                    "search_page - Style 3",
-                    "search_page - Style 1",
-                    "search_page - Style 2",
-                    "search_instant - Style 3",
-                ];
-
-                // Function to check if the given value is in the array
-                function isInArray(value, array) {
-                    return array.indexOf(value) !== -1;
-                }
-
-                // Function to check the <td> elements against the values array
-                function checkTDValues() {
-                    let tds = document.querySelectorAll("td");
-                    let matchFound = false;
-
-                    tds.forEach((td) => {
-                        let tdValue = td.textContent.trim();
-
-                        if (isInArray(tdValue, values)) {
-                            matchFound = true;
-                        }
-                    });
-                    let defaultDesignsDetected;
-                    if (matchFound) {
-                        defaultDesignsDetected = true;
-                        console.log("default designs detected");
-                    } else {
-                        defaultDesignsDetected = false;
-                        console.log("default designs NOT detected");
-                    }
-                }
-                // Call the function to check the <td> elements on page load
-                checkTDValues();
-
                 // Find the c-card element
                 const cardElement = document.querySelector('c-card[headline-title="Design"]');
 
@@ -72,21 +80,6 @@ function runDeleteSearchDesigns(enableDeleteDesigns) {
 
                     // Define the function to be triggered
                     const myFunction = async () => {
-                        // Array of the desired innerHTML values
-                        let values = [
-                            "search_facets - Style 4",
-                            "search_instant - Style 4",
-                            "search_page - Style 4",
-                            "search_instant - Style 2",
-                            "search_instant - Style 1",
-                            "search_facets - Style 1",
-                            "search_facets - Style 3",
-                            "search_facets - Style 2",
-                            "search_page - Style 3",
-                            "search_page - Style 1",
-                            "search_page - Style 2",
-                            "search_instant - Style 3",
-                        ];
                         let iterations = 0;
 
                         while (
@@ -154,6 +147,6 @@ function runDeleteSearchDesigns(enableDeleteDesigns) {
                 }
             }
         }
-        setInterval(checkUrlSearchDesigns, 1000); // Check every second
+        // setInterval(checkUrlSearchDesigns, 1000); // Check every second
     }
 }
