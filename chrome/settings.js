@@ -149,30 +149,12 @@ window.addEventListener("reactComponentLoaded", function (e) {
         );
     }
 
-    chrome.storage.sync.get(
-        {
-            shortcut1: "default shortcut", // default value
-            enableShortcut1: false, // default value
-            shortcut2: "default shortcut", // default value
-            enableShortcut2: false, // default value
-            enableDeleteDesigns: true, // default value
-            // Add other shortcuts and their enable/disable values here
-        },
-        function (items) {
-            // Apply shortcuts here
-            // For example, if your shortcut is a string representing a key, you could do:
-            window.addEventListener("keydown", function (e) {
-                if (items.enableShortcut1 && e.key === items.shortcut1) {
-                    // Perform action for shortcut1
-                }
-                if (items.enableShortcut2 && e.key === items.shortcut2) {
-                    // Perform action for shortcut2
-                }
-                // Handle other shortcuts here
-            });
-
-            if (items.enableDeleteDesigns) {
-            }
-        }
-    );
+    chrome.storage.sync.get({
+        shortcut1: "default shortcut", // default value
+        enableShortcut1: false, // default value
+        shortcut2: "default shortcut", // default value
+        enableShortcut2: false, // default value
+        enableDeleteDesigns: false, // default value
+        // Add other shortcuts and their enable/disable values here
+    });
 });
