@@ -1,5 +1,12 @@
-chrome.storage.sync.get(function (items) {
-    if (items.enableDeleteDesigns) {
+window.addEventListener("message", function (event) {
+    if (event.source !== window) return;
+    if (event.data.type && event.data.type === "FROM_CONTENT_SCRIPT") {
+        runDeleteSearchDesigns(event.data.enableDeleteDesigns);
+    }
+});
+
+function runDeleteSearchDesigns(enableDeleteDesigns) {
+    if (enableDeleteDesigns) {
         function checkUrlSearchDesigns() {
             if (
                 window.location.href.indexOf("/search/designs") !== -1 &&
@@ -104,4 +111,4 @@ chrome.storage.sync.get(function (items) {
         }
         setInterval(checkUrlSearchDesigns, 1000); // Check every second
     }
-});
+}
