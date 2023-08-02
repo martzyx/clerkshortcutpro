@@ -8,6 +8,52 @@ window.addEventListener("message", function (event) {
 function runDeleteSearchDesigns(enableDeleteDesigns) {
     if (enableDeleteDesigns) {
         function checkUrlSearchDesigns() {
+            // Your values array
+            let values = [
+                "search_facets - Style 4",
+                "search_instant - Style 4",
+                "search_page - Style 4",
+                "search_instant - Style 2",
+                "search_instant - Style 1",
+                "search_facets - Style 1",
+                "search_facets - Style 3",
+                "search_facets - Style 2",
+                "search_page - Style 3",
+                "search_page - Style 1",
+                "search_page - Style 2",
+                "search_instant - Style 3",
+            ];
+
+            // Function to check if the given value is in the array
+            function isInArray(value, array) {
+                return array.indexOf(value) !== -1;
+            }
+
+            // Function to check the <td> elements against the values array
+            function checkTDValues() {
+                let tds = document.querySelectorAll("td");
+                let matchFound = false;
+
+                tds.forEach((td) => {
+                    let tdValue = td.textContent.trim();
+
+                    if (isInArray(tdValue, values)) {
+                        matchFound = true;
+                    }
+                });
+                let defaultDesignsDetected;
+                if (matchFound) {
+                    defaultDesignsDetected = true;
+                    console.log("default designs detected");
+                } else {
+                    defaultDesignsDetected = false;
+                    console.log("default designs NOT detected");
+                }
+            }
+
+            // Call the function to check the <td> elements on page load
+            checkTDValues();
+
             if (
                 window.location.href.indexOf("/search/designs") !== -1 &&
                 window.location.href.indexOf("/search/designs/new") === -1
