@@ -54,7 +54,6 @@ function runDeleteSearchDesigns(enableDeleteDesigns) {
                 });
                 if (matchFound) {
                     defaultDesignsDetected = true;
-                    console.log("default designs detected - search");
                 }
             }
             // Call the function to check the <td> elements on page load
@@ -140,6 +139,11 @@ function runDeleteSearchDesigns(enableDeleteDesigns) {
 
                         // Log message indicating that the loop has finished
                         console.log("ClerkShortcutPro: Finished deleting the spam.");
+                        const martzDeleteButton = document.querySelector(".martzDeleteButton");
+                        if (martzDeleteButton) {
+                            // Check if the button exists
+                            martzDeleteButton.remove();
+                        }
                     };
 
                     // Attach the function to the button click event
