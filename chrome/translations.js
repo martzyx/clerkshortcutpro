@@ -181,21 +181,8 @@ function checkUrl() {
                                             document.createTextNode("Copied to clipboard!");
                                         // add the text node to the newly created div
                                         tooltip.appendChild(tooltipText);
-
-                                        // Set some style
-                                        tooltip.style.position = "absolute";
-                                        tooltip.style.borderLeft = "5px solid #16cc53";
-                                        tooltip.style.bottom = "20px";
-                                        tooltip.style.left = "0px";
-                                        tooltip.style.minWidth = "400px";
-                                        tooltip.style.maxWidth = "600px";
-                                        tooltip.style.padding = "10px 20px";
-                                        tooltip.style.textAlign = "left";
-                                        tooltip.style.borderRadius = "0 5px 5px 0";
-                                        tooltip.style.backgroundColor = "white";
-                                        tooltip.style.color = "#1f3038";
-                                        tooltip.style.boxShadow = "0 0 4px 1px rgba(0, 0, 0, 0.08)";
-                                        tooltip.style.transition = "all 0.5s";
+                                        tooltip.className = "ok visible";
+                                        tooltip.id = "message";
 
                                         // add the newly created element and its content into the DOM
                                         document.body.appendChild(tooltip);
