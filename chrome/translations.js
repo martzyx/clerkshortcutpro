@@ -143,32 +143,24 @@ function checkUrl() {
                             { class: "translateES", text: "ES", style: buttonStyling, id: "es" },
                         ];
 
+                        var buttonWrapper = document.createElement("div");
+                        buttonWrapper.className = "daterange";
+                        headlineElement.appendChild(buttonWrapper);
+                        buttonWrapper.style.display = "flex";
+                        buttonWrapper.style.marginBottom = "1em";
+
                         // Loop through the button data
                         for (var i = 0; i < buttonData.length; i++) {
                             // Create a new button element
-                            var button = document.createElement("button");
+                            var button = document.createElement("a");
 
                             // Set the class and innerHTML for each button
                             button.className = buttonData[i].class + " translateButton";
                             button.textContent = buttonData[i].text;
                             button.id = buttonData[i].id;
 
-                            // Set the styling
-                            button.style.margin = "0px 2px";
-                            button.style.textDecoration = "none";
-                            button.style.color = "#2e7ef9";
-                            button.style.borderBottom = "1px solid #2e7ef9";
-                            button.style.display = "inline-block";
-                            button.style.marginLeft = "0.4em";
-                            button.style.padding = "0.2em 0.6em";
-                            button.style.border = "1px solid #2e7ef9";
-                            button.style.borderRadius = "5px";
-                            button.style.fontSize = "0.9em";
-                            button.style.fontWeight = "bold";
-                            button.style.transition = "all 0.2s";
-
                             // Append the button to the headlineElement
-                            headlineElement.appendChild(button);
+                            buttonWrapper.appendChild(button);
                         }
                     }
 
