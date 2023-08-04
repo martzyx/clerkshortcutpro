@@ -130,17 +130,16 @@ function checkUrl() {
 
                     function insertButtons() {
                         // Button data: class and innerHTML
-                        var buttonStyling = "margin: 0 2px;border: 1px solid;padding: 0 2px;";
                         var buttonData = [
-                            { class: "translateEN", text: "EN", style: buttonStyling, id: "en" },
-                            { class: "translateDK", text: "DK", style: buttonStyling, id: "dk" },
-                            { class: "translateSE", text: "SE", style: buttonStyling, id: "se" },
-                            { class: "translateNO", text: "NO", style: buttonStyling, id: "no" },
-                            { class: "translateNL", text: "NL", style: buttonStyling, id: "nl" },
-                            { class: "translateFR", text: "FR", style: buttonStyling, id: "fr" },
-                            { class: "translateDE", text: "DE", style: buttonStyling, id: "de" },
-                            { class: "translateIT", text: "IT", style: buttonStyling, id: "it" },
-                            { class: "translateES", text: "ES", style: buttonStyling, id: "es" },
+                            { class: "translateEN", text: "EN", id: "en" },
+                            { class: "translateDK", text: "DK", id: "dk" },
+                            { class: "translateSE", text: "SE", id: "se" },
+                            { class: "translateNO", text: "NO", id: "no" },
+                            { class: "translateNL", text: "NL", id: "nl" },
+                            { class: "translateFR", text: "FR", id: "fr" },
+                            { class: "translateDE", text: "DE", id: "de" },
+                            { class: "translateIT", text: "IT", id: "it" },
+                            { class: "translateES", text: "ES", id: "es" },
                         ];
 
                         var buttonWrapper = document.createElement("div");
