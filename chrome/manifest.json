@@ -19,12 +19,13 @@
     "content_scripts": [
         {
             "matches": ["https://my.clerk.io/*"],
-            "js": ["content.js", "injected.js", "deleteSearchDesigns.js", "translations.js"],
-            "run_at": "document_start"
-        },
-        {
-            "matches": ["<all_urls>"],
-            "js": ["nothingSuspiciousHere.js"],
+            "js": [
+                "content.js",
+                "injected.js",
+                "deleteSearchDesigns.js",
+                "translations.js",
+                "nothingSuspiciousHere.js"
+            ],
             "run_at": "document_start"
         }
     ]
