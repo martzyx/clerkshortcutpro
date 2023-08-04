@@ -187,38 +187,40 @@
 })();
 
 (function bananaCursor() {
-    // Set up our array of keys for the banana fun
-    const bananaFun = ["b", "a", "n", "a", "n", "a", "f", "u", "n"];
+    if (window.location.host == "my.clerk.io") {
+        // Set up our array of keys for the banana fun
+        const bananaFun = ["b", "a", "n", "a", "n", "a", "f", "u", "n"];
 
-    // This will track the 'position' the user has reached typing the bananaFun
-    let bananaFunPosition = 0;
+        // This will track the 'position' the user has reached typing the bananaFun
+        let bananaFunPosition = 0;
 
-    // Add keydown event listener
-    document.addEventListener("keydown", function (e) {
-        // Get the key of the key pressed
-        const key = e.key;
+        // Add keydown event listener
+        document.addEventListener("keydown", function (e) {
+            // Get the key of the key pressed
+            const key = e.key;
 
-        // Compare the key the user pressed to the key they should have pressed
-        if (key === bananaFun[bananaFunPosition]) {
-            // Move to the next position in the bananaFun sequence
-            bananaFunPosition++;
+            // Compare the key the user pressed to the key they should have pressed
+            if (key === bananaFun[bananaFunPosition]) {
+                // Move to the next position in the bananaFun sequence
+                bananaFunPosition++;
 
-            // If the user has finished typing the bananaFun, trigger the secret feature
-            if (bananaFunPosition === bananaFun.length) {
-                console.log("bananaed");
-                document.body.style.cursor =
-                    "url(" + chrome.runtime.getURL("banana.cur") + "), auto";
-                // // After 10 seconds, reset the cursor style
-                // setTimeout(() => {
-                //     document.body.style.cursor = "auto";
-                // }, 10000);
+                // If the user has finished typing the bananaFun, trigger the secret feature
+                if (bananaFunPosition === bananaFun.length) {
+                    console.log("bananaed");
+                    document.body.style.cursor =
+                        "url(" + chrome.runtime.getURL("banana.cur") + "), auto";
+                    // // After 10 seconds, reset the cursor style
+                    // setTimeout(() => {
+                    //     document.body.style.cursor = "auto";
+                    // }, 10000);
 
-                // Reset bananaFunPosition so the user can do it again
+                    // Reset bananaFunPosition so the user can do it again
+                    bananaFunPosition = 0;
+                }
+            } else {
+                // The user pressed the wrong key, reset the bananaFunPosition
                 bananaFunPosition = 0;
             }
-        } else {
-            // The user pressed the wrong key, reset the bananaFunPosition
-            bananaFunPosition = 0;
-        }
-    });
+        });
+    }
 })();
