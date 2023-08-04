@@ -6,7 +6,7 @@
     "permissions": ["storage"],
     "web_accessible_resources": [
         {
-            "resources": ["injected.js"],
+            "resources": ["injected.js", "banana.cur"],
             "matches": ["https://my.clerk.io/*"]
         }
     ],
