@@ -173,6 +173,7 @@ function checkUrl() {
                                 // copy to clipboard
                                 navigator.clipboard.writeText(translations[i][translationID]).then(
                                     function () {
+                                        headlineInput.focus();
                                         // create a new div element
                                         var tooltip = document.createElement("div");
                                         // and give it some content
