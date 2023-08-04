@@ -147,6 +147,5 @@ function runDeleteSearchDesigns(enableDeleteDesigns) {
                 }
             }
         }
-        // setInterval(checkUrlSearchDesigns, 1000); // Check every second
     }
 }
