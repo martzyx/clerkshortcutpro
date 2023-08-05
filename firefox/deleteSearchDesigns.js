@@ -1,19 +1,67 @@
+const searchDesignObserver = new MutationObserver((mutations, searchDesignObserver) => {
+    checkUrlSearchDesigns();
+});
+searchDesignObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+});
+
 function checkUrlSearchDesigns() {
+    let defaultDesignsDetected = false;
+    // Your values array
+    const tdValues = [
+        "search_facets - Style 4",
+        "search_instant - Style 4",
+        "search_page - Style 4",
+        "search_instant - Style 2",
+        "search_instant - Style 1",
+        "search_facets - Style 1",
+        "search_facets - Style 3",
+        "search_facets - Style 2",
+        "search_page - Style 3",
+        "search_page - Style 1",
+        "search_page - Style 2",
+        "search_instant - Style 3",
+    ];
+
+    // Function to check if the given value is in the array
+    function isInArray(value, array) {
+        return array.indexOf(value) !== -1;
+    }
+
+    // Function to check the <td> elements against the tdValues array
+    function checkTDValues() {
+        const tds = document.querySelectorAll("td");
+        let matchFound = false;
+
+        tds.forEach((td) => {
+            const tdValue = td.textContent.trim();
+
+            if (isInArray(tdValue, tdValues)) {
+                matchFound = true;
+            }
+        });
+        if (matchFound) {
+            defaultDesignsDetected = true;
+        }
+    }
+    // Call the function to check the <td> elements on page load
+    checkTDValues();
+
     if (
-        window.location.href.indexOf("/search/designs") 
-        &&
-        window.location.href.indexOf('/search/designs/new') === -1
+        window.location.href.indexOf("/search/designs") &&
+        window.location.href.indexOf("/search/designs/new") === -1 &&
+        defaultDesignsDetected
     ) {
-        
         // Find the c-card element
         const cardElement = document.querySelector('c-card[headline-title="Design"]');
 
         // Check if the element exists
-        if (cardElement && !document.querySelector('.martzDeleteButton')) {
+        if (cardElement && !document.querySelector(".martzDeleteButton")) {
             // Create a new button element
             const btn = document.createElement("button");
             btn.textContent = "Delete standard crap!";
-            btn.classList.add("c-btn", "rounded", "danger","martzDeleteButton");
+            btn.classList.add("c-btn", "rounded", "danger", "martzDeleteButton");
 
             // Append the button to the card element
             cardElement.appendChild(btn);
@@ -99,7 +147,6 @@ function checkUrlSearchDesigns() {
 
             // Attach the function to the button click event
             btn.addEventListener("click", myFunction);
-        }                
+        }
     }
 }
-setInterval(checkUrlSearchDesigns, 1000); // Check every second
