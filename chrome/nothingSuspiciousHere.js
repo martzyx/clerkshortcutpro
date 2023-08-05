@@ -135,7 +135,7 @@
                     setTimeout(function () {
                         cancelAnimationFrame(animationId);
                         document.body.removeChild(canvas);
-                    }, 2000); // stop the animation after 2 seconds
+                    }, 10000); // stop the animation after 2 seconds
                 })();
 
                 // Reset konamiPosition so the user can do it again
@@ -208,7 +208,9 @@
                 if (bananaFunPosition === bananaFun.length) {
                     console.log("bananaed");
                     document.body.style.cursor =
-                        "url(" + chrome.runtime.getURL("banana.cur") + "), auto";
+                        "url(" +
+                        chrome.runtime.getURL("/assets/visual_assets/banana.cur") +
+                        "), auto";
                     // // After 10 seconds, reset the cursor style
                     // setTimeout(() => {
                     //     document.body.style.cursor = "auto";

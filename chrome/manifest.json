@@ -6,19 +6,19 @@
     "permissions": ["storage"],
     "web_accessible_resources": [
         {
-            "resources": ["injected.js", "banana.cur"],
-            "matches": ["https://my.clerk.io/*"]
+            "resources": ["injected.js", "/assets/visual_assets/banana.cur"],
+            "matches": ["https://my.clerk.io/*", "https://hq.clerk.io/*"]
         }
     ],
     "action": {
         "default_popup": "/assets/index.html"
     },
     "icons": {
-        "512": "thumbnail.png"
+        "512": "/assets/visual_assets/thumbnail.png"
     },
     "content_scripts": [
         {
-            "matches": ["https://my.clerk.io/*"],
+            "matches": ["https://my.clerk.io/*", "https://hq.clerk.io/"],
             "js": [
                 "content.js",
                 "injected.js",
