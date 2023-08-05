@@ -6,8 +6,8 @@
     "permissions": ["storage"],
     "web_accessible_resources": [
         {
-            "resources": ["injected.js", "/assets/visual_assets/banana.cur"],
-            "matches": ["https://my.clerk.io/*", "https://hq.clerk.io/*"]
+            "matches": ["https://my.clerk.io/*", "https://hq.clerk.io/*"],
+            "resources": ["injected.js", "/assets/visual_assets/banana.cur"]
         }
     ],
     "action": {
@@ -18,7 +18,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://my.clerk.io/*", "https://hq.clerk.io/"],
+            "matches": ["https://my.clerk.io/*", "https://hq.clerk.io/*"],
             "js": [
                 "content.js",
                 "injected.js",
