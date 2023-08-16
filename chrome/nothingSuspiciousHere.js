@@ -207,7 +207,21 @@
             if (bananaFunPosition === bananaFun.length) {
                 console.log("you got bananaed");
                 document.body.style.cursor =
-                    "url(" + chrome.runtime.getURL("/assets/visual_assets/banana.cur") + "), auto";
+                    "url(" + chrome.runtime.getURL("/assets/visual_assets/banana1.svg") + "), auto";
+
+                // Create a style element
+                let style = document.createElement("style");
+                // Add the custom cursor style for all anchor tags
+                style.innerHTML =
+                    `
+                        a {
+                            cursor: url('` +
+                    chrome.runtime.getURL("/assets/visual_assets/openBanana.svg") +
+                    `') 0 0, pointer !important;
+                        }
+                    `;
+                // Append the style to the document head
+                document.head.appendChild(style);
             }
         } else {
             // The user pressed the wrong key, reset the bananaFunPosition
