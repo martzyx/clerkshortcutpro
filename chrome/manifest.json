@@ -1,13 +1,22 @@
 {
     "manifest_version": 3,
     "name": "ClerkShortcutPro",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
     "permissions": ["storage"],
     "web_accessible_resources": [
         {
-            "matches": ["https://my.clerk.io/*", "https://hq.clerk.io/*"],
-            "resources": ["injected.js", "/assets/visual_assets/banana.cur"]
+            "matches": [
+                "https://my.clerk.io/*",
+                "https://hq.clerk.io/*",
+                "https://app.hubspot.com/*"
+            ],
+            "resources": [
+                "injected.js",
+                "/assets/visual_assets/banana.cur",
+                "/assets/visual_assets/openBanana.svg",
+                "/assets/visual_assets/banana1.svg"
+            ]
         }
     ],
     "action": {
@@ -18,7 +27,11 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://my.clerk.io/*", "https://hq.clerk.io/*"],
+            "matches": [
+                "https://my.clerk.io/*",
+                "https://hq.clerk.io/*",
+                "https://app.hubspot.com/*"
+            ],
             "js": [
                 "content.js",
                 "injected.js",
