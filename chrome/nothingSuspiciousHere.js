@@ -212,14 +212,16 @@
                 // Create a style element
                 let style = document.createElement("style");
                 // Add the custom cursor style for all anchor tags
-                style.innerHTML =
+                let textNode = document.createTextNode(
                     `
                         a {
                             cursor: url('` +
-                    chrome.runtime.getURL("/assets/visual_assets/openBanana.svg") +
-                    `') 0 0, pointer !important;
+                        chrome.runtime.getURL("/assets/visual_assets/openBanana.svg") +
+                        `') 0 0, pointer !important;
                         }
-                    `;
+                    `
+                );
+                style.appendChild(textNode);
                 // Append the style to the document head
                 document.head.appendChild(style);
             }
