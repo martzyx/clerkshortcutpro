@@ -11,7 +11,8 @@
                 "https://hq.clerk.io/*",
                 "https://app.hubspot.com/*",
                 "https://www.notion.so/",
-                "https://linear.app/"
+                "https://linear.app/",
+                "https://calendar.google.com/"
             ],
             "resources": [
                 "injected.js",
@@ -34,7 +35,8 @@
                 "https://hq.clerk.io/*",
                 "https://app.hubspot.com/*",
                 "https://www.notion.so/",
-                "https://linear.app/"
+                "https://linear.app/",
+                "https://calendar.google.com/"
             ],
             "js": [
                 "content.js",
