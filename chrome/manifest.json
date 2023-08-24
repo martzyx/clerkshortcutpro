@@ -10,9 +10,9 @@
                 "https://my.clerk.io/*",
                 "https://hq.clerk.io/*",
                 "https://app.hubspot.com/*",
-                "https://www.notion.so/",
-                "https://linear.app/",
-                "https://calendar.google.com/"
+                "https://www.notion.so/*",
+                "https://linear.app/*",
+                "https://calendar.google.com/*"
             ],
             "resources": [
                 "injected.js",
@@ -34,9 +34,9 @@
                 "https://my.clerk.io/*",
                 "https://hq.clerk.io/*",
                 "https://app.hubspot.com/*",
-                "https://www.notion.so/",
-                "https://linear.app/",
-                "https://calendar.google.com/"
+                "https://www.notion.so/*",
+                "https://linear.app/*",
+                "https://calendar.google.com/*"
             ],
             "js": [
                 "content.js",
