@@ -9,7 +9,9 @@
             "matches": [
                 "https://my.clerk.io/*",
                 "https://hq.clerk.io/*",
-                "https://app.hubspot.com/*"
+                "https://app.hubspot.com/*",
+                "https://www.notion.so/",
+                "https://linear.app/"
             ],
             "resources": [
                 "injected.js",
@@ -30,7 +32,9 @@
             "matches": [
                 "https://my.clerk.io/*",
                 "https://hq.clerk.io/*",
-                "https://app.hubspot.com/*"
+                "https://app.hubspot.com/*",
+                "https://www.notion.so/",
+                "https://linear.app/"
             ],
             "js": [
                 "content.js",
