@@ -178,24 +178,45 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 
 function checkDOM() {
     function getApiKey() {
+        // Stubbe way:
         // if(typeof Clerk == 'function') {
         //     Clerk._config.key
         // }
         // Find the script tag with the specific src attribute pattern
-        const scripts = Array.from(document.getElementsByTagName("script"));
-        for (let script of scripts) {
-            if (script.src && script.src.includes("api.clerk.io")) {
-                // Extract API key using a regular expression
-                const match = script.src.match(/key%22%3A%22([^%]+)%22/);
-                if (match && match[1]) {
-                    return decodeURIComponent(match[1]);
-                }
+        const clerkScript = document.querySelector('script[src*="api.clerk.io"]');
+
+        if (clerkScript) {
+            // Extract API key using a regular expression
+            const match = clerkScript.src.match(/key%22%3A%22([^%]+)%22/);
+            if (match && match[1]) {
+                return decodeURIComponent(match[1]);
             }
         }
         return null;
     }
 
-    // Example usage:
+    async function fetchVisitorID(apiKey) {
+        const apiUrl = `https://api.clerk.io/v2/misc/visitor_id?visitor=auto&key=${apiKey}`;
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data.visitor;
+        } catch (error) {
+            console.error("There was a problem with the fetch operation:", error);
+        }
+    }
+
     const apiKey = getApiKey();
-    console.log(apiKey); // This will log the API key to the console
+    if (apiKey) {
+        console.log("Public key:", apiKey);
+    }
+
+    fetchVisitorID(apiKey).then((visitorID) => {
+        if (visitorID) {
+            console.log("Visitor ID:", visitorID);
+        }
+    });
 }
