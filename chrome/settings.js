@@ -158,3 +158,44 @@ window.addEventListener("reactComponentLoaded", function (e) {
         // Add other shortcuts and their enable/disable values here
     });
 });
+
+// Get the current tab.
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    let currentTab = tabs[0]; // There should only be one in this list
+
+    // Inject the code into the current tab.
+    chrome.scripting.executeScript(
+        {
+            target: { tabId: currentTab.id },
+            function: checkDOM,
+        },
+        (results) => {
+            // results[0] will contain the result of the injected function (if any)
+            console.log(results[0]);
+        }
+    );
+});
+
+function checkDOM() {
+    function getApiKey() {
+        // if(typeof Clerk == 'function') {
+        //     Clerk._config.key
+        // }
+        // Find the script tag with the specific src attribute pattern
+        const scripts = Array.from(document.getElementsByTagName("script"));
+        for (let script of scripts) {
+            if (script.src && script.src.includes("api.clerk.io")) {
+                // Extract API key using a regular expression
+                const match = script.src.match(/key%22%3A%22([^%]+)%22/);
+                if (match && match[1]) {
+                    return decodeURIComponent(match[1]);
+                }
+            }
+        }
+        return null;
+    }
+
+    // Example usage:
+    const apiKey = getApiKey();
+    console.log(apiKey); // This will log the API key to the console
+}

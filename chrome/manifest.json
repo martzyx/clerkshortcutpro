@@ -3,7 +3,7 @@
     "name": "ClerkShortcutPro",
     "version": "1.4.5",
     "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
-    "permissions": ["storage"],
+    "permissions": ["storage", "activeTab", "scripting"],
     "web_accessible_resources": [
         {
             "matches": [
