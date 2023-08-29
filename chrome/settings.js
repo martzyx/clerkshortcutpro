@@ -203,6 +203,14 @@ function checkDOM() {
                 throw new Error("Network response was not ok");
             }
             const data = await response.json();
+            const visitorID = data.visitor;
+            if (visitorID) {
+                console.log("Visitor ID:", visitorID);
+                // Construct the URL using the visitorID (or any other way you want)
+                const newTabUrl = `https://api.clerk.io/v2/misc/visitor_id?visitor=auto&key=${apiKey}`;
+                // Send a message to the background script to open a new tab with the constructed URL
+                chrome.runtime.sendMessage({ type: "openNewTab", url: newTabUrl });
+            }
             return data.visitor;
         } catch (error) {
             console.error("There was a problem with the fetch operation:", error);
@@ -214,9 +222,5 @@ function checkDOM() {
         console.log("Public key:", apiKey);
     }
 
-    fetchVisitorID(apiKey).then((visitorID) => {
-        if (visitorID) {
-            console.log("Visitor ID:", visitorID);
-        }
-    });
+    fetchVisitorID(apiKey).then(() => {});
 }
