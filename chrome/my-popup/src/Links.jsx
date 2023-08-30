@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HorizontalLine from "./HorizontalLine";
 import FormHeading from "./FormHeading";
 import InfoIcon from "./InfoIcon";
 import Button from "./Button";
 
 const Links = () => {
+    useEffect(() => {
+        // Dispatch a custom event
+        const event = new CustomEvent("reactLinksLoaded", { detail: {} });
+        window.dispatchEvent(event);
+    }, []);
     return (
         <>
             <HorizontalLine />
@@ -14,7 +19,7 @@ const Links = () => {
             </div>
             <div className="flex items-center justify-between mt-2">
                 <label className="mr-2 text-sm">Get visitor ID of current tab</label>
-                <Button label="Go" />
+                <Button label="Go" type="button" id="visitorGoButton" />
             </div>
             <HorizontalLine />
             <div

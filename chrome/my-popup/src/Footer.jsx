@@ -2,6 +2,12 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
+    useEffect(() => {
+        var settingsNavEl = document.getElementById("settingsNav");
+        if (settingsNavEl) {
+            document.getElementById("linksNav").click();
+        }
+    }, []);
     return (
         <footer>
             <div className="btm-nav max-w-xl mx-auto min-w-max dark:bg-darkMode border-t border-black">

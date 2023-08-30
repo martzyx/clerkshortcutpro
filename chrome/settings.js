@@ -1,4 +1,4 @@
-window.addEventListener("reactComponentLoaded", function (e) {
+window.addEventListener("reactSettingsLoaded", function (e) {
     // Restore previously saved settings
     restore_options();
     assignProceedShortcutListener();
@@ -158,16 +158,23 @@ window.addEventListener("reactComponentLoaded", function (e) {
         // Add other shortcuts and their enable/disable values here
     });
 });
-
-// Get the current tab.
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    let currentTab = tabs[0]; // There should only be one in this list
-    let tabProtocol = new URL(currentTab.url).protocol;
-    if (tabProtocol === "http:" || tabProtocol === "https:") {
-        // Inject the code into the current tab.
-        chrome.scripting.executeScript({
-            target: { tabId: currentTab.id },
-            function: checkDOM,
+window.addEventListener("reactLinksLoaded", function (e) {
+    // When button is clicked, perform visitorID call
+    var visitorGoButton = document.getElementById("visitorGoButton");
+    if (visitorGoButton) {
+        visitorGoButton.addEventListener("click", function () {
+            // Get the current tab to run checkDOM function
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                let currentTab = tabs[0]; // There should only be one in this list
+                let tabProtocol = new URL(currentTab.url).protocol;
+                if (tabProtocol === "http:" || tabProtocol === "https:") {
+                    // Inject the code into the current tab.
+                    chrome.scripting.executeScript({
+                        target: { tabId: currentTab.id },
+                        function: checkDOM,
+                    });
+                }
+            });
         });
     }
 });
