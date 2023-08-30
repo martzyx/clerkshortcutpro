@@ -162,18 +162,14 @@ window.addEventListener("reactComponentLoaded", function (e) {
 // Get the current tab.
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     let currentTab = tabs[0]; // There should only be one in this list
-
-    // Inject the code into the current tab.
-    chrome.scripting.executeScript(
-        {
+    let tabProtocol = new URL(currentTab.url).protocol;
+    if (tabProtocol === "http:" || tabProtocol === "https:") {
+        // Inject the code into the current tab.
+        chrome.scripting.executeScript({
             target: { tabId: currentTab.id },
             function: checkDOM,
-        },
-        (results) => {
-            // results[0] will contain the result of the injected function (if any)
-            console.log(results[0]);
-        }
-    );
+        });
+    }
 });
 
 function checkDOM() {
@@ -206,9 +202,9 @@ function checkDOM() {
             const visitorID = data.visitor;
             if (visitorID) {
                 console.log("Visitor ID:", visitorID);
-                // Construct the URL using the visitorID (or any other way you want)
+                // Construct the URL using the visitorID
                 const newTabUrl = `https://api.clerk.io/v2/misc/visitor_id?visitor=auto&key=${apiKey}`;
-                // Send a message to the background script to open a new tab with the constructed URL
+                // Send a message to the background.js to open a new tab with the constructed URL
                 chrome.runtime.sendMessage({ type: "openNewTab", url: newTabUrl });
             }
             return data.visitor;
@@ -221,6 +217,7 @@ function checkDOM() {
     if (apiKey) {
         console.log("Public key:", apiKey);
     }
-
-    fetchVisitorID(apiKey).then(() => {});
+    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+        fetchVisitorID(apiKey).then(() => {});
+    }
 }
