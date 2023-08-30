@@ -1,15 +1,21 @@
 {
     "manifest_version": 3,
     "name": "ClerkShortcutPro",
-    "version": "1.4.4",
+    "version": "1.4.5",
     "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
-    "permissions": ["storage"],
+    "permissions": ["storage", "activeTab", "scripting", "tabs"],
+    "background": { "service_worker": "background.js" },
     "web_accessible_resources": [
         {
             "matches": [
                 "https://my.clerk.io/*",
                 "https://hq.clerk.io/*",
-                "https://app.hubspot.com/*"
+                "https://app.hubspot.com/*",
+                "https://www.notion.so/*",
+                "https://linear.app/*",
+                "https://calendar.google.com/*",
+                "http://*/*",
+                "https://*/*"
             ],
             "resources": [
                 "injected.js",
@@ -30,7 +36,12 @@
             "matches": [
                 "https://my.clerk.io/*",
                 "https://hq.clerk.io/*",
-                "https://app.hubspot.com/*"
+                "https://app.hubspot.com/*",
+                "https://www.notion.so/*",
+                "https://linear.app/*",
+                "https://calendar.google.com/*",
+                "http://*/*",
+                "https://*/*"
             ],
             "js": [
                 "content.js",

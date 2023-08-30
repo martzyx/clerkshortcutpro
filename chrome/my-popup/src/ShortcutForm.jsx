@@ -4,6 +4,7 @@ import CheckboxInput from "./CheckBoxInput";
 import TextInput from "./TextInput";
 import HorizontalLine from "./HorizontalLine";
 import InfoIcon from "./InfoIcon";
+import Button from "./Button";
 
 const ShortcutForm = () => {
     // Define state to hold display status
@@ -77,11 +78,7 @@ const ShortcutForm = () => {
 
             <HorizontalLine />
 
-            <button
-                type="submit"
-                className="mt-2 rounded-none bg-black text-white hover:bg-pasPurp py-1.5 px-3 transition">
-                Save Settings
-            </button>
+            <Button label="Save settings" type="submit"></Button>
             {saveAlert && (
                 <div
                     className={`grid mx-2 grid-flow-col grid-cols-[auto,minmax(auto,1fr)] justify-items-start text-left alert alert-success fixed left-1/2 w-fit transform -translate-x-1/2 bottom-20 transition-opacity duration-1000 ${

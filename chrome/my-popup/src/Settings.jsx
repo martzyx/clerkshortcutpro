@@ -4,7 +4,7 @@ import ShortcutForm from "./ShortCutForm";
 const Settings = () => {
     useEffect(() => {
         // Dispatch a custom event
-        const event = new CustomEvent("reactComponentLoaded", { detail: {} });
+        const event = new CustomEvent("reactSettingsLoaded", { detail: {} });
         window.dispatchEvent(event);
     }, []);
     return (

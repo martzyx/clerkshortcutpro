@@ -1,4 +1,4 @@
-window.addEventListener("reactComponentLoaded", function (e) {
+window.addEventListener("reactSettingsLoaded", function (e) {
     // Restore previously saved settings
     restore_options();
     assignProceedShortcutListener();
@@ -158,3 +158,93 @@ window.addEventListener("reactComponentLoaded", function (e) {
         // Add other shortcuts and their enable/disable values here
     });
 });
+window.addEventListener("reactLinksLoaded", function (e) {
+    // When button is clicked, perform visitorID call
+    var visitorGoButton = document.getElementById("visitorGoButton");
+    if (visitorGoButton) {
+        visitorGoButton.addEventListener("click", function () {
+            // Get the current tab to run checkDOM function
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                let currentTab = tabs[0]; // There should only be one in this list
+                let tabProtocol = new URL(currentTab.url).protocol;
+                if (tabProtocol === "http:" || tabProtocol === "https:") {
+                    // Inject the code into the current tab.
+                    chrome.scripting.executeScript({
+                        target: { tabId: currentTab.id },
+                        function: checkDOM,
+                    });
+                }
+            });
+        });
+    }
+});
+
+function checkDOM() {
+    function getApiKey() {
+        // Stubbe way:
+        // if(typeof Clerk == 'function') {
+        //     Clerk._config.key
+        // }
+        // Find the script tag with the specific src attribute pattern
+        const clerkScript = document.querySelector('script[src*="api.clerk.io"]');
+
+        if (clerkScript) {
+            // Extract API key using a regular expression
+            const match = clerkScript.src.match(/key%22%3A%22([^%]+)%22/);
+            if (match && match[1]) {
+                return decodeURIComponent(match[1]);
+            }
+        } else {
+            console.log("ClerkShortcutPro: Public API key could not be found");
+            chrome.runtime.sendMessage({ type: "showError" });
+        }
+        return null;
+    }
+
+    async function fetchVisitorID(apiKey) {
+        const apiUrl = `https://api.clerk.io/v2/misc/visitor_id?visitor=auto&key=${apiKey}`;
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            const visitorID = data.visitor;
+            if (visitorID) {
+                console.log("Visitor ID:", visitorID);
+                // Construct the URL using the visitorID
+                const newTabUrl = `https://api.clerk.io/v2/misc/visitor_id?visitor=auto&key=${apiKey}`;
+                // Send a message to the background.js to open a new tab with the constructed URL
+                chrome.runtime.sendMessage({ type: "openNewTab", url: newTabUrl });
+            }
+            return data.visitor;
+        } catch (error) {
+            console.error("There was a problem with the fetch operation:", error);
+        }
+    }
+
+    const apiKey = getApiKey();
+    if (apiKey) {
+        console.log("Public key:", apiKey);
+    }
+    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+        fetchVisitorID(apiKey).then(() => {});
+    }
+}
+
+// Popup script
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.type === "showError") {
+        displayError();
+    }
+});
+
+function displayError() {
+    const errorAlert = document.querySelector(".alert-error");
+    errorAlert.classList.remove("opacity-0");
+    errorAlert.classList.add("opacity-1");
+    setTimeout(() => {
+        errorAlert.classList.remove("opacity-1");
+        errorAlert.classList.add("opacity-0");
+    }, 2000);
+}

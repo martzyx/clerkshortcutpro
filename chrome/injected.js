@@ -9,9 +9,11 @@ window.addEventListener("message", function (event) {
 function setKeyboardShortcut(shortcut1, enableShortcut1) {
     if (enableShortcut1) {
         document.addEventListener("keydown", function (event) {
-            if (event.key === shortcut1) {
+            if (
+                event.key === shortcut1 &&
+                window.location.href.startsWith("https://my.clerk.io/")
+            ) {
                 console.log("Proceed shortcut pressed: " + shortcut1);
-
                 const buttons = [
                     {
                         selector: '[click="saveDesign(true)"] > button',
@@ -64,7 +66,10 @@ function setKeyboardShortcut(shortcut1, enableShortcut1) {
 function setKeyboardShortcut2(shortcut2, enableShortcut2) {
     if (enableShortcut2) {
         document.addEventListener("keydown", function (event) {
-            if (event.key === shortcut2) {
+            if (
+                event.key === shortcut2 &&
+                window.location.href.startsWith("https://my.clerk.io/")
+            ) {
                 console.log("closeModal shortcut pressed: " + shortcut2);
                 const buttons = [
                     { selector: '[ng-click="closeModal()"]', message: "Clicking closeModal" },
