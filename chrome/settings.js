@@ -194,6 +194,9 @@ function checkDOM() {
             if (match && match[1]) {
                 return decodeURIComponent(match[1]);
             }
+        } else {
+            console.log("ClerkShortcutPro: Public API key could not be found");
+            chrome.runtime.sendMessage({ type: "showError" });
         }
         return null;
     }
@@ -227,4 +230,21 @@ function checkDOM() {
     if (window.location.protocol === "http:" || window.location.protocol === "https:") {
         fetchVisitorID(apiKey).then(() => {});
     }
+}
+
+// Popup script
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.type === "showError") {
+        displayError();
+    }
+});
+
+function displayError() {
+    const errorAlert = document.querySelector(".alert-error");
+    errorAlert.classList.remove("opacity-0");
+    errorAlert.classList.add("opacity-1");
+    setTimeout(() => {
+        errorAlert.classList.remove("opacity-1");
+        errorAlert.classList.add("opacity-0");
+    }, 2000);
 }
