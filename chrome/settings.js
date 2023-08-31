@@ -194,8 +194,10 @@ function checkDOM() {
             if (match && match[1]) {
                 return decodeURIComponent(match[1]);
             }
+            // } else if (typeof Clerk == "function") {
+            //     return Clerk._config.key;
         } else {
-            console.log("ClerkShortcutPro: Public API key could not be found");
+            console.error("ClerkShortcutPro: Public API key could not be found");
             chrome.runtime.sendMessage({ type: "showError" });
         }
         return null;
