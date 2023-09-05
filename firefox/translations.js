@@ -151,7 +151,7 @@ function checkUrl() {
                             // Create a new button element
                             var button = document.createElement("a");
 
-                            // Set the class and innerHTML for each button
+                            // Set the class and text for each button
                             button.className = buttonData[i].class + " translateButton";
                             button.textContent = buttonData[i].text;
                             button.id = buttonData[i].id;

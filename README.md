@@ -56,9 +56,8 @@ Please submit a pull request if you'd like to contribute.
 
 ## Todo:
 
--   Redo styling of translation buttons
--   Always work on porting to Firefox :/
--   Make tool for customers to see hidden designs
+-   Always work on porting to Firefox :)
+-   Make tool to see hidden designs
 -   Make translations buttons toggle in settings
 
 ## License
