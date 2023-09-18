@@ -59,6 +59,8 @@ Please submit a pull request if you'd like to contribute.
 -   Always work on porting to Firefox :)
 -   Make tool to see hidden designs
 -   Make translations buttons toggle in settings
+-   Fix visitor key function
+-   Idea from D: "In platform admins, copy attribute fields to CSV"
 
 ## License
 
