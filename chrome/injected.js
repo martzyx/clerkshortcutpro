@@ -11,7 +11,7 @@ function setKeyboardShortcut(shortcut1, enableShortcut1) {
         document.addEventListener("keydown", function (event) {
             if (
                 event.key === shortcut1 &&
-                window.location.href.startsWith("https://my.clerk.io/")
+                window.location.href.startsWith("https://old-my.clerk.io/")
             ) {
                 console.log("Proceed shortcut pressed: " + shortcut1);
                 const buttons = [
@@ -68,7 +68,7 @@ function setKeyboardShortcut2(shortcut2, enableShortcut2) {
         document.addEventListener("keydown", function (event) {
             if (
                 event.key === shortcut2 &&
-                window.location.href.startsWith("https://my.clerk.io/")
+                window.location.href.startsWith("https://old-my.clerk.io/")
             ) {
                 console.log("closeModal shortcut pressed: " + shortcut2);
                 const buttons = [

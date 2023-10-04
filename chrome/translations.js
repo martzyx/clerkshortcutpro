@@ -8,11 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-let currentUrl = "";
+// let currentUrl = "";
 function checkUrl() {
     if (
         window.location.href.includes("recommendations/content/") &&
-        window.location.href !== currentUrl &&
+        // window.location.href !== currentUrl &&
         window.location.href.split("recommendations/content/")[1].length > 0
     ) {
         function monitorElement(selector, callback) {
@@ -124,7 +124,7 @@ function checkUrl() {
             ];
             for (let i = 0; i < translations.length; i++) {
                 if (contentName === translations[i].origin) {
-                    currentUrl = window.location.href;
+                    // currentUrl = window.location.href;
                     var headlineInput = document.querySelector("#template-variable-headline");
                     var headlineElement = headlineInput.parentNode;
 
@@ -169,33 +169,36 @@ function checkUrl() {
                     function applyTranslation(contentName, translationID) {
                         for (var i = 0; i < translations.length; i++) {
                             if (translations[i].origin === contentName) {
-                                // copy to clipboard
-                                navigator.clipboard.writeText(translations[i][translationID]).then(
-                                    function () {
-                                        headlineInput.focus();
-                                        // create a new div element
-                                        var tooltip = document.createElement("div");
-                                        // and give it some content
-                                        var tooltipText =
-                                            document.createTextNode("Copied to clipboard!");
-                                        // add the text node to the newly created div
-                                        tooltip.appendChild(tooltipText);
-                                        tooltip.className = "ok visible";
-                                        tooltip.id = "message";
-
-                                        // add the newly created element and its content into the DOM
-                                        document.body.appendChild(tooltip);
-
-                                        // hide the tooltip after 2 seconds
-                                        setTimeout(function () {
-                                            tooltip.style.display = "none";
-                                        }, 2000);
-                                    },
-                                    function (err) {
-                                        console.error("Could not copy text: ", err);
-                                    }
-                                );
+                                headlineInput.value = translations[i][translationID];
+                                headlineInput.dispatchEvent(new Event("input", { bubbles: true }));
                                 break;
+                                // // copy to clipboard
+                                // navigator.clipboard.writeText(translations[i][translationID]).then(
+                                //     function () {
+                                //         headlineInput.focus();
+                                //         // create a new div element
+                                //         var tooltip = document.createElement("div");
+                                //         // and give it some content
+                                //         var tooltipText =
+                                //             document.createTextNode("Copied to clipboard!");
+                                //         // add the text node to the newly created div
+                                //         tooltip.appendChild(tooltipText);
+                                //         tooltip.className = "ok visible";
+                                //         tooltip.id = "message";
+
+                                //         // add the newly created element and its content into the DOM
+                                //         document.body.appendChild(tooltip);
+
+                                //         // hide the tooltip after 2 seconds
+                                //         setTimeout(function () {
+                                //             tooltip.style.display = "none";
+                                //         }, 2000);
+                                //     },
+                                //     function (err) {
+                                //         console.error("Could not copy text: ", err);
+                                //     }
+                                // );
+                                // break;
                             }
                         }
                     }
@@ -203,7 +206,6 @@ function checkUrl() {
                         button.addEventListener("click", function () {
                             var translationID = this.id;
                             applyTranslation(contentName, translationID);
-                            headlineInput.value = "";
                         });
                     });
                     break; // Exit the loop since we found a match
