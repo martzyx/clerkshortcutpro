@@ -1,3 +1,5 @@
+// this is deprecated, after the new version of my.clerk.io
+
 const searchDesignObserver = new MutationObserver((mutations, searchDesignObserver) => {
     checkUrlSearchDesigns();
 });
