@@ -1,32 +1,31 @@
+<!-- THIS IS NO LONGER IN USE -->
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>Shortcut Settings</title>
+    </head>
 
-<head>
-    <title>Shortcut Settings</title>
-</head>
+    <body>
+        <h1>Shortcut Settings</h1>
+        <form id="shortcut-form">
+            <label for="enable-shortcut1">Enable proceed/confirm shortcut:</label>
+            <input type="checkbox" id="enable-shortcut1" name="enable-shortcut1" />
+            <br />
+            <label for="shortcut1">Map the key you want to use (default is 'enter'):</label>
+            <input type="text" id="shortcut1" name="shortcut1" />
+            <br />
+            <label for="enable-shortcut2">Enable close modal shortcut:</label>
+            <input type="checkbox" id="enable-shortcut2" name="enable-shortcut2" />
+            <br />
+            <label for="shortcut2">Map the key you want to use (default is 'esc'):</label>
+            <input type="text" id="shortcut2" name="shortcut2" />
+            <br />
+            <label for="enable-delete-designs">Enable delete button for search designs:</label>
+            <input type="checkbox" id="enable-delete-designs" name="enable-delete-designs" />
+            <br />
+            <button type="submit">Save Settings</button>
+        </form>
 
-<body>
-    <h1>Shortcut Settings</h1>
-    <form id="shortcut-form">
-        <label for="enable-shortcut1">Enable proceed/confirm shortcut:</label>
-        <input type="checkbox" id="enable-shortcut1" name="enable-shortcut1">
-        <br>
-        <label for="shortcut1">Map the key you want to use (default is 'enter'):</label>
-        <input type="text" id="shortcut1" name="shortcut1">
-        <br>
-        <label for="enable-shortcut2">Enable close modal shortcut:</label>
-        <input type="checkbox" id="enable-shortcut2" name="enable-shortcut2">
-        <br>
-        <label for="shortcut2">Map the key you want to use (default is 'esc'):</label>
-        <input type="text" id="shortcut2" name="shortcut2">
-        <br>
-        <label for="enable-delete-designs">Enable delete button for search designs:</label>
-        <input type="checkbox" id="enable-delete-designs" name="enable-delete-designs">    
-        <br>    
-        <button type="submit">Save Settings</button>
-    </form>
-
-    <script src="settings.js"></script>
-</body>
-
+        <script src="settings.js"></script>
+    </body>
 </html>
