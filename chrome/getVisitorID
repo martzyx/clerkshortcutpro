@@ -14,4 +14,3 @@ function getApiKey() {
 }
 
 const apiKey = getApiKey();
-// console.log(apiKey); // This will log the API key to the console
