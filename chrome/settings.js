@@ -158,6 +158,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
         // Add other shortcuts and their enable/disable values here
     });
 });
+
 window.addEventListener("reactLinksLoaded", function (e) {
     // When button is clicked, perform visitorID call
     var visitorGoButton = document.getElementById("visitorGoButton");
