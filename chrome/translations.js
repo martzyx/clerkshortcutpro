@@ -1,37 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const observer = new MutationObserver((mutations, observer) => {
-        checkUrl();
-    });
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-    });
+    if (document.body && window.location.href.startsWith("https://old-my.clerk.io/")) {
+        // check if iframe is old my clerk
+        const observer = new MutationObserver((mutations, observer) => {
+            checkUrl();
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+    }
 });
 
-// let currentUrl = "";
 function checkUrl() {
     if (
         window.location.href.includes("recommendations/content/") &&
-        // window.location.href !== currentUrl &&
         window.location.href.split("recommendations/content/")[1].length > 0
     ) {
-        function monitorElement(selector, callback) {
-            const observer = new MutationObserver((mutationsList, observer) => {
-                // If the element is found, we stop observing and run the callback.
-                if (document.querySelector(selector)) {
-                    observer.disconnect();
-                    callback();
+        // Function to check if the headline is loaded
+        function checkHeadline() {
+            const element = document.querySelector(".text-main-headline");
+            if (element) {
+                if (!document.querySelector(".translateButton")) {
+                    makeTranslationsButtons();
                 }
-            });
-
-            // We start observing the document with the configured parameters.
-            observer.observe(document, { childList: true, subtree: true });
-        }
-        monitorElement(".text-main-headline", () => {
-            if (!document.querySelector(".translateButton")) {
-                makeTranslationsButtons();
+                observer.disconnect();
             }
-        });
+        }
+
+        const config = { attributes: false, childList: true, subtree: true };
+
+        const callback = function (mutationsList, observer) {
+            for (const mutation of mutationsList) {
+                if (mutation.type === "childList") {
+                    checkHeadline();
+                }
+            }
+        };
+
+        const observer = new MutationObserver(callback);
+        const targetNode = document.body;
+        observer.observe(targetNode, config);
+
+        // Check if the element is already present without waiting for mutations
+        checkHeadline();
 
         function makeTranslationsButtons() {
             const contentName = document.querySelector(".text-main-headline").innerHTML;
@@ -129,7 +141,7 @@ function checkUrl() {
                     var headlineElement = headlineInput.parentNode;
 
                     function insertButtons() {
-                        // Button data: class and innerHTML
+                        // Button data: class and button text
                         var buttonData = [
                             { class: "translateEN", text: "EN", id: "en" },
                             { class: "translateDK", text: "DK", id: "dk" },
@@ -150,10 +162,8 @@ function checkUrl() {
 
                         // Loop through the button data
                         for (var i = 0; i < buttonData.length; i++) {
-                            // Create a new button element
+                            // button making
                             var button = document.createElement("a");
-
-                            // Set the class and innerHTML for each button
                             button.className = buttonData[i].class + " translateButton";
                             button.textContent = buttonData[i].text;
                             button.id = buttonData[i].id;
