@@ -44,7 +44,7 @@
 
 (function martzFun() {
     // Set up our array of keys for the Modified Konami Code
-    const martz = ["m", "a", "r", "t", "z","f","u","n"];
+    const martz = ["m", "a", "r", "t", "z", "f", "u", "n"];
 
     // This will track the 'position' the user has reached typing the Konami Code
     let konamiPosition = 0;
