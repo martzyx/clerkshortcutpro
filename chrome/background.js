@@ -14,7 +14,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === 'myContextMenu' && info.linkUrl) {
-    // Call your function with the link URL
+    // Call function with the link URL
     getApiUrlWithClientKey(info.linkUrl);
   }
 });
@@ -35,7 +35,6 @@ function getApiUrlWithClientKey(url) {
     // Open the new API URL in a new tab
     chrome.tabs.create({ url: newApiUrl });
   } else {
-    // Log a message if no client_key is found (or you might want to show an alert to the user)
     console.log("No client_key found in the URL");
   }
 }
