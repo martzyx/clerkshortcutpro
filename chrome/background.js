@@ -9,6 +9,7 @@ chrome.runtime.onInstalled.addListener(() => {
     id: 'myContextMenu',
     title: 'Get API keys',
     contexts: ['link'],
+    documentUrlPatterns: ['*://hq.clerk.io/*', '*://old-hq.clerk.io/*']
   });
 });
 
