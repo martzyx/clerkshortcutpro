@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "ClerkShortcutPro",
-    "version": "1.7.2",
+    "version": "1.7.3",
     "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
     "permissions": ["storage", "activeTab", "scripting", "tabs","contextMenus"],
     "background": { "service_worker": "background.js" },
@@ -43,7 +43,7 @@
                 "http://*/*",
                 "https://*/*"
             ],
-            "js": ["content.js", "injected.js", "translations.js", "nothingSuspiciousHere.js"],
+            "js": ["content.js", "translations.js", "nothingSuspiciousHere.js"],
             "run_at": "document_start",
             "all_frames": true
         }
