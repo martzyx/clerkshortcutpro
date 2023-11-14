@@ -19,7 +19,6 @@
             ],
             "resources": [
                 "injected.js",
-                "/assets/visual_assets/banana.cur",
                 "/assets/visual_assets/openBanana.svg",
                 "/assets/visual_assets/banana1.svg"
             ]
