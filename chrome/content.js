@@ -8,10 +8,10 @@ s.onload = function () {
 chrome.storage.sync.get(
     {
         shortcut1: "Enter",
-        enableShortcut1: true, // Default value is true
+        enableShortcut1: true,
         shortcut2: "Escape",
-        enableShortcut2: true, // Default value is true
-        enableDeleteDesigns: true, // Default value is true
+        enableShortcut2: true,
+        enableDeleteDesigns: true,
     },
     function (items) {
         window.postMessage(

@@ -1,5 +1,4 @@
 (function spin() {
-    // Set up our array of keys for the Modified Konami Code
     const spinny = [
         "ArrowLeft",
         "ArrowUp",
@@ -11,20 +10,14 @@
         "ArrowDown",
     ];
 
-    // This will track the 'position' the user has reached typing the Konami Code
     let konamiPosition = 0;
 
-    // Add keydown event listener
     document.addEventListener("keydown", function (e) {
-        // Get the key of the key pressed
         const key = e.key;
 
-        // Compare the key the user pressed to the key they should have pressed
         if (key === spinny[konamiPosition]) {
-            // Move to the next position in the spinny sequence
             konamiPosition++;
 
-            // If the user has finished typing the Konami Code, trigger the secret feature
             if (konamiPosition === spinny.length) {
                 (function () {
                     document.documentElement.style.transitionDuration = "60s";
@@ -43,36 +36,29 @@
 })();
 
 (function martzFun() {
-    // Set up our array of keys for the Modified Konami Code
     const martz = ["m", "a", "r", "t", "z", "f", "u", "n"];
 
-    // This will track the 'position' the user has reached typing the Konami Code
     let konamiPosition = 0;
 
-    // Add keydown event listener
     document.addEventListener("keydown", function (e) {
-        // Get the key of the key pressed
         const key = e.key;
 
-        // Compare the key the user pressed to the key they should have pressed
         if (key === martz[konamiPosition]) {
-            // Move to the next position in the martz sequence
             konamiPosition++;
 
-            // If the user has finished typing the Konami Code, trigger the secret feature
             if (konamiPosition === martz.length) {
                 (function () {
                     const colours = ["#ff6b6b", "#feca57", "#1dd1a1", "#5f27cd", "#54a0ff"];
                     const confettisCount = 500;
 
                     function confettiParticle() {
-                        this.x = window.innerWidth / 2; // Start from middle of screen
-                        this.y = window.innerHeight; // Start from bottom of screen
+                        this.x = window.innerWidth / 2;
+                        this.y = window.innerHeight;
                         this.size = Math.random() * 7 + 3;
-                        this.speedY = Math.random() * -10 + -2; // Blow upwards (negative y)
-                        this.speedX = Math.random() * 20 - 10; // Random horizontal direction
-                        this.gravity = 0.05; // Pull back down (increase y)
-                        this.decay = 0.015; // Shrink confetti over time
+                        this.speedY = Math.random() * -10 + -2;
+                        this.speedX = Math.random() * 20 - 10;
+                        this.gravity = 0.05;
+                        this.decay = 0.015;
                         this.colour = colours[Math.floor(Math.random() * colours.length)];
                     }
 
@@ -90,7 +76,7 @@
                         this.x += this.speedX;
                         this.size -= this.decay;
 
-                        if (this.size < 0) this.size = 0; // Make sure size can't be less than 0
+                        if (this.size < 0) this.size = 0;
 
                         this.draw();
                     };
@@ -123,7 +109,7 @@
                         for (let i = 0; i < particles.length; i++) {
                             particles[i].update();
                             if (particles[i].size === 0) {
-                                particles.splice(i, 1); // Remove when size is 0
+                                particles.splice(i, 1);
                             }
                         }
                         if (particles.length > 0) {
@@ -135,37 +121,28 @@
                     setTimeout(function () {
                         cancelAnimationFrame(animationId);
                         document.body.removeChild(canvas);
-                    }, 10000); // stop the animation after 2 seconds
+                    }, 10000);
                 })();
 
-                // Reset konamiPosition so the user can do it again
                 konamiPosition = 0;
             }
         } else {
-            // The user pressed the wrong key, reset the konamiPosition
             konamiPosition = 0;
         }
     });
 })();
 
 (function runPrank() {
-    // Set up our array of keys for the Modified Konami Code
     const prank = ["p", "r", "a", "n", "k", "f", "u", "n"];
 
-    // This will track the 'position' the user has reached typing the Konami Code
     let konamiPosition = 0;
 
-    // Add keydown event listener
     document.addEventListener("keydown", function (e) {
-        // Get the key of the key pressed
         const key = e.key;
 
-        // Compare the key the user pressed to the key they should have pressed
         if (key === prank[konamiPosition]) {
-            // Move to the next position in the prank sequence
             konamiPosition++;
 
-            // If the user has finished typing the Konami Code, trigger the secret feature
             if (konamiPosition === prank.length) {
                 setInterval(() => {
                     const allElements = document.getElementsByTagName("*");
@@ -187,31 +164,22 @@
 })();
 
 (function bananaCursor() {
-    // Set up our array of keys for the banana fun
     const bananaFun = ["b", "a", "n", "a", "n", "a", "f", "u", "n"];
 
-    // This will track the 'position' the user has reached typing the bananaFun
     let bananaFunPosition = 0;
 
-    // Add keydown event listener
     document.addEventListener("keydown", function (e) {
-        // Get the key of the key pressed
         const key = e.key;
 
-        // Compare the key the user pressed to the key they should have pressed
         if (key === bananaFun[bananaFunPosition]) {
-            // Move to the next position in the bananaFun sequence
             bananaFunPosition++;
 
-            // If the user has finished typing the bananaFun, trigger the secret feature
             if (bananaFunPosition === bananaFun.length) {
                 console.log("you got bananaed");
                 document.body.style.cursor =
                     "url(" + chrome.runtime.getURL("/assets/visual_assets/banana1.svg") + "), auto";
 
-                // Create a style element
                 let style = document.createElement("style");
-                // Add the custom cursor style for all anchor tags
                 let textNode = document.createTextNode(
                     `
                         a {
@@ -222,7 +190,6 @@
                     `
                 );
                 style.appendChild(textNode);
-                // Append the style to the document head
                 document.head.appendChild(style);
             }
         } else {
