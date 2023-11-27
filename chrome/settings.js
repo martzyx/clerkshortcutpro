@@ -217,7 +217,7 @@ function checkDOM() {
                 console.log("Visitor ID:", visitorID);
                 // Construct the URL using the visitorID
                 const newTabUrl = `https://api.clerk.io/v2/misc/visitor_id?visitor=auto&key=${apiKey}`;
-                // Send a message to the background.js to open a new tab with the constructed URL
+                // Send a message to background.js to open a new tab with the constructed URL
                 chrome.runtime.sendMessage({ type: "openNewTab", url: newTabUrl });
             }
             return data.visitor;
