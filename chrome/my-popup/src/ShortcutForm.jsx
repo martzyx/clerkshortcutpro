@@ -30,7 +30,10 @@ const ShortcutForm = () => {
         }, 2000);
     };
     return (
-        <form id="shortcut-form" className="text-center" onSubmit={handleSubmit}>
+        <form
+            id="shortcut-form"
+            className="text-center"
+            onSubmit={handleSubmit}>
             <HorizontalLine />
             <div className="flex items-center gap-2 justify-center">
                 <FormHeading text="Proceed/Confirm Shortcut" />
@@ -63,17 +66,6 @@ const ShortcutForm = () => {
                 id="shortcut2"
                 name="shortcut2"
                 label="Map the key you want to use (default is 'esc'):"
-            />
-
-            <HorizontalLine />
-            <div className="flex items-center gap-2 justify-center">
-                <FormHeading text="Delete Search Designs Button" />
-                <InfoIcon tooltipText="Creates delete all designs button in search designs page" />
-            </div>
-            <CheckboxInput
-                id="enable-delete-designs"
-                name="enable-delete-designs"
-                label="Enable delete button for search designs:"
             />
 
             <HorizontalLine />

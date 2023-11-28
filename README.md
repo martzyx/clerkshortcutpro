@@ -43,13 +43,6 @@ When viewing best-practice content in Recommendations > Content in my.clerk.io, 
 
 _(Side note: I tried making it auto-fill, but Angular doesn't allow that to be saved. There needs to be some user input.)_
 
-## Usage of Delete Search Designs
-
-Whenever you are on my.clerk.io > search designs, refresh the page, and you should see a button at the bottom.
-When clicking this button, it deletes all designs that match the names of the default designs.
-In chrome, you can enable/disable this in the options section of the extension.
-![Example](/assets/deletesearchscreeny.png "Walah!")
-
 ## Contributing
 
 Please submit a pull request if you'd like to contribute.
@@ -71,4 +64,6 @@ See the LICENSE file for license rights and limitations.
 
 -   If updating chrome manifest, use `node convertManifest.js` to automatically update firefox manifest
 -   To package firefox: Use command `web-ext build`
--   When packaging chrome zip, use `zip -r chrome.zip chrome -x "chrome/my-popup/*"`
+-   When packaging chrome zip, use `zip -r chrome-1.7.3.zip chrome -x "chrome/my-popup/*"`
+-   To run react dev app, navigate to my-popup, and use `npm run dev`
+    -   To build, use `npm run build`
