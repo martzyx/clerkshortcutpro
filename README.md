@@ -53,8 +53,11 @@ Please submit a pull request if you'd like to contribute.
 -   Make tool to see hidden designs
 -   Make translations buttons toggle in settings
 -   Fix visitor key function
--   Idea from D: "In platform admins, copy attribute fields to CSV"
 -   Add select all button for copy new store page
+-   Make translation buttons for input variables in content pages
+    - Extension makes a translate button in the content
+    - Once user fills the input variables, forms, a translate button is available to translate all the variables to the chosen language
+-   Confirm modal in features myclerk section
 
 ## License
 

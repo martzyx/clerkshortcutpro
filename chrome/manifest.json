@@ -1,9 +1,17 @@
 {
     "manifest_version": 3,
     "name": "ClerkShortcutPro",
-    "version": "1.7.3",
+    "version": "1.7.4",
     "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
-    "permissions": ["storage", "activeTab", "scripting", "tabs","contextMenus"],
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting",
+        "tabs",
+        "contextMenus"
+    ],
+    "host_permissions": ["https://translation.googleapis.com/*"],
+
     "background": { "service_worker": "background.js" },
     "web_accessible_resources": [
         {

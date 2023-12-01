@@ -182,33 +182,6 @@ function checkUrl() {
                                 headlineInput.value = translations[i][translationID];
                                 headlineInput.dispatchEvent(new Event("input", { bubbles: true }));
                                 break;
-                                // // copy to clipboard
-                                // navigator.clipboard.writeText(translations[i][translationID]).then(
-                                //     function () {
-                                //         headlineInput.focus();
-                                //         // create a new div element
-                                //         var tooltip = document.createElement("div");
-                                //         // and give it some content
-                                //         var tooltipText =
-                                //             document.createTextNode("Copied to clipboard!");
-                                //         // add the text node to the newly created div
-                                //         tooltip.appendChild(tooltipText);
-                                //         tooltip.className = "ok visible";
-                                //         tooltip.id = "message";
-
-                                //         // add the newly created element and its content into the DOM
-                                //         document.body.appendChild(tooltip);
-
-                                //         // hide the tooltip after 2 seconds
-                                //         setTimeout(function () {
-                                //             tooltip.style.display = "none";
-                                //         }, 2000);
-                                //     },
-                                //     function (err) {
-                                //         console.error("Could not copy text: ", err);
-                                //     }
-                                // );
-                                // break;
                             }
                         }
                     }
