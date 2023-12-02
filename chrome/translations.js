@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     if (document.body && window.location.href.startsWith("https://old-my.clerk.io/")) {
-        // check if iframe is old my clerk
+        // check if iframe is old myclerk
         const observer = new MutationObserver((mutations, observer) => {
             checkUrl();
         });
