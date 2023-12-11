@@ -1,28 +1,39 @@
-function checkEl() {
-    // Check if oldmyclerk iframe
-    if (!window.location.href.startsWith("https://old-my.clerk.io")) {
-        return;
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    // check if iframe is old myclerk
+    if (document.body && window.location.href.startsWith("https://old-my.clerk.io/")) {
+        const observer = new MutationObserver((mutations, observer) => {
+            checkUrl();
+            const editorWidthEl = document.querySelector('[ng-view][autoscroll="true"].ng-scope');
+            if (editorWidthEl && editorWidthEl.getAttribute("data-csp") == "true") {
+                observer.disconnect();
+            }
+        });
 
-    let editorWidthEl = document.querySelector('[ng-view][autoscroll="true"].ng-scope');
-    if (editorWidthEl) {
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+    }
+});
+
+function checkUrl() {
+    if (window.location.href.includes("/code")) {
         enlargeEditor();
-        clearInterval(editorInterval);
     }
 }
 
-let editorInterval = setInterval(checkEl, 200);
-
 function enlargeEditor() {
     // https://ace.c9.io/#nav=howto
-    let editorWidthEl = document.querySelector('[ng-view][autoscroll="true"].ng-scope');
+    const editorWidthEl = document.querySelector('[ng-view][autoscroll="true"].ng-scope');
     const editorEl = document.querySelectorAll(".editor");
-    editorEl.forEach((el) => (el.style = "height:calc(100vh - 5em)"));
+    editorEl.forEach((el) => (el.style = "height:calc(80vh - 5em)"));
 
     for (el of editorEl) {
         let editorID = el.getAttribute("id");
-        let editor = ace.edit(editorID);
-        editor.resize();
+        if (typeof ace !== "undefined") {
+            let editor = ace.edit(editorID);
+            editor.resize();
+        }
     }
 
     if (editorWidthEl) {
