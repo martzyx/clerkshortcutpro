@@ -58,6 +58,7 @@ Please submit a pull request if you'd like to contribute.
     - Extension makes a translate button in the content
     - Once user fills the input variables, forms, a translate button is available to translate all the variables to the chosen language
 -   Confirm modal in features myclerk section
+-   Add old myclerk to contextmenu
 
 ## License
 
