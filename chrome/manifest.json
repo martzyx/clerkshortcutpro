@@ -3,15 +3,8 @@
     "name": "ClerkShortcutPro",
     "version": "1.8.0",
     "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
-    "permissions": [
-        "storage",
-        "activeTab",
-        "scripting",
-        "tabs",
-        "contextMenus"
-    ],
+    "permissions": ["storage", "activeTab", "scripting", "tabs","contextMenus"],
     "host_permissions": ["https://translation.googleapis.com/*"],
-
     "background": { "service_worker": "background.js" },
     "web_accessible_resources": [
         {
@@ -50,7 +43,7 @@
                 "http://*/*",
                 "https://*/*"
             ],
-            "js": ["content.js", "translations.js", "nothingSuspiciousHere.js","aceEditorEnhanced.js"],
+            "js": ["content.js", "translations.js", "nothingSuspiciousHere.js"],
             "run_at": "document_start",
             "all_frames": true
         }
