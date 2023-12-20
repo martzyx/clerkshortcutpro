@@ -5,7 +5,6 @@ window.addEventListener("reactSettingsLoaded", function (e) {
     assignCloseModalShortcutListener();
     toggleProceedShortcutListener();
     toggleCloseModalShortcutListener();
-    toggleDeleteDesignsListener();
 
     // When form is submitted, save settings
     var shortcutForm = document.getElementById("shortcut-form");
@@ -39,7 +38,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
         }
     }
 
-    // Enable/Disable Shortcut Function for shortcut1
+    // Disable assignment input for shortcut1 if toggle is not checked
     function toggleProceedShortcutListener() {
         var enableshortcut1 = document.getElementById("enable-shortcut1");
         if (enableshortcut1) {
@@ -49,24 +48,13 @@ window.addEventListener("reactSettingsLoaded", function (e) {
             });
         }
     }
+    // Disable assignment input for shortcut2 if toggle is not checked
     function toggleCloseModalShortcutListener() {
-        // Enable/Disable Shortcut Function for shortcut2
         var enableShortcut2 = document.getElementById("enable-shortcut2");
         if (enableShortcut2) {
             enableShortcut2.addEventListener("change", function () {
                 var enableShortcut = enableShortcut2.checked;
                 document.getElementById("shortcut2").disabled = !enableShortcut;
-            });
-        }
-    }
-
-    function toggleDeleteDesignsListener() {
-        // Enable/Disable Delete Designs Function
-        var enableDeleteDesignsEl = document.getElementById("enable-delete-designs");
-        if (enableDeleteDesignsEl) {
-            enableDeleteDesignsEl.addEventListener("change", function () {
-                var enableDeleteDesigns = enableDeleteDesignsEl.checked;
-                chrome.storage.sync.set({ enableDeleteDesigns: enableDeleteDesigns });
             });
         }
     }
@@ -84,6 +72,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 enableShortcut1: document.getElementById("enable-shortcut1").checked,
                 shortcut2: shortcut2Value,
                 enableShortcut2: document.getElementById("enable-shortcut2").checked,
+                enableTranslationButtons: document.getElementById("translation-button-toggle").checked
                 // Add other shortcuts and their enable/disable values here
             },
             function () {
@@ -101,7 +90,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 enableShortcut1: true, 
                 shortcut2: "Escape", 
                 enableShortcut2: true, 
-                enableDeleteDesigns: true, 
+                enableTranslationButtons: true,
                 // Add other shortcuts and their enable/disable values here
             },
 
@@ -110,7 +99,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 const enableShortcut1Element = document.getElementById("enable-shortcut1");
                 const shortcut2Element = document.getElementById("shortcut2");
                 const enableShortcut2Element = document.getElementById("enable-shortcut2");
-                const enableDeleteDesignsElement = document.getElementById("enable-delete-designs");
+                const enableTranslationButtonsElement = document.getElementById("translation-button-toggle");
 
                 if (shortcut1Element) {
                     shortcut1Element.value = items.shortcut1;
@@ -129,11 +118,10 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 if (enableShortcut2Element) {
                     enableShortcut2Element.checked = items.enableShortcut2;
                 }
-
-                if (enableDeleteDesignsElement) {
-                    enableDeleteDesignsElement.checked = items.enableDeleteDesigns;
+                
+                if (enableTranslationButtonsElement) {
+                    enableTranslationButtonsElement.checked = items.enableTranslationButtons;
                 }
-
                 // Set the default shortcut values without waiting for keydown event
                 if (items.shortcut1 === "Enter" && shortcut1Element) {
                     shortcut1Element.value = "Enter";
@@ -154,7 +142,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
         enableShortcut1: false, 
         shortcut2: "default shortcut", 
         enableShortcut2: false, 
-        enableDeleteDesigns: false, 
+        enableTranslationButtons: false,
         // Add other shortcuts and their enable/disable values here
     });
 });

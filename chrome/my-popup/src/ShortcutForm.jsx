@@ -69,6 +69,18 @@ const ShortcutForm = () => {
             />
 
             <HorizontalLine />
+            
+            <div className="flex items-center gap-2 justify-center">
+                <FormHeading text="Translation buttons for headlines" />
+                <InfoIcon tooltipText="Provides translations buttons in Recs &gt; Content &gt; Select Design" />
+            </div>
+            <CheckboxInput
+                id="translation-button-toggle"
+                name="translation-button-toggle"
+                label="Toggle the translation buttons:"
+            />
+
+            <HorizontalLine />
 
             <Button label="Save settings" type="submit"></Button>
             {saveAlert && (
