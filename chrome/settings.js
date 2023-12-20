@@ -20,7 +20,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
         var shortcut1 = document.getElementById("shortcut1");
         if (shortcut1) {
             shortcut1.addEventListener("keydown", function (event) {
-                event.preventDefault(); // Prevent the default action
+                event.preventDefault(); 
                 document.getElementById("shortcut1").value = event.key; // Assign the pressed key
                 return false; // Prevent the form from being submitted
             });
@@ -39,8 +39,8 @@ window.addEventListener("reactSettingsLoaded", function (e) {
         }
     }
 
+    // Enable/Disable Shortcut Function for shortcut1
     function toggleProceedShortcutListener() {
-        // Enable/Disable Shortcut Function for shortcut1
         var enableshortcut1 = document.getElementById("enable-shortcut1");
         if (enableshortcut1) {
             enableshortcut1.addEventListener("change", function () {
@@ -84,7 +84,6 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 enableShortcut1: document.getElementById("enable-shortcut1").checked,
                 shortcut2: shortcut2Value,
                 enableShortcut2: document.getElementById("enable-shortcut2").checked,
-
                 // Add other shortcuts and their enable/disable values here
             },
             function () {
@@ -97,12 +96,12 @@ window.addEventListener("reactSettingsLoaded", function (e) {
     // Restores select box and checkbox state using the preferences stored in chrome.storage.
     function restore_options() {
         chrome.storage.sync.get(
-            {
-                shortcut1: "Enter", // default value
-                enableShortcut1: true, // default value
-                shortcut2: "Escape", // default value
-                enableShortcut2: true, // default value
-                enableDeleteDesigns: true, // default value
+            { // default values
+                shortcut1: "Enter", 
+                enableShortcut1: true, 
+                shortcut2: "Escape", 
+                enableShortcut2: true, 
+                enableDeleteDesigns: true, 
                 // Add other shortcuts and their enable/disable values here
             },
 
@@ -150,11 +149,12 @@ window.addEventListener("reactSettingsLoaded", function (e) {
     }
 
     chrome.storage.sync.get({
-        shortcut1: "default shortcut", // default value
-        enableShortcut1: false, // default value
-        shortcut2: "default shortcut", // default value
-        enableShortcut2: false, // default value
-        enableDeleteDesigns: false, // default value
+        // default value
+        shortcut1: "default shortcut", 
+        enableShortcut1: false, 
+        shortcut2: "default shortcut", 
+        enableShortcut2: false, 
+        enableDeleteDesigns: false, 
         // Add other shortcuts and their enable/disable values here
     });
 });
@@ -164,12 +164,11 @@ window.addEventListener("reactLinksLoaded", function (e) {
     var visitorGoButton = document.getElementById("visitorGoButton");
     if (visitorGoButton) {
         visitorGoButton.addEventListener("click", function () {
-            // Get the current tab to run checkDOM function
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                let currentTab = tabs[0]; // There should only be one in this list
+                let currentTab = tabs[0]; 
                 let tabProtocol = new URL(currentTab.url).protocol;
                 if (tabProtocol === "http:" || tabProtocol === "https:") {
-                    // Inject the code into the current tab.
+                    // Inject checkDOM script into current tab.
                     chrome.scripting.executeScript({
                         target: { tabId: currentTab.id },
                         function: checkDOM,
@@ -190,7 +189,6 @@ function checkDOM() {
         const clerkScript = document.querySelector('script[src*="api.clerk.io"]');
 
         if (clerkScript) {
-            // Extract API key using a regular expression
             const match = clerkScript.src.match(/key%22%3A%22([^%]+)%22/);
             if (match && match[1]) {
                 return decodeURIComponent(match[1]);
@@ -215,9 +213,8 @@ function checkDOM() {
             const visitorID = data.visitor;
             if (visitorID) {
                 console.log("Visitor ID:", visitorID);
-                // Construct the URL using the visitorID
                 const newTabUrl = `https://api.clerk.io/v2/misc/visitor_id?visitor=auto&key=${apiKey}`;
-                // Send a message to background.js to open a new tab with the constructed URL
+                // Send a message to background.js to open a new tab with the  URL
                 chrome.runtime.sendMessage({ type: "openNewTab", url: newTabUrl });
             }
             return data.visitor;
@@ -235,7 +232,7 @@ function checkDOM() {
     }
 }
 
-// Popup script
+// Popup script for React component
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.type === "showError") {
         displayError();
