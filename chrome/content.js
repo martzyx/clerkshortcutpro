@@ -11,7 +11,6 @@ chrome.storage.sync.get(
         enableShortcut1: true,
         shortcut2: "Escape",
         enableShortcut2: true,
-        enableDeleteDesigns: true,
     },
     function (items) {
         window.postMessage(
@@ -21,7 +20,6 @@ chrome.storage.sync.get(
                 enableShortcut1: items.enableShortcut1,
                 shortcut2: items.shortcut2,
                 enableShortcut2: items.enableShortcut2,
-                enableDeleteDesigns: items.enableDeleteDesigns,
             },
             "*"
         );
@@ -34,8 +32,7 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
             key === "shortcut1" ||
             key === "enableShortcut1" ||
             key === "shortcut2" ||
-            key === "enableShortcut2" ||
-            key === "enableDeleteDesigns"
+            key === "enableShortcut2"
         ) {
             window.postMessage(
                 {
@@ -44,7 +41,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
                     enableShortcut1: changes.enableShortcut1.newValue,
                     shortcut2: changes.shortcut2.newValue,
                     enableShortcut2: changes.enableShortcut2.newValue,
-                    enableDeleteDesigns: changes.enableDeleteDesigns.newValue,
                 },
                 "*"
             );
