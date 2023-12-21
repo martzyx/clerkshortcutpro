@@ -1,9 +1,3 @@
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === "openNewTab") {
-        chrome.tabs.create({ url: message.url });
-    }
-});
-
 chrome.storage.sync.get(
     {
         openOldMyClerk: true,

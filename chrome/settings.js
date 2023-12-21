@@ -18,7 +18,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
         var shortcut1 = document.getElementById("shortcut1");
         if (shortcut1) {
             shortcut1.addEventListener("keydown", function (event) {
-                event.preventDefault(); 
+                event.preventDefault();
                 document.getElementById("shortcut1").value = event.key; // Assign the pressed key
                 return false; // Prevent the form from being submitted
             });
@@ -85,14 +85,15 @@ window.addEventListener("reactSettingsLoaded", function (e) {
     // Restores select box and checkbox state using the preferences stored in chrome.storage.
     function restore_options() {
         chrome.storage.sync.get(
-            { // default values if user has not yet set up
-                shortcut1: "Enter", 
-                enableShortcut1: true, 
-                shortcut2: "Escape", 
-                enableShortcut2: true, 
+            {
+                // default values if user has not yet set up
+                shortcut1: "Enter",
+                enableShortcut1: true,
+                shortcut2: "Escape",
+                enableShortcut2: true,
                 enableTranslationButtons: true,
                 openOldMyClerk: true,
-                getClientInfo: true
+                getClientInfo: true,
             },
 
             function updateItems(items) {
@@ -122,7 +123,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 if (enableShortcut2Element) {
                     enableShortcut2Element.checked = items.enableShortcut2;
                 }
-                
+
                 if (enableTranslationButtonsElement) {
                     enableTranslationButtonsElement.checked = items.enableTranslationButtons;
                 }
@@ -150,13 +151,13 @@ window.addEventListener("reactSettingsLoaded", function (e) {
     }
 });
 
+// When get visitorID button is clicked
 window.addEventListener("reactLinksLoaded", function (e) {
-    // When button is clicked, perform visitorID call
     var visitorGoButton = document.getElementById("visitorGoButton");
     if (visitorGoButton) {
         visitorGoButton.addEventListener("click", function () {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                let currentTab = tabs[0]; 
+                let currentTab = tabs[0];
                 let tabProtocol = new URL(currentTab.url).protocol;
                 if (tabProtocol === "http:" || tabProtocol === "https:") {
                     // Inject checkDOM script into current tab.
@@ -172,25 +173,25 @@ window.addEventListener("reactLinksLoaded", function (e) {
 
 function checkDOM() {
     function getApiKey() {
-        // Stubbe way:
-        // if(typeof Clerk == 'function') {
-        //     Clerk._config.key
-        // }
-        // Find the script tag with the specific src attribute pattern
-        const clerkScript = document.querySelector('script[src*="api.clerk.io"]');
+        var clerkTrackingScript = Array.from(document.querySelectorAll("script")).filter(function (s) {
+            return s.textContent.includes("cdn.clerk.io/clerk.js");
+        });
 
-        if (clerkScript) {
-            const match = clerkScript.src.match(/key%22%3A%22([^%]+)%22/);
+        if (clerkTrackingScript.length > 0) {
+            var firstScript = clerkTrackingScript[0];
+            var keyPattern = /key:\s*'([^']+)'/;
+            var match = keyPattern.exec(firstScript.textContent);
+
             if (match && match[1]) {
-                return decodeURIComponent(match[1]);
+                var pubKey = match[1];
+                console.log("Public key:", pubKey);
+                return pubKey;
+            } else {
+                console.error("ClerkShortcutPro: Public API key could not be found");
+                chrome.runtime.sendMessage({ type: "showError" });
             }
-            // } else if (typeof Clerk == "function") {
-            //     return Clerk._config.key;
-        } else {
-            console.error("ClerkShortcutPro: Public API key could not be found");
-            chrome.runtime.sendMessage({ type: "showError" });
+            return null;
         }
-        return null;
     }
 
     async function fetchVisitorID(apiKey) {
@@ -215,16 +216,13 @@ function checkDOM() {
     }
 
     const apiKey = getApiKey();
-    if (apiKey) {
-        console.log("Public key:", apiKey);
-    }
     if (window.location.protocol === "http:" || window.location.protocol === "https:") {
         fetchVisitorID(apiKey).then(() => {});
     }
 }
 
 // Error popup for React component
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (message) {
     if (message.type === "showError") {
         displayError();
     }
