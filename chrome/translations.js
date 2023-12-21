@@ -1,22 +1,32 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // check if iframe is old myclerk
-    if (document.body && window.location.href.startsWith("https://old-my.clerk.io/")) {
-        const observer = new MutationObserver((mutations, observer) => {
-            checkUrl();
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-        });
+chrome.storage.sync.get(
+    {
+        enableTranslationButtons: true,
+    },
+    function (items) {
+        if (items.enableTranslationButtons) {
+            initialCheck();
+        }
     }
-});
+);
 
-function checkUrl() {
-    if (
-        window.location.href.includes("recommendations/content/") &&
-        window.location.href.split("recommendations/content/")[1].length > 0
-    ) {
+function initialCheck() {
+    document.addEventListener("DOMContentLoaded", () => {
+        // check if iframe is old myclerk
+        if (document.body && window.location.href.startsWith("https://old-my.clerk.io/")) {
+            const observer = new MutationObserver((mutations, observer) => {
+                checkForRec();
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+            });
+        }
+    });
+}
+
+function checkForRec() {
+    if (window.location.href.includes("recommendations/content/") && window.location.href.split("recommendations/content/")[1].length > 0) {
         // Function to check if the headline is loaded
         function checkHeadline() {
             const element = document.querySelector(".text-main-headline");

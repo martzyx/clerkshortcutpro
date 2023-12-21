@@ -1,5 +1,4 @@
 window.addEventListener("reactSettingsLoaded", function (e) {
-    // Restore previously saved settings
     restore_options();
     assignProceedShortcutListener();
     assignCloseModalShortcutListener();
@@ -72,8 +71,9 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 enableShortcut1: document.getElementById("enable-shortcut1").checked,
                 shortcut2: shortcut2Value,
                 enableShortcut2: document.getElementById("enable-shortcut2").checked,
-                enableTranslationButtons: document.getElementById("translation-button-toggle").checked
-                // Add other shortcuts and their enable/disable values here
+                enableTranslationButtons: document.getElementById("translation-button-toggle").checked,
+                getClientInfo: document.getElementById("client-info-toggle").checked,
+                openOldMyClerk: document.getElementById("old-myclerk-toggle").checked,
             },
             function () {
                 // Update status to let user know options were saved.
@@ -85,13 +85,14 @@ window.addEventListener("reactSettingsLoaded", function (e) {
     // Restores select box and checkbox state using the preferences stored in chrome.storage.
     function restore_options() {
         chrome.storage.sync.get(
-            { // default values
+            { // default values if user has not yet set up
                 shortcut1: "Enter", 
                 enableShortcut1: true, 
                 shortcut2: "Escape", 
                 enableShortcut2: true, 
                 enableTranslationButtons: true,
-                // Add other shortcuts and their enable/disable values here
+                openOldMyClerk: true,
+                getClientInfo: true
             },
 
             function updateItems(items) {
@@ -100,6 +101,8 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 const shortcut2Element = document.getElementById("shortcut2");
                 const enableShortcut2Element = document.getElementById("enable-shortcut2");
                 const enableTranslationButtonsElement = document.getElementById("translation-button-toggle");
+                const getClientInfoElement = document.getElementById("client-info-toggle");
+                const openOldMyClerkElement = document.getElementById("old-myclerk-toggle");
 
                 if (shortcut1Element) {
                     shortcut1Element.value = items.shortcut1;
@@ -107,6 +110,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 }
 
                 if (enableShortcut1Element) {
+                    // sets the element to checked/unchecked based on chrome storage
                     enableShortcut1Element.checked = items.enableShortcut1;
                 }
 
@@ -122,6 +126,15 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 if (enableTranslationButtonsElement) {
                     enableTranslationButtonsElement.checked = items.enableTranslationButtons;
                 }
+
+                if (openOldMyClerkElement) {
+                    openOldMyClerkElement.checked = items.openOldMyClerk;
+                }
+
+                if (getClientInfoElement) {
+                    getClientInfoElement.checked = items.getClientInfo;
+                }
+
                 // Set the default shortcut values without waiting for keydown event
                 if (items.shortcut1 === "Enter" && shortcut1Element) {
                     shortcut1Element.value = "Enter";
@@ -135,16 +148,6 @@ window.addEventListener("reactSettingsLoaded", function (e) {
             }
         );
     }
-
-    chrome.storage.sync.get({
-        // default value
-        shortcut1: "default shortcut", 
-        enableShortcut1: false, 
-        shortcut2: "default shortcut", 
-        enableShortcut2: false, 
-        enableTranslationButtons: false,
-        // Add other shortcuts and their enable/disable values here
-    });
 });
 
 window.addEventListener("reactLinksLoaded", function (e) {
@@ -220,7 +223,7 @@ function checkDOM() {
     }
 }
 
-// Popup script for React component
+// Error popup for React component
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.type === "showError") {
         displayError();

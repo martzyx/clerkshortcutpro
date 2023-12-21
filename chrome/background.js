@@ -1,5 +1,5 @@
-importScripts('openOldMyClerk.js');
-importScripts('getApiKeys.js');
+importScripts("getApiKeys.js");
+importScripts("openOldMyClerk.js")
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === "openNewTab") {
