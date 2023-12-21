@@ -11,7 +11,7 @@ function App() {
         <Router>
             <div
                 id="app-wrapper"
-                className="font-sans max-w-xl mx-auto w-128 h-screen min-h-50em p-8 bg-white text-black dark:bg-darkMode dark:text-white">
+                className="font-sans max-w-xl mx-auto w-128 min-h-50em p-8 bg-white text-black dark:bg-darkMode dark:text-white">
                 <Heading1 heading="ClerkShortcutPro" />
                 <Routes>
                     <Route path="/" element={<Links />} />

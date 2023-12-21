@@ -30,80 +30,56 @@ const ShortcutForm = () => {
         }, 2000);
     };
     return (
-        <form
-            id="shortcut-form"
-            className="text-center"
-            onSubmit={handleSubmit}>
-            <HorizontalLine />
-            <div className="flex items-center gap-2 justify-center">
-                <FormHeading text="Proceed/Confirm Shortcut" />
-                <InfoIcon tooltipText="Proceeds with the modal or the current flow" />
-            </div>
-            <div>
-                <CheckboxInput
-                    id="enable-shortcut1"
-                    name="enable-shortcut1"
-                    label="Enable proceed/confirm shortcut:"
-                />
-                <TextInput
-                    id="shortcut1"
-                    name="shortcut1"
-                    label="Map the key you want to use (default is 'enter'):"
-                />
-            </div>
-
-            <HorizontalLine />
-            <div className="flex items-center gap-2 justify-center">
-                <FormHeading text="Escape/Close Modal Shortcut" />
-                <InfoIcon tooltipText="Closes modal or exits the current flow" />
-            </div>
-            <CheckboxInput
-                id="enable-shortcut2"
-                name="enable-shortcut2"
-                label="Enable close modal shortcut:"
-            />
-            <TextInput
-                id="shortcut2"
-                name="shortcut2"
-                label="Map the key you want to use (default is 'esc'):"
-            />
-
-            <HorizontalLine />
-            
-            <div className="flex items-center gap-2 justify-center">
-                <FormHeading text="Translation buttons for headlines" />
-                <InfoIcon tooltipText="Provides translations buttons in Recs &gt; Content &gt; Select Design" />
-            </div>
-            <CheckboxInput
-                id="translation-button-toggle"
-                name="translation-button-toggle"
-                label="Toggle the translation buttons:"
-            />
-
-            <HorizontalLine />
-
-            <Button label="Save settings" type="submit"></Button>
-            {saveAlert && (
-                <div
-                    className={`grid mx-2 grid-flow-col grid-cols-[auto,minmax(auto,1fr)] justify-items-start text-left alert alert-success fixed left-1/2 w-fit transform -translate-x-1/2 bottom-20 transition-opacity duration-1000 ${
-                        fade ? "opacity-0" : "opacity-100"
-                    }`}>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="stroke-current shrink-0 h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                    </svg>
-                    <span>Settings saved</span>
+        <div>
+            <form id="shortcut-form" className="text-center mb-20" onSubmit={handleSubmit}>
+                <HorizontalLine />
+                <div className="flex items-center gap-2 justify-center">
+                    <FormHeading text="Proceed/Confirm Shortcut" />
+                    <InfoIcon tooltipText="Proceeds with the modal or the current flow" />
                 </div>
-            )}
-        </form>
+                <div>
+                    <CheckboxInput id="enable-shortcut1" name="enable-shortcut1" label="Enable proceed/confirm shortcut:" />
+                    <TextInput id="shortcut1" name="shortcut1" label="Map the key you want to use (default is 'enter'):" />
+                </div>
+
+                <HorizontalLine />
+                <div className="flex items-center gap-2 justify-center">
+                    <FormHeading text="Escape/Close Modal Shortcut" />
+                    <InfoIcon tooltipText="Closes modal or exits the current flow" />
+                </div>
+                <CheckboxInput id="enable-shortcut2" name="enable-shortcut2" label="Enable close modal shortcut:" />
+                <TextInput id="shortcut2" name="shortcut2" label="Map the key you want to use (default is 'esc'):" />
+
+                <HorizontalLine />
+
+                <div className="flex items-center gap-2 justify-center">
+                    <FormHeading text="Translation buttons for headlines" />
+                    <InfoIcon tooltipText="Provides translations buttons in Recs &gt; Content &gt; Select Design" />
+                </div>
+                <CheckboxInput id="translation-button-toggle" name="translation-button-toggle" label="Toggle the translation buttons:" />
+
+                <HorizontalLine />
+
+                <div className="flex items-center gap-2 justify-center">
+                    <FormHeading text="Right-click menu" />
+                    <InfoIcon tooltipText="Creates options in context menu in HQ" />
+                </div>
+                <CheckboxInput id="client-info-toggle" name="client-info-toggle" label="Get client info (API keys)" />
+                <CheckboxInput id="old-myclerk-toggle" name="old-myclerk-toggle" label="Open old myclerk" />
+
+                <HorizontalLine />
+
+                <Button label="Save settings" type="submit"></Button>
+                {saveAlert && (
+                    <div className={`grid mx-2 grid-flow-col grid-cols-[auto,minmax(auto,1fr)] justify-items-start text-left alert alert-success fixed left-1/2 w-fit transform -translate-x-1/2 bottom-20 transition-opacity duration-1000 ${fade ? "opacity-0" : "opacity-100"}`}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Settings saved</span>
+                    </div>
+                )}
+            </form>
+        </div>
     );
 };
 
