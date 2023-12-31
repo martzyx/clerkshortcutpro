@@ -7,7 +7,7 @@ This user-friendly extension facilitates interaction with the my.clerk.io user i
 
 The following workflow automation is available:
 
--   Delete standard search designs
+-   Automatically translate headlines of Clerk contents with use of buttons
 
 ## Installation
 
@@ -29,8 +29,6 @@ Enable or disable the desired shortcuts by toggling the corresponding checkboxes
 
 To change the default keyboard shortcuts, click on the input field for the shortcut you want to modify and press the desired key. The input field will be automatically updated with the selected key.
 
-To enable/disable the Delete Search Designs button, click on the checkbox.
-
 Click the "Save Settings" button to save your changes.
 
 Remember, this extension is meant to enhance your navigation and user experience within the my.clerk.io interface. I hope you find them useful and time-saving.
@@ -51,14 +49,15 @@ Please submit a pull request if you'd like to contribute.
 
 -   Always work on porting to Firefox :)))
 -   Make tool to see hidden designs
--   Make translations buttons toggle in settings
--   Fix visitor key function
 -   Add select all button for copy new store page
 -   Make translation buttons for input variables in content pages
-    - Extension makes a translate button in the content
-    - Once user fills the input variables, forms, a translate button is available to translate all the variables to the chosen language
--   Confirm modal in features myclerk section
--   Add old myclerk to contextmenu
+    -   Extension makes a translate button in the content
+    -   Once user fills the input variables, forms, a translate button is available to translate all the variables to the chosen language
+-   Add shortcut for new modal in features myclerk section
+-   Add contextMenu customization
+-   Make sure content.js doesn't inject injected.js unnecessarily
+-   Add new screenshot for translations
+-   Use Google Sheets API for translation realtime database retrieval
 
 ## License
 
