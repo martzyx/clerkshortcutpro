@@ -14,7 +14,8 @@ The following workflow automation is available:
 **If using chrome:**
 https://chrome.google.com/webstore/detail/clerkshortcutpro/cgacjinjmhilbalfehjefkebkjlomkhl
 
-**If using firefox:**
+
+~~**If using firefox:**~~ ** Deprecated firefox for now ** 
 https://addons.mozilla.org/en-US/firefox/addon/clerkshortcutpro/
 
 ## How to Customize options and keybinds (Chrome only)
