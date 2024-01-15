@@ -174,7 +174,7 @@ window.addEventListener("reactLinksLoaded", function (e) {
 function checkDOM() {
     function getApiKey() {
         var clerkTrackingScript = Array.from(document.querySelectorAll("script")).filter(function (s) {
-            return s.textContent.includes("cdn.clerk.io/clerk.js");
+            return s.textContent.includes("cdn.clerk.io/clerk.js") || s.textContent.includes("custom.clerk.io");
         });
 
         if (clerkTrackingScript.length > 0) {
@@ -191,6 +191,9 @@ function checkDOM() {
                 chrome.runtime.sendMessage({ type: "showError" });
             }
             return null;
+        } else {
+            console.error("ClerkShortcutPro: Public API key could not be found");
+            chrome.runtime.sendMessage({ type: "showError" });
         }
     }
 
