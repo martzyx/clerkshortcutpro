@@ -92,7 +92,7 @@ window.addEventListener("reactSettingsLoaded", function (e) {
                 shortcut2: "Escape",
                 enableShortcut2: true,
                 enableTranslationButtons: true,
-                openOldMyClerk: true,
+                openOldMyClerk: false,
                 getClientInfo: true,
             },
 
@@ -173,6 +173,7 @@ window.addEventListener("reactLinksLoaded", function (e) {
 
 function checkDOM() {
     function getApiKey() {
+        // improvement: Clerk._config.key
         var clerkTrackingScript = Array.from(document.querySelectorAll("script")).filter(function (s) {
             return s.textContent.includes("cdn.clerk.io/clerk.js") || s.textContent.includes("custom.clerk.io");
         });
