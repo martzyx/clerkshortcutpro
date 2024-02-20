@@ -85,6 +85,16 @@ window.addEventListener("reactSettingsLoaded", function (e) {
     // Restores select box and checkbox state using the preferences stored in chrome.storage.
     function restore_options() {
         chrome.storage.sync.get(
+            {
+                // default values if user has not yet set up
+                shortcut1: "Enter",
+                enableShortcut1: true,
+                shortcut2: "Escape",
+                enableShortcut2: true,
+                enableTranslationButtons: true,
+                openOldMyClerk: false,
+                getClientInfo: true,
+            },
             function updateItems(items) {
                 const shortcut1Element = document.getElementById("shortcut1");
                 const enableShortcut1Element = document.getElementById("enable-shortcut1");

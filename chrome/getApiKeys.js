@@ -1,4 +1,7 @@
 chrome.storage.sync.get(
+    {
+        getClientInfo: true, // default value
+    },
     function (items) {
         if (items.getClientInfo) {
             contextMenuClientInfo();

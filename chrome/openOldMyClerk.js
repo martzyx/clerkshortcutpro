@@ -1,4 +1,4 @@
-chrome.storage.sync.get(function (items) {
+chrome.storage.sync.get({ openOldMyClerk: false }, function (items) {
     if (items.openOldMyClerk) {
         contextMenuOldMyClerk();
     }
@@ -17,14 +17,14 @@ chrome.storage.onChanged.addListener(function (changes) {
 });
 
 function contextMenuOldMyClerk() {
-    chrome.contextMenus.removeAll(function () {
-        chrome.contextMenus.create({
-            id: "openOldMyClerkCMenu",
-            title: "Open old myClerk",
-            contexts: ["link"],
-            documentUrlPatterns: ["*://hq.clerk.io/*", "*://old-hq.clerk.io/*"],
-        });
+    // chrome.contextMenus.removeAll(function () {
+    chrome.contextMenus.create({
+        id: "openOldMyClerkCMenu",
+        title: "Open old myClerk",
+        contexts: ["link"],
+        documentUrlPatterns: ["*://hq.clerk.io/*", "*://old-hq.clerk.io/*"],
     });
+    // });
 }
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
