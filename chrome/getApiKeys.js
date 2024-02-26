@@ -13,7 +13,6 @@ chrome.storage.sync.get(
 chrome.storage.onChanged.addListener(function (changes) {
     if ("getClientInfo" in changes) {
         let storageChange = changes.getClientInfo;
-
         if (storageChange.newValue) {
             contextMenuClientInfo();
         } else {
@@ -27,7 +26,7 @@ function contextMenuClientInfo() {
         id: "getClientInfoCMenu",
         title: "Get API keys",
         contexts: ["link"],
-        documentUrlPatterns: ["*://hq.clerk.io/*", "*://old-hq.clerk.io/*"],
+        documentUrlPatterns: ["*://hq.clerk.io/*", "*://old-hq.clerk.io/*", "*://new-hq.clerk.io/*"],
     });
 }
 
