@@ -59,6 +59,7 @@ Please submit a pull request if you'd like to contribute.
 -   Make sure content.js doesn't inject injected.js unnecessarily
 -   Add new screenshot for translations
 -   Use Google Sheets API for translation realtime database retrieval
+- Idea: force setup guides to not get disabled
 
 ## License
 
