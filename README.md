@@ -60,6 +60,7 @@ Please submit a pull request if you'd like to contribute.
 -   Add new screenshot for translations
 -   Use Google Sheets API for translation realtime database retrieval
 - Idea: force setup guides to not get disabled
+- Idea: change tab name based on store name
 
 ## License
 
