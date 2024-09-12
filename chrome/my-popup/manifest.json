@@ -28,6 +28,9 @@
     "action": {
         "default_popup": "./dist/index.html"
     },
+    "icons": {
+        "48": "./assets/thumbnail.png"
+    },
     "content_scripts": [
         {
             "matches": [
