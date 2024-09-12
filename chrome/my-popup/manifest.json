@@ -5,7 +5,7 @@
     "description": "Provides intuitive shortcuts to navigate and interact with the my.clerk.io UI",
     "permissions": ["storage", "activeTab", "scripting", "tabs","contextMenus"],
     "host_permissions": ["https://translation.googleapis.com/*"],
-    "background": { "service_worker": "background.js" },
+    "background": { "service_worker": "./src/scripts/background.js" },
     "web_accessible_resources": [
         {
             "matches": [
@@ -19,17 +19,14 @@
                 "https://*/*"
             ],
             "resources": [
-                "injected.js",
-                "/assets/visual_assets/openBanana.svg",
-                "/assets/visual_assets/banana1.svg"
+                "./src/scripts/injected.js",
+                "./assets/openBanana.svg",
+                "./assets/banana1.svg"
             ]
         }
     ],
     "action": {
-        "default_popup": "/assets/index.html"
-    },
-    "icons": {
-        "512": "/assets/visual_assets/thumbnail.png"
+        "default_popup": "./dist/index.html"
     },
     "content_scripts": [
         {
@@ -43,7 +40,7 @@
                 "http://*/*",
                 "https://*/*"
             ],
-            "js": ["content.js", "translations.js", "nothingSuspiciousHere.js"],
+            "js": ["./src/scripts/content.js", "./src/scripts/translations.js", "./src/scripts/nothingSuspiciousHere.js"],
             "run_at": "document_start",
             "all_frames": true
         }

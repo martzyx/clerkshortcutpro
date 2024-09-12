@@ -1,3 +1,5 @@
+const { default: getConfigKey } = require("./test");
+
 window.addEventListener("reactSettingsLoaded", function (e) {
     restore_options();
     assignProceedShortcutListener();
@@ -155,17 +157,18 @@ window.addEventListener("reactLinksLoaded", function (e) {
     var visitorGoButton = document.getElementById("visitorGoButton");
     if (visitorGoButton) {
         visitorGoButton.addEventListener("click", function () {
-            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                let currentTab = tabs[0];
-                let tabProtocol = new URL(currentTab.url).protocol;
-                if (tabProtocol === "http:" || tabProtocol === "https:") {
-                    // Inject checkDOM script into current tab.
-                    chrome.scripting.executeScript({
-                        target: { tabId: currentTab.id },
-                        function: checkDOM,
-                    });
-                }
-            });
+            getConfigKey();
+            // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            //     let currentTab = tabs[0];
+            //     let tabProtocol = new URL(currentTab.url).protocol;
+            //     if (tabProtocol === "http:" || tabProtocol === "https:") {
+            //         // Inject checkDOM script into current tab.
+            //         chrome.scripting.executeScript({
+            //             target: { tabId: currentTab.id },
+            //             function: checkDOM,
+            //         });
+            //     }
+            // });
         });
     }
 });

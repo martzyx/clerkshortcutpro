@@ -3,9 +3,10 @@ const path = require('path');
 const { exec } = require('child_process');
 const archiver = require('archiver');
 
-const chromeManifestPath = path.join(__dirname, 'chrome', 'manifest.json');
+// Update these paths to reflect the new directory structure
+const chromeManifestPath = path.join(__dirname, 'chrome', 'my-popup', 'manifest.json');
 const firefoxManifestPath = path.join(__dirname, 'firefox', 'manifest.json');
-const chromeContentJSPath = path.join(__dirname, 'chrome', 'content.js');
+const chromeContentJSPath = path.join(__dirname, 'chrome', 'assets', 'content.js');
 const firefoxContentJSPath = path.join(__dirname, 'firefox', 'content.js');
 const outputZipPath = path.join(__dirname, 'firefox', 'extension.zip');
 

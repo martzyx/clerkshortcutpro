@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "archiver": "^5.3.1",
-    "fs": "^0.0.1-security"
+    "axios": "^1.7.7",
+    "fs": "^0.0.1-security",
+    "puppeteer": "^23.3.0"
   }
 }
