@@ -1,15 +1,36 @@
 {
     "manifest_version": 3,
-    "name": "vite-ts-react-test",
+    "name": "Clerk Shortcut Pro",
     "version": "1.0",
     "description": "",
     "action": {
+        "default_title": "Clerk Shortcut Pro",
         "default_popup": "index.html"
     },
+    "background": {
+      "service_worker": "./worker.js",
+      "type": "module"
+    },
+    "content_scripts": [
+        {
+          "matches": ["http://*/*", "https://*/*"],
+          "run_at": "document_start",
+          "js": ["./contentScript.js"]
+        }
+      ],
+      "web_accessible_resources": [
+        {
+            "resources": ["./screener.js"],
+            "matches": ["http://*/*","https://*/*"]
+        }
+    ],
     "permissions": [
         "scripting",
         "tabs",
-        "activeTab"
+        "commands",
+        "background",
+        "activeTab",
+        "storage"
     ],
     "host_permissions": [
         "https://*/*",

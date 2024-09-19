@@ -1,0 +1,72 @@
+{
+    "extends": [
+      "airbnb",
+      "airbnb-typescript",
+      "prettier",
+      "plugin:react/recommended"
+    ],
+    "parserOptions": {
+      "project": ["./tsconfig.json", "./tsconfig.node.json"],
+      "tsconfigRootDir": "./",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "prettier",
+      "react"
+    ],
+    "rules": {
+      "semi": 0,
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", "ts"] }],
+      "prettier/prettier": [
+        "off",
+        {
+          // "semi": false,
+          // "bracketSpacing": true,
+          // "printWidth": 140,
+          // "jsxSingleQuote": true,
+          // "singleQuote": false,
+          // "trailingComma": "none",
+          // "tabWidth": 4,
+          "useTabs": false,
+          "endOfLine": "auto"
+        }
+      ],
+      // React
+      "react/jsx-no-bind": "off",
+      "import/no-cycle": "off",
+      "react/function-component-definition": ["error", { 
+        "namedComponents": ["function-declaration", "arrow-function"],
+        "unnamedComponents": "arrow-function" 
+        }],
+        "react/require-default-props": ["error", { "ignoreFunctionalComponents": true }],
+        // TypeScript
+        "max-classes-per-file": ["error", 2],
+        "no-restricted-syntax": 0,
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "no-continue": "off",
+        "no-underscore-dangle": "off",
+        "no-param-reassign": "off",
+        // "no-param-reassign": ["error", { "props": false }],
+        "@typescript-eslint/no-use-before-define": ["error", {
+          "functions": false,
+          "classes": false,
+          "variables": true,
+          "typedefs": false
+        }],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "args": "all",
+            "argsIgnorePattern": "^_",
+            "caughtErrors": "all",
+            "caughtErrorsIgnorePattern": "^_",
+            "destructuredArrayIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "ignoreRestSiblings": true
+          }
+        ]
+    }
+  
+  }
