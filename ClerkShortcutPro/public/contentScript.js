@@ -9,5 +9,6 @@ s.onload = async function() {
 (document.head || document.documentElement).appendChild(s);
 
 
-
-  
+window.addEventListener('load', function(e){
+  chrome.runtime.sendMessage({type: "window_load_complete", source: "CleSS", message: { showPlaceholder: false } })
+});

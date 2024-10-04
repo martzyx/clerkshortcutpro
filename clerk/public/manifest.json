@@ -5,22 +5,22 @@
     "description": "",
     "action": {
         "default_title": "Clerk Shortcut Pro",
-        "default_popup": "index.html"
+        "default_popup": "./index.html"
     },
     "background": {
-      "service_worker": "./background.js",
+      "service_worker": "assets/background.js",
       "type": "module"
     },
     "content_scripts": [
         {
           "matches": ["http://*/*", "https://*/*"],
           "run_at": "document_start",
-          "js": ["./contentScript.js"]
+          "js": ["assets/content.js"]
         }
       ],
       "web_accessible_resources": [
         {
-            "resources": ["./screener.js"],
+            "resources": ["assets/*"],
             "matches": ["http://*/*","https://*/*"]
         }
     ],
