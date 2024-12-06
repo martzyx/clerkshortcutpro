@@ -1,7 +1,7 @@
 // src/components/ScriptExecutor.tsx
-import React from 'react';
 
-const ScriptExecutor: React.FC = () => {
+
+const ScriptExecutor = () => {
 
 
     
