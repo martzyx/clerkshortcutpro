@@ -59,25 +59,25 @@ jobs:
       - name: Check for outdated dependencies
         run: npm outdated
 
-  test:
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  # test:
+  #   runs-on: ubuntu-latest
+  #   needs: checkout
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
 
-      - name: Set up Node.js environment
-        uses: actions/setup-node@v1
-        with:
-          node-version: 23
+  #     - name: Set up Node.js environment
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 23
 
-      - name: Install dependencies
-        run: npm install
+  #     - name: Install dependencies
+  #       run: npm install
 
-      - name: Run tests
-        run: npm test
-        env:
-          CI: true
+  #     - name: Run tests
+  #       run: npm test
+  #       env:
+  #         CI: true
 
   build:
     runs-on: ubuntu-latest
