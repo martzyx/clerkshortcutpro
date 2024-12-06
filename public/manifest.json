@@ -35,5 +35,11 @@
     "host_permissions": [
         "https://*/*",
         "http://*/*"
-    ]
+    ],
+    "icons": {
+      "16": "/assets/icons/color/16.png",
+      "32": "/assets/icons/color/32.png",
+      "48": "/assets/icons/color/48.png",
+      "128": "/assets/icons/color/128.png"
+    }
   }
