@@ -3,11 +3,19 @@
 
 const ScriptExecutor = () => {
 
+  const handleClick = async () => {
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const currTab = tabs[0];
 
+    if (currTab.id !== undefined) {
+      chrome.tabs.sendMessage(currTab.id, { message: 'Hello from React!' });
+    }
+  };
     
   return (
     <div className='w-5/12'>
-      <h1 className='bg-red-400'>Script Executor</h1>
+      <span>CLICK</span>
+      <button className="w-7 h-7" onClick={handleClick}>HERE</button>
     </div>
   );
 };
