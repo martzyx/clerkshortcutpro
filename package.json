@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "webpack --config webpack.config.cjs",
+    "build": "webpack --config webpack.config.mjs",
     "lint": "eslint .",
     "types": "npx tsc",
     "preview": "vite preview"

@@ -1,8 +1,8 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
-module.exports = {
+export default {
     mode:'production',
     target: 'web',
     entry: {
@@ -48,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.css$/i,
-                include: path.resolve(__dirname, 'src'),
+                include: path.resolve('src'),
                 use: ['style-loader', 'css-loader', 'postcss-loader'],
               },
         ],
