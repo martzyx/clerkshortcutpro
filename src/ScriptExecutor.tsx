@@ -15,7 +15,7 @@ const ScriptExecutor = () => {
   return (
     <div className='w-5/12'>
       <span>CLICK</span>
-      <button className="w-7 h-7" onClick={handleClick}>HERE</button>
+      <button className="w-7 h-7 bg-red-600" onClick={handleClick}>HERE</button>
     </div>
   );
 };
