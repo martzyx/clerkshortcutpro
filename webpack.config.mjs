@@ -6,9 +6,13 @@ export default {
     mode:'production',
     target: 'web',
     entry: {
+        webResource: './src/scripts/webResource.ts',
         contentScript: './src/scripts/contentScript.ts',
         background: './src/scripts/background.ts',
         react: './src/main.tsx',
+    },
+    optimization: {
+        minimize: false
     },
     output: {
         path: path.resolve('dist'),

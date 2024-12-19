@@ -8,21 +8,19 @@
         "default_popup": "index.html"
     },
     "background": {
-      "service_worker": "./background.js"
+      "service_worker": "background.js"
     },
     "content_scripts": [
         {
-          "all_frames": true,
-            "matches": [
-                "<all_urls>"
-            ],
-          "js": ["./contentScript.js"]
+          "matches": ["<all_urls>"],
+          "run_at": "document_start",
+          "js": ["contentScript.js"]
         }
       ],
       "web_accessible_resources": [
         {
-            "resources": ["./screener.js"],
-            "matches": ["http://*/*","https://*/*"]
+            "resources": ["webResource.js"],
+            "matches": ["<all_urls>"]
         }
     ],
     "permissions": [
