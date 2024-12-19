@@ -11,7 +11,7 @@ function onRequestObserved(entries: PerformanceObserverEntryList) {
         type: DTO.ClerkSniffer,
         state: isClerk(loadedResources)
     }
-    
+    console.log('Sending message to content script', clerkSniffer);
     window.postMessage(clerkSniffer, '*');
     return clerkSniffer;
 }
