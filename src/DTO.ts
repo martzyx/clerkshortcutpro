@@ -1,19 +1,17 @@
 enum DTO {
-    ClerkSniffer = 'clerksniffer'
+    ClerkSniffer = 'clerksniffer',
+    ClerkApiKey = 'clerkapikey'
 }
 
-export type ClerkSniffer = {
+export type clerkSniffer = {
     type: DTO.ClerkSniffer;
     state: boolean;
 }
 
-export type TabState = {
-    isClerk: boolean;
-    tabId: number;
-}
 
-export type TabMap = {
-    [tabId: number]: TabState;
+export type clerkApiKey = {
+    type: DTO.ClerkApiKey;
+    apiKey: string;
 }
 
 export default DTO;

@@ -11,9 +11,6 @@ export default {
         background: './src/scripts/background.ts',
         react: './src/main.tsx',
     },
-    optimization: {
-        minimize: false
-    },
     output: {
         path: path.resolve('dist'),
         filename: '[name].js',
