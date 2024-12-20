@@ -5,6 +5,9 @@ import './index.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ClerkSniffer />
+    <div className='w-20 h-20'>
+      <ClerkSniffer />
+      
+    </div>
   </StrictMode>
 )
