@@ -1,7 +1,3 @@
-import DTO from "../DTO";
-
-console.log('Content script loaded');
-
 const script = document.createElement('script');
 script.src = chrome.runtime.getURL('webResource.js');
 script.onload = async () => {
@@ -16,10 +12,5 @@ window.addEventListener('message', (event) => {
         || ! chrome.runtime?.id) {
         return;
       }
-
-    if(event.data.type !== DTO.ClerkSniffer) {
-        return;
-    }
-    console.log("send", event.data);
     chrome.runtime.sendMessage(event.data);
 });

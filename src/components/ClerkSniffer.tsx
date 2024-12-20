@@ -11,6 +11,7 @@ const ClerkSniffer = () => {
           return;
         }
       }
+      
     };
 
     chrome.runtime.onMessage.addListener(messageListener);
@@ -21,7 +22,7 @@ const ClerkSniffer = () => {
   }, []);
 
   return (
-    <div>{isClerk ? "True" : "False"}</div>
+    <div>Clerk avaliable = {isClerk ? "True" : "False"}</div>
   );
 };
 

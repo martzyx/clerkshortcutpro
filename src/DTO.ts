@@ -1,6 +1,6 @@
 enum DTO {
     ClerkSniffer = 'clerksniffer',
-    HQclerkCustomers = 'hqclerkcustomers',
+    HQclerkClients = 'hqclerkclients',
     ClerkApiKey = 'clerkapikey'
 }
 
@@ -10,7 +10,7 @@ export type clerkSniffer = {
 }
 
 export type HQclerkCustomers = {
-    type: DTO.HQclerkCustomers;
+    type: DTO.HQclerkClients;
     clients: HQclerkClient[];
 }
 

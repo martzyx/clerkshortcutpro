@@ -6,9 +6,9 @@ export default {
     mode:'production',
     target: 'web',
     entry: {
-        webResource: './src/scripts/webResource.ts',
-        contentScript: './src/scripts/contentScript.ts',
-        background: './src/scripts/background.ts',
+        webResource: './src/extension/webResource.ts',
+        contentScript: './src/extension/contentScript.ts',
+        background: './src/extension/background.ts',
         react: './src/main.tsx',
     },
     output: {
