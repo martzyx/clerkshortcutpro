@@ -1,4 +1,4 @@
-import DTO from "../../DTO";
+import DTO  from "../../DTO";
 
  interface Company {
     id: number;
@@ -37,16 +37,17 @@ import DTO from "../../DTO";
     key: string;
   }
   
-   interface Clients {
+  export interface Clients {
     companies: Company[];
     stores: Store[];
     users: User[];
   }
-  
-  interface ClerkData {
+
+  type HQclerkData = {
     status: string;
     clients: Clients;
-  }
+}
+
 
   const { fetch: origFetch } = window;
   window.fetch = async (...args) => {
@@ -59,9 +60,9 @@ import DTO from "../../DTO";
           response
               .clone()
               .json()
-              .then((data: ClerkData) => {
+              .then((data: HQclerkData) => {
+                console.log(data);
                   if (data.status === "ok") {
-                    console.log(data.clients);
                     window.postMessage({ type: DTO.HQclerkClients, data: data.clients }, '*'); // send to content script
                   }
               })

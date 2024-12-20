@@ -1,25 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import DTO, { HQclerkCustomers } from '../DTO';
+import { Clients } from '../extension/webResources/ClerkHQScraper';
 
 const ClerkClients = () => {
-    const [clients, setClients] = useState(null);
+    const [clients, setClients] = useState<Clients>();
     useEffect(() => {
       console.log('ClerkClients mounted');
-        const messageListener = (request: HQclerkCustomers) => {
-            if(request.type === DTO.HQclerkClients) {
-                console.log(request);
-            }
+        const messageListener = (request: Clients) => {
+      
+            
+              console.log(request);
+              setClients(request);
+          
         };
     
         chrome.runtime.onMessage.addListener(messageListener);
-    
+
         return () => {
           chrome.runtime.onMessage.removeListener(messageListener);
         };
       }, []);
 
   return (
-    <div>{clients}</div>
+    <div>
+      <h1>Clerk Clients</h1>
+      <ul>
+        {clients?.companies?.map(company => (
+          <li key={company.id}>
+            <h2>{company.name}</h2>
+            <p>{company.store}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
