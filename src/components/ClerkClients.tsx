@@ -6,14 +6,13 @@ const ClerkClients = () => {
   const [clients, setClients] = useState<Clients>();
   
   useEffect(() => {
-    chrome.storage.local.get(DTO.HQclerkClients, (result) => {
+    chrome.storage.session.get(DTO.HQclerkClients, (result) => {
       setClients(result[DTO.HQclerkClients]);
     });
   }, [])
 
   return (
     <div>
-      <button >CLICK HERE</button>
       <h1>Clerk Clients</h1>
       <ul>
         {clients?.companies?.map(company => (
