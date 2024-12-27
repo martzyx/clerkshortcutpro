@@ -14,7 +14,9 @@ const ClerkSniffer = () => {
       
     };
 
-    chrome.runtime.onMessage.addListener(messageListener);
+    chrome.storage.session.get(DTO.ClerkSniffer, (result) => {
+      setIsClerk(result[DTO.ClerkSniffer]);
+    });
 
     return () => {
       chrome.runtime.onMessage.removeListener(messageListener);

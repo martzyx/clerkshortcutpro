@@ -1,3 +1,4 @@
+import { Clients } from "./extension/webResources/ClerkHQScraper";
 
 enum DTO {
     ClerkSniffer = 'clerksniffer',
@@ -10,6 +11,10 @@ export type clerkSniffer = {
     state: boolean;
 }
 
+export type HQclerkClients = {
+    type: DTO.HQclerkClients;
+    clients: Clients;
+}
 
 export type clerkApiKey = {
     type: DTO.ClerkApiKey;

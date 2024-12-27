@@ -1,4 +1,4 @@
-import DTO  from "../../DTO";
+import DTO, { HQclerkClients }  from "../../DTO";
 
  interface Company {
     id: number;
@@ -61,9 +61,12 @@ import DTO  from "../../DTO";
               .clone()
               .json()
               .then((data: HQclerkData) => {
-                console.log(data);
+                  const clerkClients: HQclerkClients = {
+                      type: DTO.HQclerkClients,
+                      clients: data.clients
+                  };
                   if (data.status === "ok") {
-                    window.postMessage({ type: DTO.HQclerkClients, data: data.clients }, '*'); // send to content script
+                    window.postMessage(clerkClients, '*'); // send to content script
                   }
               })
               .catch(err => console.error(err));

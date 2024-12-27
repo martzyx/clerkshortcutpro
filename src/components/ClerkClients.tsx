@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Clients } from '../extension/webResources/ClerkHQScraper';
+import DTO from '../DTO';
 
 const ClerkClients = () => {
-    const [clients, setClients] = useState<Clients>();
-    useEffect(() => {
-      console.log('ClerkClients mounted');
-        const messageListener = (request: Clients) => {
-      
-            
-              console.log(request);
-              setClients(request);
-          
-        };
-    
-        chrome.runtime.onMessage.addListener(messageListener);
+  const [clients, setClients] = useState<Clients>();
+  
+  useEffect(() => {
+    const fetchClients = async () => {
+  
+      const result = await chrome.storage.local.get(DTO.HQclerkClients)
+      console.log("Fetched HQclerkClients", result[DTO.HQclerkClients]);
+      setClients(result[DTO.HQclerkClients])
+    }
 
-        return () => {
-          chrome.runtime.onMessage.removeListener(messageListener);
-        };
-      }, []);
+    fetchClients()
+  }, [])
 
   return (
     <div>
+      <button >CLICK HERE</button>
       <h1>Clerk Clients</h1>
       <ul>
         {clients?.companies?.map(company => (
