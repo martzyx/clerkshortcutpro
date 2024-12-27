@@ -6,14 +6,9 @@ const ClerkClients = () => {
   const [clients, setClients] = useState<Clients>();
   
   useEffect(() => {
-    const fetchClients = async () => {
-  
-      const result = await chrome.storage.local.get(DTO.HQclerkClients)
-      console.log("Fetched HQclerkClients", result[DTO.HQclerkClients]);
-      setClients(result[DTO.HQclerkClients])
-    }
-
-    fetchClients()
+    chrome.storage.local.get(DTO.HQclerkClients, (result) => {
+      setClients(result[DTO.HQclerkClients]);
+    });
   }, [])
 
   return (
