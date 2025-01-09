@@ -20,7 +20,7 @@ function onRequestObserved(entries: PerformanceObserverEntryList) {
     type: DTO.ClerkSniffer,
     state: isClerk(loadedResources)
   }
-  if (clerkSniffer.state) {
+  if (clerkSniffer) {
     window.postMessage(clerkSniffer, '*')
     return clerkSniffer
   }
