@@ -2,7 +2,6 @@ import { Clients } from "./extension/webResources/ClerkHQScraper";
 
 enum DTO {
     ClerkSniffer = 'clerksniffer',
-    ClerkSnifferTabs = 'clerksniffertabs',
     HQclerkClients = 'hqclerkclients',
     ClerkApiKey = 'clerkapikey'
 }
