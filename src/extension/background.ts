@@ -7,16 +7,16 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
     // Handle the clerk icon on the tab
     HandleClerkIcon(request, sender);
 
-    // Append the new tab information
+    /* Handle logic for clerkSniffer in pop-up */
     if(request.state == false) return
-    // Handle popup data
     const currentTab = await chrome.tabs.query({ active: true, currentWindow: true });
     const data = await chrome.storage.session.get(DTO.ClerkSniffer);
     const updatedData = new Set(data[DTO.ClerkSniffer] || []);
 
-    // Append the new tab information
+    // Append the new active tab with clerk to the list
     updatedData.add(currentTab[0].url);
-  
+    
+
     await chrome.storage.session.set({ [DTO.ClerkSniffer]: Array.from(updatedData) });
   }
   if (request.type === DTO.HQclerkClients) {
