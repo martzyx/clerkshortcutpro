@@ -14,13 +14,16 @@ const CLERK_DETAILS_REDIRECT = 'https://hq.clerk.io/v1/customers/update/'
 
 
 const ClerkClients = () => {
-  const [clients, setClients] = useState<Clients>({ companies: [], stores: [], users: [] })
+  const [clients, setClients] = useState<Clients>();
   const [tab, setTab] = useState<number>(1)
   useEffect(() => {
     chrome.storage.session.get(DTO.HQclerkClients, result => {
+      if(result[DTO.HQclerkClients] === undefined) return;
       setClients(result[DTO.HQclerkClients])
     })
   }, [])
+
+  if(clients === undefined) return
 
   return (
     <div className="w-full">
@@ -69,7 +72,7 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[] }> = ({
           <Accordion color='gray' className='first:mt-4 last:mb-4' collapseAll>
             <Accordion.Panel key={index} >
               <Accordion.Title className='text-black rounded-none focus:border-none focus:ring-0'>
-                <div className="flex gap-4 w-full justify-between items-center">
+                <div className="flex gap-4 w-full justify-between items-center z-50">
                   <div className='flex gap-4 justify-between w-[300px] items-center'>
                     <span className='font-semibold self-center'>{company.name || "Unknown"}</span>
                     <div className='flex gap-4'>
