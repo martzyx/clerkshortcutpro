@@ -57,4 +57,9 @@ export default {
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
+    optimization: {
+        splitChunks: {
+          chunks: 'all',
+        },
+      },
 }

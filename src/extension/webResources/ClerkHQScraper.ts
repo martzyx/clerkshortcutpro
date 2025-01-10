@@ -1,6 +1,6 @@
 import DTO, { HQclerkClients }  from "../../DTO";
 
- interface Company {
+export interface Company {
     id: number;
     account_id: string;
     name: string;
@@ -9,14 +9,14 @@ import DTO, { HQclerkClients }  from "../../DTO";
     key: string;
   }
   
-   interface Store {
+  export interface Store {
     id: string;
     name: string;
     key: string;
     client_key: string;
   }
   
-   interface User {
+  export  interface User {
     id: number;
     account_id: string;
     name: string;
