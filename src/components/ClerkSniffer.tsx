@@ -10,7 +10,7 @@ const ClerkSniffer = () => {
         // Handle popup data
         chrome.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
           const currentUrl = tabs[0].url
-          if(currentUrl == undefined) return
+          if(currentUrl == undefined || result[DTO.ClerkSniffer] == undefined) return
           for (const url of result[DTO.ClerkSniffer]) {
             if(currentUrl.includes(url)) {
               setIsClerk(true);
