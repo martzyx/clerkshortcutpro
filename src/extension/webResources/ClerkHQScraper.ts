@@ -1,7 +1,9 @@
 import DTO, { HQclerkClients }  from "../../DTO";
 
 export interface Company {
+
     id: number;
+    account_id: string;
     subscription: string;
     name: string;
     store: string;
@@ -16,6 +18,9 @@ export interface Company {
     };
     trial_expire_at: number;
     created_at: number;
+    // Error handling
+    status?: string;
+    message?: string;
   }
   
   export interface Store {

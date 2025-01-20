@@ -7,7 +7,7 @@ import {
   Store
 } from '../extension/webResources/ClerkHQScraper'
 import DTO from '../DTO'
-import ToolTipCopyText from './ToolTipCopyText'
+import CopyText from './CopyText'
 
 const CLERK_BACKEND_REDIRECT = 'https://my.clerk.io/#/?client_key='
 const CLERK_DETAILS_REDIRECT = 'https://hq.clerk.io/v1/customers/update/'
@@ -50,7 +50,7 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
   const handleClickToBackend = (url: string, client_key: string) => {
     chrome.tabs.create({ active: true, url: url + client_key })
   }
-
+  console.log(companies)
   return (
     <>
       {companies.map((company: Company, index: number) => (
@@ -61,8 +61,8 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
                   <div className='flex gap-4 justify-between w-[300px] items-center'>
                     <span className='font-semibold self-center'>{company.name || "Unknown"}</span>
                     <div className='flex gap-4'>
-                      <ToolTipCopyText toolTipLable='Company ID' content={company.id} defaultText='Unknown ID'/>
-                      <ToolTipCopyText toolTipLable='Company Key' content={company.subscription} defaultText='Unknown Key'/>
+                      <CopyText showToolTip={true} toolTipLable='Company ID' content={company.id} />
+                      <CopyText showToolTip={true} toolTipLable='Company Key' content={company.account_id} />
                     </div>
                   </div>
                   
@@ -87,17 +87,30 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
                   </div>
                 </div>
               </Accordion.Title>
-              <Accordion.Content>
-              <ClerkStore
-                  stores={stores.filter(
-                    store => store.client_key === company.key
-                  )}
-                />
-              <ClerkUser
-                  users={users.filter(
-                    user => user.account_id === company.subscription
-                  )}
-                />
+              <Accordion.Content className='p-4'>
+                {company.status === 'error' && (
+                  <div className='bg-orange-100 p-1 pl-2 pr-2 border border-orange-400 text-orange-700 px-4 py-3 rounded relative' role='alert'>
+                    <span className='font-bold text-sm'>Warning - Missing Infomation</span>
+                    <span className='block sm:inline text-xs'>{company.message}</span>
+                  </div>
+                )  
+                }
+                <div className='grid grid-cols-3 pt-4'>
+                  <ClerkCompanyDetails company={company} />
+                  
+                  <ClerkStore
+                      stores={stores.filter(
+                        store => store.client_key === company.key
+                      )}
+                    />
+                  
+                  <ClerkUser
+                      users={users.filter(
+                        user => user.account_id === company.subscription
+                      )}
+                    />
+                    </div>
+            
               </Accordion.Content>
             </Accordion.Panel>
           </Accordion>
@@ -106,16 +119,27 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
   )
 }
 
+const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
+  return (
+    <div>
+      <div>{company.name}</div>
+      <div>{company.id}</div>
+      <CopyText content={company.key} isKey={true} />
+    </div>
+  )
+}
+
+
 const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
   return (
     <div>
       {stores.length > 0 &&
         stores.map((store: Store, index: number) => {
           return (
-            <div key={index}>
-              <div>{store.name}</div>
-              <div>{store.id}</div>
-              <div>{store.key}</div>
+            <div key={index}> 
+              <span>{store.name}</span>
+              <CopyText  content={store.id} />
+              <CopyText  content={store.key} isKey={true} />
             </div>
           )
         })}
