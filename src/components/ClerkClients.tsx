@@ -15,12 +15,13 @@ const CLERK_DETAILS_REDIRECT = 'https://hq.clerk.io/v1/customers/update/'
 
 const ClerkClients = () => {
   const [clients, setClients] = useState<Clients>();
-  const [tab, setTab] = useState<number>(1)
   useEffect(() => {
-    chrome.storage.session.get(DTO.HQclerkClients, result => {
-      if(result[DTO.HQclerkClients] === undefined) return;
-      setClients(result[DTO.HQclerkClients])
-    })
+    chrome.storage.session.get(DTO.HQclerkClients).then(res => {
+      const c: Clients = res[DTO.HQclerkClients];
+      console.log("Clients", c);
+      setClients(c);
+    });
+  
   }, [])
 
   if(clients === undefined) return
@@ -28,33 +29,17 @@ const ClerkClients = () => {
   return (
     <div className="w-full">
        
-      <div className="flex text-sm">
-        <FlowbiteBtn
-          color="gray"
-          className="rounded-r-none"
-          onClick={() => setTab(1)}
-        >
-          Companies
-        </FlowbiteBtn>
-        <FlowbiteBtn
-          color="gray"
-          className="rounded-l-none"
-          onClick={() => setTab(2)}
-        >
-          Users
-        </FlowbiteBtn>
-      </div>
-      {tab === 1 && (
-        <ClerkCompany companies={clients.companies} stores={clients.stores} />
-      )}
-      {tab === 2 && <ClerkUser users={clients.users} />}
+ 
+        <ClerkCompany companies={clients.companies} stores={clients.stores} users={clients.users}/>
+   
     </div>
   )
 }
 
-const ClerkCompany: React.FC<{ companies: Company[], stores: Store[] }> = ({
+const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: User[] }> = ({
   companies,
-  stores
+  stores,
+  users
 }) => {
   if(companies.length === 0) return;
   // remove duplicate companies
@@ -77,7 +62,7 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[] }> = ({
                     <span className='font-semibold self-center'>{company.name || "Unknown"}</span>
                     <div className='flex gap-4'>
                       <ToolTipCopyText toolTipLable='Company ID' content={company.id} defaultText='Unknown ID'/>
-                      <ToolTipCopyText toolTipLable='Company Key' content={company.account_id} defaultText='Unknown Key'/>
+                      <ToolTipCopyText toolTipLable='Company Key' content={company.subscription} defaultText='Unknown Key'/>
                     </div>
                   </div>
                   
@@ -103,9 +88,14 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[] }> = ({
                 </div>
               </Accordion.Title>
               <Accordion.Content>
-                <ClerkStore
+              <ClerkStore
                   stores={stores.filter(
                     store => store.client_key === company.key
+                  )}
+                />
+              <ClerkUser
+                  users={users.filter(
+                    user => user.account_id === company.subscription
                   )}
                 />
               </Accordion.Content>
