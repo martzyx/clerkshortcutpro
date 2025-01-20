@@ -21,6 +21,7 @@ function onRequestObserved(entries: PerformanceObserverEntryList) {
     state: isClerk(loadedResources)
   }
   if (clerkSniffer) {
+    console.log(window)
     window.postMessage(clerkSniffer, '*')
     return clerkSniffer
   }
