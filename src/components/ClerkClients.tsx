@@ -30,15 +30,16 @@ const ClerkClients = () => {
     <div className="w-full">
        
  
-        <ClerkCompany companies={clients.companies} stores={clients.stores}/>
+        <ClerkCompany companies={clients.companies} stores={clients.stores} users={clients.users}/>
    
     </div>
   )
 }
 
-const ClerkCompany: React.FC<{ companies: Company[], stores: Store[] }> = ({
+const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: User[] }> = ({
   companies,
-  stores
+  stores,
+  users
 }) => {
   if(companies.length === 0) return;
   // remove duplicate companies
@@ -90,6 +91,11 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[] }> = ({
               <ClerkStore
                   stores={stores.filter(
                     store => store.client_key === company.key
+                  )}
+                />
+              <ClerkUser
+                  users={users.filter(
+                    user => user.account_id === company.subscription
                   )}
                 />
               </Accordion.Content>
