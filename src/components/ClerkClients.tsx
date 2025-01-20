@@ -106,7 +106,7 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
                   
                   <ClerkUser
                       users={users.filter(
-                        user => user.account_id === company.subscription
+                        user => user.account_id === company.account_id
                       )}
                     />
                     </div>
