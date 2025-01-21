@@ -12,7 +12,6 @@ import CopyText from './CopyText'
 const CLERK_BACKEND_REDIRECT = 'https://my.clerk.io/#/?client_key='
 const CLERK_DETAILS_REDIRECT = 'https://hq.clerk.io/v1/customers/update/'
 
-
 const ClerkClients = () => {
   const [clients, setClients] = useState<Clients>();
   useEffect(() => {
@@ -23,37 +22,22 @@ const ClerkClients = () => {
     });
   
   }, [])
-
   if(clients === undefined) return
 
-  return (
-    <div className="w-full">
-       
- 
-        <ClerkCompany companies={clients.companies} stores={clients.stores} users={clients.users}/>
-   
-    </div>
-  )
-}
 
-const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: User[] }> = ({
-  companies,
-  stores,
-  users
-}) => {
-  if(companies.length === 0) return;
+  if(clients.companies.length === 0) return;
   // remove duplicate companies
-  companies = companies.filter(
+  clients.companies = clients.companies.filter(
     (company, index, self) => index === self.findIndex(t => t.id === company.id)
   )
 
   const handleClickToBackend = (url: string, client_key: string) => {
     chrome.tabs.create({ active: true, url: url + client_key })
   }
-  console.log(companies)
+
   return (
-    <>
-      {companies.map((company: Company, index: number) => (
+    <div className="w-full">
+      {clients.companies.map((company: Company, index: number) => (
           <Accordion color='gray' className='first:mt-4 last:mb-4' collapseAll>
             <Accordion.Panel key={index} >
               <Accordion.Title className='text-black rounded-none focus:border-none focus:ring-0'>
@@ -61,8 +45,8 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
                   <div className='flex gap-4 justify-between w-[300px] items-center'>
                     <span className='font-semibold self-center'>{company.name || "Unknown"}</span>
                     <div className='flex gap-4'>
-                      <CopyText showToolTip={true} toolTipLable='Company ID' content={company.id} />
-                      <CopyText showToolTip={true} toolTipLable='Company Key' content={company.account_id} />
+                      <CopyText showToolTip={true} toolTipLable='Company Id' content={company.id} />
+                      <CopyText showToolTip={true} toolTipLable='Subscription Id' content={company.account_id} />
                     </div>
                   </div>
                   
@@ -87,7 +71,7 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
                   </div>
                 </div>
               </Accordion.Title>
-              <Accordion.Content className='p-4'>
+              <Accordion.Content className='p-1'>
                 {company.status === 'error' && (
                   <div className='bg-orange-100 p-1 pl-2 pr-2 border border-orange-400 text-orange-700 px-4 py-3 rounded relative' role='alert'>
                     <span className='font-bold text-sm'>Warning - Missing Infomation</span>
@@ -95,17 +79,17 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
                   </div>
                 )  
                 }
-                <div className='grid grid-cols-3 pt-4'>
+                <div className='grid grid-cols-3'>
                   <ClerkCompanyDetails company={company} />
                   
                   <ClerkStore
-                      stores={stores.filter(
+                      stores={clients.stores.filter(
                         store => store.client_key === company.key
                       )}
                     />
                   
                   <ClerkUser
-                      users={users.filter(
+                      users={clients.users.filter(
                         user => user.account_id === company.account_id
                       )}
                     />
@@ -115,24 +99,65 @@ const ClerkCompany: React.FC<{ companies: Company[], stores: Store[], users: Use
             </Accordion.Panel>
           </Accordion>
         ))}
-    </>
-  )
-}
-
-const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
-  return (
-    <div>
-      <div>{company.name}</div>
-      <div>{company.id}</div>
-      <CopyText content={company.key} isKey={true} />
     </div>
   )
 }
 
+const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
+
+  function timeConverter(UNIX_timestamp: number | undefined){
+    if(UNIX_timestamp === undefined) return '-'
+    const a = new Date(UNIX_timestamp * 1000);
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const year = a.getFullYear();
+    const month = months[a.getMonth()];
+    const date = a.getDate();
+    const time = date + ' ' + month + ' ' + year;
+    return time;
+  }
+
+  return (
+    <div >
+      <h2 className='font-semibold pb-2 text-center text-lg'>Company Details</h2>
+      <ProductInfo label="Company Id" content={company.id} />
+      <ProductInfo label="Subscription Id" content={company.account_id} />
+      <div className='grid grid-cols-2 items-center ml-1'>
+          <span className='font-semibold'>Public Key</span>
+          <CopyText content={company.key} isKey={true} />
+        </div>
+      <ProductInfo label="Hubspot Id" content={company.hubspot_id} />
+
+      <div className='mt-1 border-y border-gray-200'>         
+        <>
+         <ProductInfo label="Search" content={company.products?.search} />
+         <ProductInfo label="Recs" content={company.products?.recommendations} />
+         <ProductInfo label="Email" content={company.products?.email} />
+         <ProductInfo label="Audience" content={company.products?.audience} />
+         <ProductInfo label="Chat" content={company.products?.chat} />
+        </>
+        
+       
+      </div>
+      <ProductInfo label="Created At" content={timeConverter(company.created_at)} />
+      <ProductInfo label="Trial Expire At" content={timeConverter(company.trial_expire_at)} />
+    </div>
+  )
+}
+
+const ProductInfo: React.FC<{ label: string, content: string | number | undefined}> = ({ label, content }) => (
+  <div className='grid grid-cols-2 items-center ml-1'>
+    <span className='font-semibold'>{label}</span>
+    <CopyText content={content} defaultText='0' />
+  </div>
+)
+
+
 
 const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
   return (
-    <div>
+    <div className='mx-4'>
+      <h2 className='font-semibold pb-1 text-lg'>Stores</h2>
+
       {stores.length > 0 &&
         stores.map((store: Store, index: number) => {
           return (
@@ -150,11 +175,12 @@ const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
 const ClerkUser: React.FC<{ users: User[] }> = ({ users }) => {
   return (
     <div>
+      <h2 className='font-semibold pb-1 text-lg'>Users</h2>
+
       {users.length > 0 &&
         users.map((user: User, index: number) => {
           return (
             <div key={index}>
-              <div>{user.name}</div>
               <div>{user.user.email}</div>
               <div>{user.store}</div>
               <div>{user.enabled ? 'Enabled' : 'Disabled'}</div>

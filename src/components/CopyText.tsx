@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { Button as FlowbiteBtn, Tooltip } from 'flowbite-react'
 
 
-const CopyText: React.FC<{ toolTipLable?: string, content: string | number, defaultText?: string, isKey?: boolean, showToolTip?: boolean}> = 
+const CopyText: React.FC<{ toolTipLable?: string, content: string | number | undefined, defaultText?: string, isKey?: boolean, showToolTip?: boolean}> = 
 ({ toolTipLable, content, defaultText, isKey = false, showToolTip = false}) => {
   const [copy, setCopy] = useState(toolTipLable)
+  
+  if(content === undefined){
+    content = '-'
+  } 
+  
   const ORIGINAL_CONTENT = content
-
-
   const handleCopyClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     navigator.clipboard.writeText(ORIGINAL_CONTENT.toString());

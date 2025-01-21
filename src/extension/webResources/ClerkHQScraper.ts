@@ -15,9 +15,10 @@ export interface Company {
       email: number;
       audience: number;
       chat: number;
-    };
-    trial_expire_at: number;
-    created_at: number;
+    } | undefined;
+    hubspot_id: string | undefined;
+    trial_expire_at: number | undefined;
+    created_at: number | undefined;
     // Error handling
     status?: string;
     message?: string;
