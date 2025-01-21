@@ -11,6 +11,11 @@ import CopyText from './CopyText'
 
 const CLERK_BACKEND_REDIRECT = 'https://my.clerk.io/#/?client_key='
 const CLERK_DETAILS_REDIRECT = 'https://hq.clerk.io/v1/customers/update/'
+const handleClickToBackend = (url: string, client_key: string) => {
+  chrome.tabs.create({ active: true, url: url + client_key })
+}
+
+
 
 const ClerkClients = () => {
   const [clients, setClients] = useState<Clients>();
@@ -30,10 +35,6 @@ const ClerkClients = () => {
   clients.companies = clients.companies.filter(
     (company, index, self) => index === self.findIndex(t => t.id === company.id)
   )
-
-  const handleClickToBackend = (url: string, client_key: string) => {
-    chrome.tabs.create({ active: true, url: url + client_key })
-  }
 
   return (
     <div className="w-full">
@@ -73,9 +74,9 @@ const ClerkClients = () => {
               </Accordion.Title>
               <Accordion.Content className='p-1'>
                 {company.status === 'error' && (
-                  <div className='bg-orange-100 p-1 pl-2 pr-2 border border-orange-400 text-orange-700 px-4 py-3 rounded relative' role='alert'>
-                    <span className='font-bold text-sm'>Warning - Missing Infomation</span>
-                    <span className='block sm:inline text-xs'>{company.message}</span>
+                  <div className='bg-orange-100 flex pl-2 pr-2 border border-orange-400 text-orange-700 py-1   rounded relative' role='alert'>
+                    <span className='font-bold text-sm mr-2'>Missing Infomation  -  </span>
+                    <span className='text-center self-center block sm:inline text-xs'>{company.message}</span>
                   </div>
                 )  
                 }
@@ -121,13 +122,14 @@ const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
       <h2 className='font-semibold pb-2 text-center text-lg'>Company Details</h2>
       <ProductInfo label="Company Id" content={company.id} />
       <ProductInfo label="Subscription Id" content={company.account_id} />
-      <div className='grid grid-cols-2 items-center ml-1'>
+      <div className='grid grid-cols-2 items-center'>
           <span className='font-semibold'>Public Key</span>
           <CopyText content={company.key} isKey={true} />
         </div>
       <ProductInfo label="Hubspot Id" content={company.hubspot_id} />
 
-      <div className='mt-1 border-y border-gray-200'>         
+      {company.products !== undefined && (
+        <div className='mt-1 border-y border-gray-200'>         
         <>
          <ProductInfo label="Search" content={company.products?.search} />
          <ProductInfo label="Recs" content={company.products?.recommendations} />
@@ -135,17 +137,17 @@ const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
          <ProductInfo label="Audience" content={company.products?.audience} />
          <ProductInfo label="Chat" content={company.products?.chat} />
         </>
-        
-       
       </div>
-      <ProductInfo label="Created At" content={timeConverter(company.created_at)} />
-      <ProductInfo label="Trial Expire At" content={timeConverter(company.trial_expire_at)} />
+      )}
+      
+      {company.created_at !== undefined && (<ProductInfo label="Created At" content={timeConverter(company.created_at)} />)}
+      {company.trial_expire_at !== undefined && (<ProductInfo label="Trial Expire At" content={timeConverter(company.trial_expire_at)} />)}     
     </div>
   )
 }
 
 const ProductInfo: React.FC<{ label: string, content: string | number | undefined}> = ({ label, content }) => (
-  <div className='grid grid-cols-2 items-center ml-1'>
+  <div className='grid grid-cols-2 items-center'>
     <span className='font-semibold'>{label}</span>
     <CopyText content={content} defaultText='0' />
   </div>
@@ -156,15 +158,21 @@ const ProductInfo: React.FC<{ label: string, content: string | number | undefine
 const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
   return (
     <div className='mx-4'>
-      <h2 className='font-semibold pb-1 text-lg'>Stores</h2>
+       <h2 className='font-semibold pb-2 text-center text-lg'>Stores</h2>
 
       {stores.length > 0 &&
         stores.map((store: Store, index: number) => {
           return (
-            <div key={index}> 
-              <span>{store.name}</span>
-              <CopyText  content={store.id} />
-              <CopyText  content={store.key} isKey={true} />
+            <div className='pb-1 mb-1 border-b border-gray-200' key={index}> 
+              <span className='font-semibold text-center items-center'>{store.name}</span>
+              <div className='grid grid-cols-2 items-center'>
+                <span className='font-semibold'>Store Id</span>
+                <CopyText content={store.id} isKey={true} />
+              </div>
+              <div className='grid grid-cols-2 items-center'>
+                <span className='font-semibold'>Store Key</span>
+                <CopyText content={store.key} isKey={true} />
+              </div>
             </div>
           )
         })}
@@ -175,7 +183,7 @@ const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
 const ClerkUser: React.FC<{ users: User[] }> = ({ users }) => {
   return (
     <div>
-      <h2 className='font-semibold pb-1 text-lg'>Users</h2>
+ <h2 className='font-semibold pb-2 text-center text-lg'>Users</h2>
 
       {users.length > 0 &&
         users.map((user: User, index: number) => {
