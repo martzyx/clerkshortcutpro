@@ -188,10 +188,12 @@ const ClerkUser: React.FC<{ users: User[] }> = ({ users }) => {
       {users.length > 0 &&
         users.map((user: User, index: number) => {
           return (
-            <div key={index}>
-              <div>{user.user.email}</div>
-              <div>{user.store}</div>
-              <div>{user.enabled ? 'Enabled' : 'Disabled'}</div>
+            <div className='pb-1 mb-1 border-b border-gray-200' key={index}> 
+              <ProductInfo label="Name" content={user.user.name} />
+              <ProductInfo label="Email" content={user.user.email} />
+              <ProductInfo label="Phone" content={user.user.phone} />
+              <ProductInfo label="Id" content={user.user.id} />
+              <ProductInfo label="Role" content={user.user.role} />
             </div>
           )
         })}
