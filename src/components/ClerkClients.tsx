@@ -73,27 +73,29 @@ const ClerkClients = () => {
                 </div>
               </Accordion.Title>
               <Accordion.Content className='p-1'>
-                {company.status === 'error' && (
+                {/* {company.status === 'error' && (
                   <div className='bg-orange-100 flex pl-2 pr-2 border border-orange-400 text-orange-700 py-1   rounded relative' role='alert'>
                     <span className='font-bold text-sm mr-2'>Missing Infomation  -  </span>
                     <span className='text-center self-center block sm:inline text-xs'>{company.message}</span>
                   </div>
-                )  
-                }
-                <div className='grid grid-cols-3'>
+                )} */}
+                <div className='grid grid-flow-col gap-4 first:ml-2 last:mr-2 *:max-w-52 *:mx-auto *:w-full'>
                   <ClerkCompanyDetails company={company} />
-                  
-                  <ClerkStore
+                  {clients.stores.filter(s => s.client_key === company.key).length > 0 && (
+                    <ClerkStore
                       stores={clients.stores.filter(
                         store => store.client_key === company.key
                       )}
                     />
-                  
+                  )}
+                 
+                 {clients.users.filter(u => u.account_id === company.account_id).length > 0 && (
                   <ClerkUser
                       users={clients.users.filter(
-                        user => user.account_id === company.account_id
+                        u => u.account_id === company.account_id
                       )}
                     />
+                  )}
                     </div>
             
               </Accordion.Content>
@@ -117,6 +119,7 @@ const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
     return time;
   }
 
+  console.log(company?.hubspot_id)
   return (
     <div >
       <h2 className='font-semibold pb-2 text-center text-lg'>Company Details</h2>
@@ -126,16 +129,17 @@ const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
           <span className='font-semibold'>Public Key</span>
           <CopyText content={company.key} isKey={true} />
         </div>
-      <ProductInfo label="Hubspot Id" content={company.hubspot_id} />
+       
+      <ProductInfo label="Hubspot Id" content={company?.hubspot_id} />
 
       {company.products !== undefined && (
         <div className='mt-1 border-y border-gray-200'>         
         <>
-         <ProductInfo label="Search" content={company.products?.search} />
-         <ProductInfo label="Recs" content={company.products?.recommendations} />
-         <ProductInfo label="Email" content={company.products?.email} />
-         <ProductInfo label="Audience" content={company.products?.audience} />
-         <ProductInfo label="Chat" content={company.products?.chat} />
+         <ProductInfo label="Search" content={company.products?.search} defaultText='0' />
+         <ProductInfo label="Recs" content={company.products?.recommendations} defaultText='0' />
+         <ProductInfo label="Email" content={company.products?.email} defaultText='0' />
+         <ProductInfo label="Audience" content={company.products?.audience} defaultText='0' />
+         <ProductInfo label="Chat" content={company.products?.chat} defaultText='0' />
         </>
       </div>
       )}
@@ -146,10 +150,10 @@ const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
   )
 }
 
-const ProductInfo: React.FC<{ label: string, content: string | number | undefined}> = ({ label, content }) => (
+const ProductInfo: React.FC<{ label: string, content: string | number | undefined, defaultText?: string}> = ({ label, content, defaultText }) => (
   <div className='grid grid-cols-2 items-center'>
     <span className='font-semibold'>{label}</span>
-    <CopyText content={content} defaultText='0' />
+    <CopyText content={content} defaultText={defaultText} />
   </div>
 )
 
@@ -190,10 +194,10 @@ const ClerkUser: React.FC<{ users: User[] }> = ({ users }) => {
           return (
             <div className='pb-1 mb-1 border-b border-gray-200' key={index}> 
               <ProductInfo label="Name" content={user.user.name} />
-              <ProductInfo label="Email" content={user.user.email} />
-              <ProductInfo label="Phone" content={user.user.phone} />
+              <ProductInfo label="Email" content={user.user.email}  />
+              <ProductInfo label="Phone" content={user.user.phone}  />
               <ProductInfo label="Id" content={user.user.id} />
-              <ProductInfo label="Role" content={user.user.role} />
+              <ProductInfo label="Role" content={user.user.role}  />
             </div>
           )
         })}

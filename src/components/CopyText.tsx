@@ -5,10 +5,13 @@ import { Button as FlowbiteBtn, Tooltip } from 'flowbite-react'
 const CopyText: React.FC<{ toolTipLable?: string, content: string | number | undefined, defaultText?: string, isKey?: boolean, showToolTip?: boolean}> = 
 ({ toolTipLable, content, defaultText, isKey = false, showToolTip = false}) => {
   const [copy, setCopy] = useState(toolTipLable)
-  
-  if(content === undefined){
-    content = '-'
-  } 
+
+
+  if(content === undefined || content === ''){
+    return (
+      <span className='text-center'>{defaultText ? defaultText : '-'}</span>
+    )
+  }
   
   const ORIGINAL_CONTENT = content
   const handleCopyClick = (event: React.MouseEvent) => {
@@ -28,7 +31,7 @@ const CopyText: React.FC<{ toolTipLable?: string, content: string | number | und
           <FlowbiteBtn 
           onClick={(event: React.MouseEvent) => handleCopyClick(event)}
           color='gray' className='border-none hover:border focus:border-none focus:ring-0 self-center' size='xs'>
-            {content ? content : defaultText ? defaultText : 'Unknown'}
+            {content ? content : defaultText ? defaultText : '-'}
           </FlowbiteBtn>
         </Tooltip>
       )
@@ -38,7 +41,7 @@ const CopyText: React.FC<{ toolTipLable?: string, content: string | number | und
       <FlowbiteBtn 
       onClick={(event: React.MouseEvent) => handleCopyClick(event)}
       color='gray' className='border-none hover:border focus:border-none focus:ring-0 self-center' size='xs'>
-        {content ? content : defaultText ? defaultText : 'Unknown'}
+        {content}
       </FlowbiteBtn>
   )
 }
