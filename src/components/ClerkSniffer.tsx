@@ -19,7 +19,7 @@ const ClerkSniffer = () => {
     });
   }, [])
   return (
-    <span className='flex gap-2'>
+    <span className='flex gap-2 font-semibold text-sm align-baseline items-center'>
       Clerk is {isClerk ? 'active' : 'inactive'}
       {isClerk ? <ClerkSnifferStatus actice={true} /> : <ClerkSnifferStatus actice={false} />}
       </span>
