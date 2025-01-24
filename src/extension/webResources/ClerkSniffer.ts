@@ -21,7 +21,6 @@ function onRequestObserved(entries: PerformanceObserverEntryList) {
     state: isClerk(loadedResources)
   }
   if (clerkSniffer) {
-    console.log(window)
     window.postMessage(clerkSniffer, '*')
     return clerkSniffer
   }
@@ -51,17 +50,17 @@ function HandleClerkIcon(
     throw new Error('No tab id in message')
   }
 
+  // Tab state not found, creating new tab state
   if (typeof sender.tab?.id == 'number' && !tabStates[sender.tab?.id]) {
-    console.log('Tab state not found, creating new tab state')
     tabStates[sender.tab.id] = {
       isClerk: request.state,
       tabId: sender.tab?.id
     }
   }
 
+  // Tab state found, updating tab state
   if (typeof sender.tab?.id == 'number' && request.state) {
     tabStates[sender.tab.id]['isClerk'] = request.state
-    console.log('Tab state found, updating tab state')
     ChangeClerkIcon(tabStates[sender.tab?.id])
   }
 }

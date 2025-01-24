@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
 
     const companyPromises = ClerkClient.companies.map(async (company: Company) => {
 
-
+      // TODO: This fetch causes the "window not defined" error in "ClerkSniffer.ts"
       const CompanyExtraData: Company = await fetch(HQ_CLERK_API + company.key,
         {
           method: 'GET',
