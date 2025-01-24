@@ -1,12 +1,27 @@
 import DTO, { HQclerkClients }  from "../../DTO";
 
 export interface Company {
+
     id: number;
     account_id: string;
+    subscription: string;
     name: string;
     store: string;
     enabled: boolean;
     key: string;
+    products: {
+      search: number;
+      recommendations: number;
+      email: number;
+      audience: number;
+      chat: number;
+    } | undefined;
+    hubspot_id: string | undefined;
+    trial_expire_at: number | undefined;
+    created_at: number | undefined;
+    // Error handling
+    status?: string;
+    message?: string;
   }
   
   export interface Store {
@@ -16,7 +31,7 @@ export interface Company {
     client_key: string;
   }
   
-  export  interface User {
+  export interface User {
     id: number;
     account_id: string;
     name: string;
@@ -46,7 +61,7 @@ export interface Company {
   type HQclerkData = {
     status: string;
     clients: Clients;
-}
+  }
 
 
   const { fetch: origFetch } = window;
@@ -55,22 +70,26 @@ export interface Company {
       
       // If the response of the network request is from the clerk.io API & the request is a list
       // of clients
+    
+      if(!response.url.includes('api.clerk.io')) return response;
 
-      if(response.url.includes('api.clerk.io') && response.url.match('list')){
-          response
-              .clone()
-              .json()
-              .then((data: HQclerkData) => {
-                  const clerkClients: HQclerkClients = {
-                      type: DTO.HQclerkClients,
-                      clients: data.clients
-                  };
-                  if (data.status === "ok") {
-                    window.postMessage(clerkClients, '*'); // send to content script
-                  }
-              })
-              .catch(err => console.error(err));
-              return response;
-      } 
+      if (response.url.match('list')) {
+        response
+          .clone()
+          .json()
+          .then((data: HQclerkData) => {
+            const clerkClients: HQclerkClients = {
+              type: DTO.HQclerkClients,
+              clients: data.clients
+            };
+      
+            if (data.status === "ok") {
+              window.postMessage(clerkClients, '*'); // send to content script
+            }
+          })
+          .catch(err => console.error(err));
+        return response;
+      }
       return response;
   };
+

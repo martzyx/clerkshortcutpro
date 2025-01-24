@@ -1,4 +1,5 @@
 import DTO from '../DTO'
+import { Clients, Company } from './webResources/ClerkHQScraper';
 import HandleClerkIcon from './webResources/ClerkSniffer'
 
 
@@ -19,8 +20,32 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
 
     await chrome.storage.session.set({ [DTO.ClerkSniffer]: Array.from(updatedData) });
   }
+
   if (request.type === DTO.HQclerkClients) {
-    await chrome.storage.session.set({ [DTO.HQclerkClients]: request.clients })
-    console.log("Stored HQclerkClients", request.clients);
+    const ClerkClient: Clients = request.clients;
+
+    const HQ_CLERK_API = 'https://api.clerk.io/v2/client/info?secure=false&client_key=';
+
+    const companyPromises = ClerkClient.companies.map(async (company: Company) => {
+
+
+      const CompanyExtraData: Company = await fetch(HQ_CLERK_API + company.key,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }
+      ).then(res => res.json()).catch(err => console.error(err));
+
+      // merge the two objects
+      return { ...company, ...CompanyExtraData };
+    });
+    ClerkClient.companies = await Promise.all(companyPromises);
+    
+    console.log(ClerkClient)
+    await chrome.storage.session.set({ [DTO.HQclerkClients]: ClerkClient });    
   }
-})
+  return true;
+});

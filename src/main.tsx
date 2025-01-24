@@ -7,7 +7,6 @@ import ClerkClients from './components/ClerkClients'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
         <Suspense fallback={<div>Loading...</div>}>
-
     <div>
       <ClerkSniffer />
       <ClerkClients />
