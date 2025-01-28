@@ -1,8 +1,10 @@
 import { Clients } from "./extension/webResources/ClerkHQScraper";
+import { MyClerkData } from "./extension/webResources/MyClerkScraper";
 
 enum DTO {
     ClerkSniffer = 'clerksniffer',
     HQclerkClients = 'hqclerkclients',
+    MyClerkInfo = 'myclerkinfo'
 }
 
 export type clerkSniffer = {
@@ -15,5 +17,9 @@ export type HQclerkClients = {
     clients: Clients;
 }
 
+export type MyClerkInfo = {
+    type: DTO.MyClerkInfo;
+    info: MyClerkData;
+}
 
 export default DTO;

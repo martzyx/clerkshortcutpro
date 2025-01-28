@@ -27,6 +27,7 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
     const HQ_CLERK_API = 'https://api.clerk.io/v2/client/info?secure=false&client_key=';
 
     const companyPromises = ClerkClient.companies.map(async (company: Company) => {
+      if(company === undefined) return new Promise<Company>((resolve) => resolve(company));
 
       // TODO: This fetch causes the "window not defined" error in "ClerkSniffer.ts"
       const CompanyExtraData: Company = await fetch(HQ_CLERK_API + company.key,
@@ -44,8 +45,15 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
     });
     ClerkClient.companies = await Promise.all(companyPromises);
     
-    console.log(ClerkClient)
     await chrome.storage.session.set({ [DTO.HQclerkClients]: ClerkClient });    
   }
+
+  if(request.type === DTO.MyClerkInfo) {
+    await chrome.storage.session.set({ [DTO.MyClerkInfo]: request.info });
+  }
+
   return true;
+
+
+
 });
