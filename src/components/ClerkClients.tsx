@@ -22,7 +22,6 @@ const ClerkClients = () => {
   useEffect(() => {
     chrome.storage.session.get(DTO.HQclerkClients).then(res => {
       const c: Clients = res[DTO.HQclerkClients];
-      console.log("Clients", c);
       setClients(c);
     });
   

@@ -73,7 +73,7 @@ export interface Company {
     
       if(!response.url.includes('api.clerk.io')) return response;
 
-      if (response.url.match('list')) {
+      if (response.url.match('client/list')) {
         response
           .clone()
           .json()

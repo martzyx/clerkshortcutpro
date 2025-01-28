@@ -122,3 +122,24 @@ export const translations: ClerkTranslations[] = [
         es: "Comprados juntos habitualmemnte",
     },
 ];
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    if(document.URL.includes('https://my.clerk.io/')) {
+        const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                if(mutation.nextSibling?.baseURI?.includes('/content')) {
+                    console.log(document.querySelectorAll('input'))
+                    
+                }
+            }
+        });
+    
+        observer.observe(document.body, {
+            attributes: false,
+            childList: true,
+            subtree: true,
+        });
+    };
+});
