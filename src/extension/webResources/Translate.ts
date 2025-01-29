@@ -1,10 +1,11 @@
 import DTO, { MyClerkContent, MyClerkInfo } from "../../DTO";
 
-enum ClerkTranslationKinds {
-    CART,
-    CATEGORY_PAGE,
-    HOME_PAGE,
-    PRODUCT_PAGE,
+enum ClerkContentKinds {
+    CART = "Cart",
+    CATEGORY_PAGE = "Category Page",
+    HOME_PAGE = "Home Page",
+    PRODUCT_PAGE = "Product Page",
+    DEFAULT = "Recommendations"
 }
 
 enum ClerkContentType {
@@ -20,7 +21,7 @@ enum ClerkContentType {
 }
 
 type ClerkTranslations = {
-    kind: ClerkTranslationKinds;
+    kind: ClerkContentKinds;
     origin: ClerkContentType;
     en: string;
     dk: string;
@@ -35,7 +36,7 @@ type ClerkTranslations = {
 
 export const translations: ClerkTranslations[] = [
     {
-        kind: ClerkTranslationKinds.CART,
+        kind: ClerkContentKinds.CART,
         origin: ClerkContentType.OTHERS_ALSO_BOUGHT,
         en: "See these checkout offers",
         dk: "Andre har også købt",
@@ -48,7 +49,7 @@ export const translations: ClerkTranslations[] = [
         es: "Comprados juntos habitualmente",
     },
     {
-        kind: ClerkTranslationKinds.CATEGORY_PAGE,
+        kind: ClerkContentKinds.CATEGORY_PAGE,
         origin: ClerkContentType.POPULAR,
         en: "Most popular in this category",
         dk: "Populære i denne kategori",
@@ -61,7 +62,7 @@ export const translations: ClerkTranslations[] = [
         es: "Los más vendidos en esta categoria",
     },
     {
-        kind: ClerkTranslationKinds.HOME_PAGE,
+        kind: ClerkContentKinds.HOME_PAGE,
         origin: ClerkContentType.POPULAR,
         en: "Bestsellers",
         dk: "Vores mest populære produkter",
@@ -74,7 +75,7 @@ export const translations: ClerkTranslations[] = [
         es: "Los más vendidos",
     },
     {
-        kind: ClerkTranslationKinds.HOME_PAGE,
+        kind: ClerkContentKinds.HOME_PAGE,
         origin: ClerkContentType.HOT,
         en: "Trending products",
         dk: "Populære produkter lige nu",
@@ -87,7 +88,7 @@ export const translations: ClerkTranslations[] = [
         es: "Productos del momento",
     },
     {
-        kind: ClerkTranslationKinds.HOME_PAGE,
+        kind: ClerkContentKinds.HOME_PAGE,
         origin: ClerkContentType.VISITOR_COMPLEMENTARY,
         en: "Our top picks for you",
         dk: "Vores anbefalinger til dig",
@@ -100,7 +101,7 @@ export const translations: ClerkTranslations[] = [
         es: "Recomendamos según tus tendencias de compra",
     },
     {
-        kind: ClerkTranslationKinds.PRODUCT_PAGE,
+        kind: ClerkContentKinds.PRODUCT_PAGE,
         origin: ClerkContentType.ALTERNATIVES,
         en: "Alternatives",
         dk: "Relaterede produkter",
@@ -113,7 +114,7 @@ export const translations: ClerkTranslations[] = [
         es: "Productos relacionados",
     },
     {
-        kind: ClerkTranslationKinds.PRODUCT_PAGE,
+        kind: ClerkContentKinds.PRODUCT_PAGE,
         origin: ClerkContentType.OTHERS_ALSO_BOUGHT,
         en: "Others Also Bought",
         dk: "Andre købte også",
@@ -158,7 +159,10 @@ function handleMutations(mutations: MutationRecord[]) {
           if (!input) return;
        
           const contentType = getContentType(MY_CLERK_CONTENT!);
-            
+            const conetntKind = getContentKind(MY_CLERK_CONTENT!);
+
+            console.log("kind ", conetntKind);
+            console.log("Type", contentType);
           if (input.value.length == 0) {
             // todo
           }
@@ -179,6 +183,16 @@ function getContentType(contentData: MyClerkContent): ClerkContentType {
     }
    }
    throw new Error("Content type not found");
+}
+
+function getContentKind(contentData: MyClerkContent): ClerkContentKinds {
+    for(const value of Object.values(ClerkContentKinds)){
+        const transformedValue = value.toLowerCase().replace(/ /g, "");
+        if(contentData.content.content.api.toLowerCase().replace(/ /g, "").match(transformedValue)){
+            return value;
+        } 
+    }
+    throw new Error("Content Kind not found");
 }
 
 
