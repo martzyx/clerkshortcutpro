@@ -7,19 +7,21 @@ enum ClerkTranslationKinds {
     PRODUCT_PAGE,
 }
 
-enum ClerkTranslationOrigins {
-    CART_OTHERS_ALSO_BOUGHT = "Cart / Others Also Bought",
-    CATEGORY_PAGE_POPULAR = "Category Page / Popular",
-    HOME_PAGE_POPULAR = "Home Page / Popular",
-    HOME_PAGE_TRENDING = "Home Page / Trending",
-    HOME_PAGE_VISITOR_COMPLEMENTARY = "Home Page / Visitor Complementary",
-    PRODUCT_PAGE_ALTERNATIVES = "Product Page / Alternatives",
-    PRODUCT_PAGE_OTHERS_ALSO_BOUGHT = "Product Page / Others Also Bought",
+enum ClerkContentType {
+    POPULAR = "Popular",
+    HOT = "Trending",
+    NEW = "New",
+    OTHERS_ALSO_BOUGHT = "Others Also Bought",
+    VISITOR_COMPLEMENTARY = "Visitor Complementary",
+    COMPLEMENTARY = "Complementary",
+    ALTERNATIVES = "Alternatives",
+    SUBSTITUTING = "Substituting",
+    MOST_SOLD_WITH = "Most Sold With"
 }
 
 type ClerkTranslations = {
     kind: ClerkTranslationKinds;
-    origin: ClerkTranslationOrigins;
+    origin: ClerkContentType;
     en: string;
     dk: string;
     se: string;
@@ -34,7 +36,7 @@ type ClerkTranslations = {
 export const translations: ClerkTranslations[] = [
     {
         kind: ClerkTranslationKinds.CART,
-        origin: ClerkTranslationOrigins.CART_OTHERS_ALSO_BOUGHT,
+        origin: ClerkContentType.OTHERS_ALSO_BOUGHT,
         en: "See these checkout offers",
         dk: "Andre har også købt",
         se: "Kolla in dessa erbjudanden!",
@@ -47,7 +49,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkTranslationKinds.CATEGORY_PAGE,
-        origin: ClerkTranslationOrigins.CATEGORY_PAGE_POPULAR,
+        origin: ClerkContentType.POPULAR,
         en: "Most popular in this category",
         dk: "Populære i denne kategori",
         se: "Mest populära produkter i denna kategori",
@@ -60,7 +62,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkTranslationKinds.HOME_PAGE,
-        origin: ClerkTranslationOrigins.HOME_PAGE_POPULAR,
+        origin: ClerkContentType.POPULAR,
         en: "Bestsellers",
         dk: "Vores mest populære produkter",
         se: "Våra mest populära produkter",
@@ -73,7 +75,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkTranslationKinds.HOME_PAGE,
-        origin: ClerkTranslationOrigins.HOME_PAGE_TRENDING,
+        origin: ClerkContentType.HOT,
         en: "Trending products",
         dk: "Populære produkter lige nu",
         se: "Populära produkter för andra kunder just nu",
@@ -86,7 +88,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkTranslationKinds.HOME_PAGE,
-        origin: ClerkTranslationOrigins.HOME_PAGE_VISITOR_COMPLEMENTARY,
+        origin: ClerkContentType.VISITOR_COMPLEMENTARY,
         en: "Our top picks for you",
         dk: "Vores anbefalinger til dig",
         se: "Våra produktval för dig",
@@ -99,7 +101,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkTranslationKinds.PRODUCT_PAGE,
-        origin: ClerkTranslationOrigins.PRODUCT_PAGE_ALTERNATIVES,
+        origin: ClerkContentType.ALTERNATIVES,
         en: "Alternatives",
         dk: "Relaterede produkter",
         se: "Inte vad du letade efter? Testa någon av dessa",
@@ -112,7 +114,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkTranslationKinds.PRODUCT_PAGE,
-        origin: ClerkTranslationOrigins.PRODUCT_PAGE_OTHERS_ALSO_BOUGHT,
+        origin: ClerkContentType.OTHERS_ALSO_BOUGHT,
         en: "Others Also Bought",
         dk: "Andre købte også",
         se: "Andra köpte också dessa produkter",
@@ -139,7 +141,7 @@ function waitForMessage(): Promise<void> {
         MY_CLERK_INFO = event.data;
       }
       if (MY_CLERK_CONTENT != undefined && MY_CLERK_INFO != undefined) {
-        window.removeEventListener('message', handler);
+       // window.removeEventListener('message', handler);
         resolve();
       }
     });
@@ -147,30 +149,46 @@ function waitForMessage(): Promise<void> {
 }
 
 function handleMutations(mutations: MutationRecord[]) {   
+  
   for (const mutation of mutations) {
     if (mutation.nextSibling?.baseURI?.includes('/content')) {
       document.querySelectorAll("p").forEach(p => {
         if (p.innerHTML == "headline") {
           const input = p.closest("div")?.querySelector("input");
           if (!input) return;
-
+       
+          const contentType = getContentType(MY_CLERK_CONTENT!);
+            
           if (input.value.length == 0) {
-            input.value = "test";
-            input.innerHTML = "test";
+            // todo
           }
-        }
+          return;
+        };
       });
+      return;
     }
+ 
   }
 }
 
+function getContentType(contentData: MyClerkContent): ClerkContentType {
+   for (const value of Object.values(ClerkContentType)) {
+    const transformedValue = value.toLowerCase().replace(/ /g, "");
+    if(contentData.content.content.api.toLowerCase().replace(/ /g, "").match(transformedValue)){
+        return value;
+    }
+   }
+   throw new Error("Content type not found");
+}
+
+
 async function main() {
   if (document.URL.includes('https://my.clerk.io/')) {
+    
+
     const observer = new MutationObserver(async (mutations) => {
        await waitForMessage();
        handleMutations(mutations);
-       console.log("c", MY_CLERK_CONTENT?.content.content.name);
-       console.log("i", MY_CLERK_INFO?.info.status);
     });
 
     observer.observe(document.body, {
