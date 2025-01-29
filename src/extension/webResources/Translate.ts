@@ -22,7 +22,7 @@ enum ClerkContentType {
 
 type ClerkTranslations = {
     kind: ClerkContentKinds;
-    origin: ClerkContentType;
+    type: ClerkContentType;
     en: string;
     dk: string;
     se: string;
@@ -36,8 +36,8 @@ type ClerkTranslations = {
 
 export const translations: ClerkTranslations[] = [
     {
-        kind: ClerkContentKinds.CART,
-        origin: ClerkContentType.OTHERS_ALSO_BOUGHT,
+        kind: ClerkContentKinds.CART ,
+        type: ClerkContentType.OTHERS_ALSO_BOUGHT,
         en: "See these checkout offers",
         dk: "Andre har også købt",
         se: "Kolla in dessa erbjudanden!",
@@ -50,7 +50,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkContentKinds.CATEGORY_PAGE,
-        origin: ClerkContentType.POPULAR,
+        type: ClerkContentType.POPULAR,
         en: "Most popular in this category",
         dk: "Populære i denne kategori",
         se: "Mest populära produkter i denna kategori",
@@ -63,7 +63,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkContentKinds.HOME_PAGE,
-        origin: ClerkContentType.POPULAR,
+        type: ClerkContentType.POPULAR,
         en: "Bestsellers",
         dk: "Vores mest populære produkter",
         se: "Våra mest populära produkter",
@@ -76,7 +76,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkContentKinds.HOME_PAGE,
-        origin: ClerkContentType.HOT,
+        type: ClerkContentType.HOT,
         en: "Trending products",
         dk: "Populære produkter lige nu",
         se: "Populära produkter för andra kunder just nu",
@@ -89,7 +89,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkContentKinds.HOME_PAGE,
-        origin: ClerkContentType.VISITOR_COMPLEMENTARY,
+        type: ClerkContentType.VISITOR_COMPLEMENTARY,
         en: "Our top picks for you",
         dk: "Vores anbefalinger til dig",
         se: "Våra produktval för dig",
@@ -102,7 +102,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkContentKinds.PRODUCT_PAGE,
-        origin: ClerkContentType.ALTERNATIVES,
+        type: ClerkContentType.ALTERNATIVES,
         en: "Alternatives",
         dk: "Relaterede produkter",
         se: "Inte vad du letade efter? Testa någon av dessa",
@@ -115,7 +115,7 @@ export const translations: ClerkTranslations[] = [
     },
     {
         kind: ClerkContentKinds.PRODUCT_PAGE,
-        origin: ClerkContentType.OTHERS_ALSO_BOUGHT,
+        type: ClerkContentType.OTHERS_ALSO_BOUGHT,
         en: "Others Also Bought",
         dk: "Andre købte også",
         se: "Andra köpte också dessa produkter",
@@ -153,16 +153,12 @@ function handleMutations(mutations: MutationRecord[]) {
   
   for (const mutation of mutations) {
     if (mutation.nextSibling?.baseURI?.includes('/content')) {
-      document.querySelectorAll("p").forEach(p => {
+      document.querySelectorAll("p").forEach(async p => {
         if (p.innerHTML == "headline") {
           const input = p.closest("div")?.querySelector("input");
           if (!input) return;
-       
-          const contentType = getContentType(MY_CLERK_CONTENT!);
-            const conetntKind = getContentKind(MY_CLERK_CONTENT!);
-
-            console.log("kind ", conetntKind);
-            console.log("Type", contentType);
+    
+            console.log(getTranslation());
           if (input.value.length == 0) {
             // todo
           }
@@ -173,6 +169,16 @@ function handleMutations(mutations: MutationRecord[]) {
     }
  
   }
+}
+
+function getTranslation() {
+    const contentType = getContentType(MY_CLERK_CONTENT!);
+    const contentKind = getContentKind(MY_CLERK_CONTENT!);
+
+    translations.map((t) => {
+        if(contentKind == t.kind || t.kind == ClerkContentKinds.DEFAULT && contentType == t.type) return t
+    })
+    return null;
 }
 
 function getContentType(contentData: MyClerkContent): ClerkContentType {
@@ -194,6 +200,7 @@ function getContentKind(contentData: MyClerkContent): ClerkContentKinds {
     }
     throw new Error("Content Kind not found");
 }
+
 
 
 async function main() {
