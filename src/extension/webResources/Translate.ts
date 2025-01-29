@@ -1,3 +1,5 @@
+import DTO, { MyClerkContent, MyClerkInfo } from "../../DTO";
+
 enum ClerkTranslationKinds {
     CART,
     CATEGORY_PAGE,
@@ -122,24 +124,61 @@ export const translations: ClerkTranslations[] = [
         es: "Comprados juntos habitualmemnte",
     },
 ];
+// 
+let MY_CLERK_CONTENT: MyClerkContent | undefined = undefined;
+let MY_CLERK_INFO: MyClerkInfo | undefined = undefined;
 
+function waitForMessage(): Promise<void> {
+  return new Promise((resolve) => {
+    window.addEventListener('message', function handler(event) {
+        if(MY_CLERK_CONTENT != undefined && MY_CLERK_INFO != undefined){
+            window.removeEventListener('message', handler);
+            resolve();
+            return;
+        }
 
-document.addEventListener('DOMContentLoaded', () => {
+        if (event.data.type === DTO.MyClerkContent) {
+            MY_CLERK_CONTENT = event.data;
+        }
+        if (event.data.type == DTO.MyClerkInfo){
+            MY_CLERK_INFO = event.data;
+        }
+    });
+  });
+}
 
-    if(document.URL.includes('https://my.clerk.io/')) {
-        const observer = new MutationObserver((mutations) => {
-            for (const mutation of mutations) {
-                if(mutation.nextSibling?.baseURI?.includes('/content')) {
-                    console.log(document.querySelectorAll('input'))
-                    
-                }
-            }
-        });
-    
-        observer.observe(document.body, {
-            attributes: false,
-            childList: true,
-            subtree: true,
-        });
-    };
-});
+async function main() {
+  // Now run the rest of your code
+  if (document.URL.includes('https://my.clerk.io/')) {
+    await waitForMessage();
+    console.log("c", MY_CLERK_CONTENT);
+    console.log("i", MY_CLERK_INFO);
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.nextSibling?.baseURI?.includes('/content')) {
+
+          document.querySelectorAll("p").forEach(p => {
+            if (p.innerHTML == "headline") {
+              const input = p.closest("div")?.querySelector("input");
+              if (!input) return;
+
+              if (input.value.length == 0) {
+                input.value = "test";
+                input.innerHTML = "test";
+              }
+            } else return;
+          });
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      attributes: false,
+      childList: true,
+      subtree: true,
+    });
+  }
+}
+
+// Run the main function
+main();

@@ -2,7 +2,6 @@ import DTO from '../DTO'
 import { Clients, Company } from './webResources/ClerkHQScraper';
 import HandleClerkIcon from './webResources/ClerkSniffer'
 
-
 chrome.runtime.onMessage.addListener(async (request, sender) => {
   if (request.type === DTO.ClerkSniffer) {
     // Handle the clerk icon on the tab
@@ -51,6 +50,7 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
   if(request.type === DTO.MyClerkInfo) {
     await chrome.storage.session.set({ [DTO.MyClerkInfo]: request.info });
   }
+
 
   return true;
 
