@@ -22,7 +22,6 @@ const ClerkClients = () => {
   useEffect(() => {
     chrome.storage.session.get(DTO.HQclerkClients).then(res => {
       const c: Clients = res[DTO.HQclerkClients];
-      console.log("Clients", c);
       setClients(c);
     });
   
@@ -119,7 +118,6 @@ const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
     return time;
   }
 
-  console.log(company?.hubspot_id)
   return (
     <div >
       <h2 className='font-semibold pb-2 text-center text-lg'>Company Details</h2>

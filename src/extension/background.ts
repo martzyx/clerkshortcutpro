@@ -2,7 +2,6 @@ import DTO from '../DTO'
 import { Clients, Company } from './webResources/ClerkHQScraper';
 import HandleClerkIcon from './webResources/ClerkSniffer'
 
-
 chrome.runtime.onMessage.addListener(async (request, sender) => {
   if (request.type === DTO.ClerkSniffer) {
     // Handle the clerk icon on the tab
@@ -26,6 +25,7 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
 
     const HQ_CLERK_API = 'https://api.clerk.io/v2/client/info?secure=false&client_key=';
 
+    if(ClerkClient.companies === undefined) throw new Error('No companies found in the clerk client data');
     const companyPromises = ClerkClient.companies.map(async (company: Company) => {
 
       // TODO: This fetch causes the "window not defined" error in "ClerkSniffer.ts"
@@ -44,8 +44,16 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
     });
     ClerkClient.companies = await Promise.all(companyPromises);
     
-    console.log(ClerkClient)
     await chrome.storage.session.set({ [DTO.HQclerkClients]: ClerkClient });    
   }
+
+  if(request.type === DTO.MyClerkInfo) {
+    await chrome.storage.session.set({ [DTO.MyClerkInfo]: request.info });
+  }
+
+
   return true;
+
+
+
 });
