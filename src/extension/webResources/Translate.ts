@@ -158,7 +158,7 @@ function getTranslation(kind: ClerkContentKinds, type: ClerkContentType, languag
   const detectedLanguage = detectLanguage(language);
 
   if (!detectedLanguage) {
-    throw new Error(`Unsupported language: ${language}`);
+    throw new Error(`[ClerkShortcut] Unsupported language: ${language}`);
   }
 
   const translation = translations.find(
@@ -166,7 +166,7 @@ function getTranslation(kind: ClerkContentKinds, type: ClerkContentType, languag
   );
 
   if (!translation) {
-    throw new Error(`Translation not found for kind: ${kind}, type: ${type}`);
+    throw new Error(`[ClerkShortcut] Translation not found for kind: ${kind}, type: ${type}`);
   }
 
   // English as fallback
@@ -205,7 +205,7 @@ function handleMutations(mutations: MutationRecord[]) {
 
 
           if (!MY_CLERK_CONTENT || !MY_CLERK_INFO) {
-            throw new Error("Clerk content or store info is missing.");
+            throw new Error("[ClerkShortcut] Clerk content or store info is missing.");
           }
 
           // Determine content type and kind
@@ -214,7 +214,7 @@ function handleMutations(mutations: MutationRecord[]) {
 
           // Detect store language
           if (!MY_CLERK_INFO?.info.language) {
-            throw new Error("Store language could not be found, try refreshing the page.");
+            throw new Error("[ClerkShortcut] Store language could not be found, try refreshing the page.");
           }
 
           const storeLanguage = MY_CLERK_INFO.info.language;
@@ -238,7 +238,7 @@ function getContentType(contentData: MyClerkContent): ClerkContentType {
         return value;
     }
    }
-   throw new Error("Content type not found");
+   throw new Error("[ClerkShortcut] Content type not found");
 }
 
 function getContentKind(contentData: MyClerkContent): ClerkContentKinds {
@@ -248,7 +248,7 @@ function getContentKind(contentData: MyClerkContent): ClerkContentKinds {
             return value;
         } 
     }
-    throw new Error("Content Kind not found");
+    throw new Error("[ClerkShortcut] Content Kind not found");
 }
 
 async function main() {

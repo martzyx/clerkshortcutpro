@@ -43,11 +43,11 @@ function HandleClerkIcon(
   const tabStates: TabMap = {}
   if (request.type !== DTO.ClerkSniffer)
     throw new Error(
-      "Invalid message type - Should be of 'ClerkSniffer': " + request
+      "[ClerkShortcut] Invalid message type - Should be of 'ClerkSniffer': " + request
     )
 
   if (!sender.tab) {
-    throw new Error('No tab id in message')
+    throw new Error('[ClerkShortcut] No tab id in message')
   }
 
   // Tab state not found, creating new tab state
