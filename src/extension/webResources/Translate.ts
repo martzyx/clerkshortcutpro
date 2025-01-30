@@ -219,7 +219,6 @@ function handleMutations(mutations: MutationRecord[]) {
 
           const storeLanguage = MY_CLERK_INFO.info.language;
           const translatedText = getTranslation(contentKind, contentType, storeLanguage);
-          console.log(translatedText)
           if (input.value.length === 0) {
             input.value = translatedText; // Set the translation
           }

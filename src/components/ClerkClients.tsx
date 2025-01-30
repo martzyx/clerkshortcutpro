@@ -118,7 +118,6 @@ const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
     return time;
   }
 
-  console.log(company?.hubspot_id)
   return (
     <div >
       <h2 className='font-semibold pb-2 text-center text-lg'>Company Details</h2>

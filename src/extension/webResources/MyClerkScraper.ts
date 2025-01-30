@@ -39,7 +39,6 @@ window.fetch = async (...args) => {
           type: DTO.MyClerkInfo,
           info: data
         };
-        console.log("network info", myClerkData)
 
         if (data.status === "ok") {
           window.postMessage(myClerkData, '*'); // send to content script
@@ -57,7 +56,6 @@ window.fetch = async (...args) => {
           type: DTO.MyClerkContent,
           content: data
         };
-        console.log("network content", myClerkContentData)
         if (data.status === "ok") {
           window.postMessage(myClerkContentData, '*'); // send to content script
         }
