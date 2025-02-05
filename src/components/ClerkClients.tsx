@@ -124,7 +124,7 @@ const ClerkCompanyDetails: React.FC<{ company: Company }> = ({ company }) => {
       <ProductInfo label="Company Id" content={company.id} />
       <ProductInfo label="Subscription Id" content={company.account_id} />
       <div className='grid grid-cols-2 items-center'>
-          <span className='font-semibold'>Public Key</span>
+          <span className='font-semibold'>Client Key</span>
           <CopyText content={company.key} isKey={true} />
         </div>
        
