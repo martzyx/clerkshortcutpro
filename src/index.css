@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+    @apply min-w-[36rem];
+    @apply max-w-[36rem];
+    @apply mx-auto;
+    @apply min-h-[30vh];
+    @apply max-h-[30vh];
+}
