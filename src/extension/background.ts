@@ -1,4 +1,4 @@
-import DTO from '../DTO'
+import DTO, { SearchClients } from '../DTO'
 import { Clients, Company } from './webResources/ClerkHQScraper';
 import HandleClerkIcon from './webResources/ClerkSniffer'
 
@@ -62,7 +62,31 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
   }
 
   if(request.type === DTO.MyClerkInfo) {
+    
+
     await chrome.storage.session.set({ [DTO.MyClerkInfo]: request.info });
   }
+
+  if(request.type === DTO.SearchClients){
+    const query: SearchClients = request;
+    
+    (async () => {
+      const rawResponse = await fetch("https://api.clerk.io/v2/client/list", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({query: query.query})
+      });
+      const content = await rawResponse.json();
+    
+      console.log("fetch: ", content);
+    })();
+
+    console.log("search bg ", query.query)
+  }
+
   return true;
 });
