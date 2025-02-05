@@ -44,7 +44,7 @@ const ClerkClients = () => {
                 <div className="flex gap-4 w-full justify-between items-center z-50">
                   <div className='flex gap-4 justify-between w-[300px] items-center'>
                     <span className='font-semibold self-center'>{company.name || "Unknown"}</span>
-                    <div className='flex gap-4'>
+                    <div className='flex gap-4 min-w-36 justify-around'>
                       <CopyText showToolTip={true} toolTipLable='Company Id' content={company.id} />
                       <CopyText showToolTip={true} toolTipLable='Subscription Id' content={company.account_id} />
                     </div>
@@ -158,12 +158,23 @@ const ProductInfo: React.FC<{ label: string, content: string | number | undefine
 
 
 const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
+  const DEFAULT = stores;
+  const [seeMore, setSeeMore] = useState<boolean>(false)
+  const [seeStores, setSeeStores] = useState<Store[]>(stores);
+
+  useEffect(() => {
+    if (stores.length > 3) {
+      setSeeStores(stores.slice(0, 3));
+      setSeeMore(true)
+    }
+  }, []);
+
   return (
     <div className='mx-4'>
        <h2 className='font-semibold pb-2 text-center text-lg'>Stores</h2>
 
       {stores.length > 0 &&
-        stores.map((store: Store, index: number) => {
+        seeStores.map((store: Store, index: number) => {
           return (
             <div className='pb-1 mb-1 border-b border-gray-200' key={index}> 
               <span className='font-semibold text-center items-center'>{store.name}</span>
@@ -178,6 +189,12 @@ const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
             </div>
           )
         })}
+        {seeMore ? <h2 
+        className='text-center cursor-pointer text-gray-500'
+        onClick={() =>  {
+          setSeeStores(DEFAULT);
+          setSeeMore(!seeMore);
+        }}>See More</h2> : null}
     </div>
   )
 }

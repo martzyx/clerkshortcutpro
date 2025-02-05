@@ -9,7 +9,7 @@ const CopyText: React.FC<{ toolTipLable?: string, content: string | number | und
 
   if(content === undefined || content === ''){
     return (
-      <span className='text-center min-w-[76px]'>{defaultText ? defaultText : '-'}</span>
+      <span className='text-center min-w-[76px] content-center'>{defaultText ? defaultText : '-'}</span>
     )
   }
   
