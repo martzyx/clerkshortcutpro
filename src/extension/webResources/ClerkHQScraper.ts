@@ -1,7 +1,6 @@
 import DTO, { HQclerkClients }  from "../../DTO";
 
 export interface Company {
-
     id: number;
     account_id: string;
     subscription: string;
