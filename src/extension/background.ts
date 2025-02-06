@@ -23,6 +23,7 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
   if (request.type === DTO.HQclerkClients) {
     const requestClerkClients: Clients = request.clients;
     if(requestClerkClients.companies.length <= 0) return
+
     await StoreHQClerkClients(requestClerkClients);
   }
 

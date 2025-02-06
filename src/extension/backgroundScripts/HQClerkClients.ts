@@ -25,7 +25,6 @@ if(clients.companies === undefined)
 const companyPromises = getExtraClientData(filteredCompanies)
 
 clients.companies = await Promise.all(companyPromises);
-
 await chrome.storage.session.set({ [DTO.HQclerkClients]: clients }); 
 return true;
 }
