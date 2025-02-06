@@ -1,4 +1,4 @@
-import DTO, { MyClerkContent, MyClerkInfo } from "../../DTO";
+import DTO, { MyClerkContent, MyClerkStoreInfo } from "../../DTO";
 
 enum ClerkContentKinds {
     CART = "Cart",
@@ -175,7 +175,7 @@ function getTranslation(kind: ClerkContentKinds, type: ClerkContentType, languag
 
 // 
 let MY_CLERK_CONTENT: MyClerkContent | undefined = undefined;
-let MY_CLERK_INFO: MyClerkInfo | undefined = undefined;
+let MY_CLERK_INFO: MyClerkStoreInfo | undefined = undefined;
 
 function waitForMessage(): Promise<void> {
   return new Promise((resolve) => {
@@ -183,7 +183,7 @@ function waitForMessage(): Promise<void> {
       if (event.data.type === DTO.MyClerkContent) {
         MY_CLERK_CONTENT = event.data;
       }
-      if (event.data.type === DTO.MyClerkInfo) {
+      if (event.data.type === "myclerkstoreinfo") {
         MY_CLERK_INFO = event.data;
       }
       if (MY_CLERK_CONTENT != undefined && MY_CLERK_INFO != undefined) {
