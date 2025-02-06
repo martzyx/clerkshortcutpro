@@ -16,6 +16,17 @@ export interface Company {
       audience: number;
       chat: number;
     } | undefined;
+    accounts: {
+      name: string,
+      domain: string,
+      enabled: boolean,
+      development: boolean,
+      currency: string,
+      private_key: string,
+      public_key: string,
+      store_id: string,
+    }[] | undefined;
+
     hubspot_id: string | undefined;
     trial_expire_at: number | undefined;
     created_at: number | undefined;
@@ -63,6 +74,7 @@ export interface Company {
     clients: Clients;
   }
 
+  
 
   const { fetch: origFetch } = window;
   window.fetch = async (...args) => {
@@ -82,7 +94,7 @@ export interface Company {
               type: DTO.HQclerkClients,
               clients: data.clients
             };
-      
+
             if (data.status === "ok") {
               window.postMessage(clerkClients, '*'); // send to content script
             }

@@ -21,13 +21,27 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
   }
 
   if (request.type === DTO.HQclerkClients) {
+    const CLERK_CLIENT_LIMIT = 5
     const ClerkClient: Clients = request.clients;
+       
+    // Filter 5 unique companies based on company id
+       const uniqueCompanies = new Set<number>();
+       let i = 0;
+       const filteredCompanies = ClerkClient.companies.filter(company => {
+        if(i == CLERK_CLIENT_LIMIT) return;
+         if (uniqueCompanies.has(company.id)) {
+           return company
+         } else {
+          i++;
+           uniqueCompanies.add(company.id);
+           return company;
+         }
+       })
 
     const HQ_CLERK_API = 'https://api.clerk.io/v2/client/info?secure=false&client_key=';
 
     if(ClerkClient.companies === undefined) throw new Error('[ClerkShortcut] No companies found in the clerk client data');
-    const companyPromises = ClerkClient.companies.map(async (company: Company) => {
-
+    const companyPromises = filteredCompanies.map(async (company: Company) => {
       // TODO: This fetch causes the "window not defined" error in "ClerkSniffer.ts"
       const CompanyExtraData: Company = await fetch(HQ_CLERK_API + company.key,
         {
@@ -43,17 +57,12 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
       return { ...company, ...CompanyExtraData };
     });
     ClerkClient.companies = await Promise.all(companyPromises);
-    
+
     await chrome.storage.session.set({ [DTO.HQclerkClients]: ClerkClient });    
   }
 
   if(request.type === DTO.MyClerkInfo) {
     await chrome.storage.session.set({ [DTO.MyClerkInfo]: request.info });
   }
-
-
   return true;
-
-
-
 });
