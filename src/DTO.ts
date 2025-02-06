@@ -1,5 +1,5 @@
-import { Clients } from "./extension/webResources/ClerkHQScraper";
-import { MyClerkInfoData, MyClerkContentData } from "./extension/webResources/MyClerkScraper";
+import { Clients, Company } from "./extension/webResources/ClerkHQScraper";
+import { MyClerkContentData } from "./extension/webResources/MyClerkScraper";
 
 enum DTO {
     ClerkSniffer = 'clerksniffer',
@@ -21,7 +21,7 @@ export type HQclerkClients = {
 
 export type MyClerkInfo = {
     type: DTO.MyClerkInfo;
-    info: MyClerkInfoData;
+    info: Company;
 }
 
 export type MyClerkContent = {

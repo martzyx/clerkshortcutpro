@@ -1,6 +1,6 @@
 import DTO from '../DTO'
-import StoreHQClerkClients from './backgroundScripts/HQClerkClients';
-import { Clients} from './webResources/ClerkHQScraper';
+import StoreHQClerkClients, { updateHQClerkClient } from './backgroundScripts/HQClerkClients';
+import { Clients, Company} from './webResources/ClerkHQScraper';
 import HandleClerkIcon from './webResources/ClerkSniffer'
 
 chrome.runtime.onMessage.addListener(async (request, sender) => {
@@ -22,12 +22,14 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
 
   if (request.type === DTO.HQclerkClients) {
     const requestClerkClients: Clients = request.clients;
-    
+    if(requestClerkClients.companies.length <= 0) return
+
     await StoreHQClerkClients(requestClerkClients);
   }
 
   if(request.type === DTO.MyClerkInfo) {
-    await chrome.storage.session.set({ [DTO.MyClerkInfo]: request.info });
+    const requestClerkClientInfo: Company = request.info 
+    updateHQClerkClient(requestClerkClientInfo);
   }
 
   return true;

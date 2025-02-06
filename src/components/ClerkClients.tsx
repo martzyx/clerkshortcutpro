@@ -4,7 +4,7 @@ import {
   Clients,
   Company,
   User,
-  Store
+  Store,
 } from '../extension/webResources/ClerkHQScraper'
 import DTO from '../DTO'
 import CopyText from './CopyText'
@@ -23,10 +23,9 @@ const ClerkClients = () => {
       const c: Clients = res[DTO.HQclerkClients];
       setClients(c);
     });
-  
   }, [])
-  if(clients === undefined) return
 
+  if(clients === undefined) return
 
   if(clients.companies.length === 0) return;
   // remove duplicate companies
@@ -84,6 +83,7 @@ const ClerkClients = () => {
                       stores={clients.stores.filter(
                         store => store.client_key === company.key
                       )}
+                      company={company}
                     />
                   )}
                  
@@ -156,10 +156,13 @@ const ProductInfo: React.FC<{ label: string, content: string | number | undefine
 
 
 
-const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
+const ClerkStore: React.FC<{ stores: Store[], company: Company }> = ({ stores, company }) => {
+  console.log("stores,", stores);
+  console.log("company,", company);
   const DEFAULT = stores;
   const [seeMore, setSeeMore] = useState<boolean>(false)
   const [seeStores, setSeeStores] = useState<Store[]>(stores);
+
 
   useEffect(() => {
     if (stores.length > 3) {
@@ -168,15 +171,22 @@ const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
     }
   }, []);
 
+  function newTab(href: string | undefined){
+    if(!href) return
+    chrome.tabs.create({url: href, active: true})
+  }
+
   return (
     <div className='mx-4'>
        <h2 className='font-semibold pb-2 text-center text-lg'>Stores</h2>
 
       {stores.length > 0 &&
         seeStores.map((store: Store, index: number) => {
+          const account = company.accounts?.find(acc => acc.public_key === store.key)
+          
           return (
             <div className='pb-1 mb-1 border-b border-gray-200' key={index}> 
-              <span className='font-semibold text-center items-center'>{store.name}</span>
+              <span onClick={() => newTab(account?.domain)} className={`font-semibold text-center items-center ${account?.domain ? "hover:underline cursor-pointer" : ""} `}>{store.name}</span>
               <div className='grid grid-cols-2 items-center'>
                 <span className='font-semibold'>Store Id</span>
                 <CopyText content={store.id} isKey={true} />
@@ -184,6 +194,10 @@ const ClerkStore: React.FC<{ stores: Store[] }> = ({ stores }) => {
               <div className='grid grid-cols-2 items-center'>
                 <span className='font-semibold'>Store Key</span>
                 <CopyText content={store.key} isKey={true} />
+              </div>
+              <div className='grid grid-cols-2 items-center'>
+                <span className='font-semibold'>Private Key</span>
+                <CopyText content={account?.private_key} isKey={true} />
               </div>
             </div>
           )

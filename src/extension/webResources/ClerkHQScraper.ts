@@ -1,7 +1,6 @@
 import DTO, { HQclerkClients }  from "../../DTO";
 
 export interface Company {
-
     id: number;
     account_id: string;
     subscription: string;
@@ -16,17 +15,7 @@ export interface Company {
       audience: number;
       chat: number;
     } | undefined;
-    accounts: {
-      name: string,
-      domain: string,
-      enabled: boolean,
-      development: boolean,
-      currency: string,
-      private_key: string,
-      public_key: string,
-      store_id: string,
-    }[] | undefined;
-
+    accounts: StoreAccounts[] | undefined;
     hubspot_id: string | undefined;
     trial_expire_at: number | undefined;
     created_at: number | undefined;
@@ -40,6 +29,18 @@ export interface Company {
     name: string;
     key: string;
     client_key: string;
+    accounts: StoreAccounts[] | undefined;
+  }
+
+  export interface StoreAccounts {
+      name: string,
+      domain: string,
+      enabled: boolean,
+      development: boolean,
+      currency: string,
+      private_key: string,
+      public_key: string,
+      store_id: string,
   }
   
   export interface User {

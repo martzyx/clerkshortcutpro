@@ -20,6 +20,7 @@ const Search = () => {
           const clients = await searchClerkClients(s.query);
           const status = await StoreHQClerkClients(clients.clients);
           if(status) setSearching(false);
+          if(clients.clients.companies.length <= 0) return
           setClients(clients.clients)
           return
     }
