@@ -5,7 +5,8 @@ enum DTO {
     ClerkSniffer = 'clerksniffer',
     HQclerkClients = 'hqclerkclients',
     MyClerkInfo = 'myclerkinfo',
-    MyClerkContent = 'myclerkcontent'
+    MyClerkContent = 'myclerkcontent',
+    SearchClients = 'SearchClients'
 }
 
 export type clerkSniffer = {
@@ -26,6 +27,11 @@ export type MyClerkInfo = {
 export type MyClerkContent = {
     type: DTO.MyClerkContent;
     content: MyClerkContentData;
+}
+
+export type SearchClients = {
+    type: DTO.SearchClients;
+    query: string;
 }
 
 export default DTO;

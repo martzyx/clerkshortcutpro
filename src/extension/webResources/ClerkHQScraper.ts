@@ -69,7 +69,7 @@ export interface Company {
     users: User[];
   }
 
-  type HQclerkData = {
+  export type HQclerkData = {
     status: string;
     clients: Clients;
   }
@@ -79,12 +79,11 @@ export interface Company {
   const { fetch: origFetch } = window;
   window.fetch = async (...args) => {
       const response = await origFetch(...args);
-      
       // If the response of the network request is from the clerk.io API & the request is a list
       // of clients
-    
+      
       if(!response.url.includes('api.clerk.io')) return response;
-
+      
       if (response.url.match('client/list')) {
         response
           .clone()
@@ -94,7 +93,7 @@ export interface Company {
               type: DTO.HQclerkClients,
               clients: data.clients
             };
-
+            
             if (data.status === "ok") {
               window.postMessage(clerkClients, '*'); // send to content script
             }
