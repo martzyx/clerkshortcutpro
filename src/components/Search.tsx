@@ -3,10 +3,11 @@ import DTO, { SearchClients } from '../DTO'
 import searchClerkClients from '../extension/backgroundScripts/search';
 import StoreHQClerkClients from '../extension/backgroundScripts/HQClerkClients';
 import { Spinner } from 'flowbite-react';
+import useClerkClients from './context/useClerkClients';
 const Search = () => {
     const [query, setQuery] = useState<string>();
     const [searching, setSearching] = useState<boolean>(false)
-
+    const { setClients } = useClerkClients();
 
     const handleSearch = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -19,6 +20,7 @@ const Search = () => {
           const clients = await searchClerkClients(s.query);
           const status = await StoreHQClerkClients(clients.clients);
           if(status) setSearching(false);
+          setClients(clients.clients)
           return
     }
     

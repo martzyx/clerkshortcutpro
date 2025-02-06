@@ -4,14 +4,17 @@ import './index.css'
 import ClerkClients from './components/ClerkClients'
 import Header from './components/Header'
 import Dashboard from './components/Dashboard'
+import { ClerkClientProvider } from './components/context/useClerkClients'
 
 createRoot(document.getElementById('root')!).render(
     <>
       <Suspense fallback={<div>Loading...</div>}>
       <div>
         <Dashboard />
-        <Header />
-        <ClerkClients />
+        <ClerkClientProvider>
+          <Header />
+          <ClerkClients />
+        </ClerkClientProvider>
         </div>
       </Suspense>
     </>

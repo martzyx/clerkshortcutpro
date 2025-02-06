@@ -22,6 +22,8 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
 
   if (request.type === DTO.HQclerkClients) {
     const requestClerkClients: Clients = request.clients;
+    console.log("got clients", requestClerkClients);
+    
     await StoreHQClerkClients(requestClerkClients);
   }
 

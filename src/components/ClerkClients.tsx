@@ -8,6 +8,7 @@ import {
 } from '../extension/webResources/ClerkHQScraper'
 import DTO from '../DTO'
 import CopyText from './CopyText'
+import useClerkClients from './context/useClerkClients'
 
 const CLERK_BACKEND_REDIRECT = 'https://my.clerk.io/#/?client_key='
 const CLERK_DETAILS_REDIRECT = 'https://hq.clerk.io/v1/customers/update/'
@@ -15,10 +16,8 @@ const handleClickToBackend = (url: string, client_key: string) => {
   chrome.tabs.create({ active: true, url: url + client_key })
 }
 
-
-
 const ClerkClients = () => {
-  const [clients, setClients] = useState<Clients>();
+  const {clients, setClients} = useClerkClients();
   useEffect(() => {
     chrome.storage.session.get(DTO.HQclerkClients).then(res => {
       const c: Clients = res[DTO.HQclerkClients];
