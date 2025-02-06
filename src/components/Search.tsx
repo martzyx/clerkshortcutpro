@@ -1,23 +1,31 @@
 import React, { useState } from 'react'
 import DTO, { SearchClients } from '../DTO'
-
+import searchClerkClients from '../extension/backgroundScripts/search';
+import StoreHQClerkClients from '../extension/backgroundScripts/HQClerkClients';
+import { Spinner } from 'flowbite-react';
 const Search = () => {
     const [query, setQuery] = useState<string>();
-    
+    const [searching, setSearching] = useState<boolean>(false)
+
+
     const handleSearch = async (event: React.FormEvent) => {
         event.preventDefault();
         if(!query) return
-
+        setSearching(true);
         const s: SearchClients = {
             type: DTO.SearchClients,
             query: query
           }
-          chrome.runtime.sendMessage(s)
+          const clients = await searchClerkClients(s.query);
+          const status = await StoreHQClerkClients(clients.clients);
+          if(status) setSearching(false);
+          return
     }
     
   return (
     <form onSubmit={handleSearch} className="grid grid-cols-[minmax(1rem,2rem)_minmax(1rem,15rem)] items-center border border-gray-300 bg-white rounded-full p-1">
-      <div className="grid place-items-center p-1 gap-2 cursor-pointer">
+      
+      {searching ? <Spinner className='w-5 h-5' /> : <div className="grid place-items-center p-1 gap-2 cursor-pointer">
         <svg
           width="20"
           height="20"
@@ -43,7 +51,7 @@ const Search = () => {
             </clipPath>
           </defs>
         </svg>
-      </div>
+      </div>}
       <input
         className="w-full bg-inherit outline-none"
         placeholder="Search for clients"
