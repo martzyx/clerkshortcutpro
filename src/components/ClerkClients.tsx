@@ -157,8 +157,6 @@ const ProductInfo: React.FC<{ label: string, content: string | number | undefine
 
 
 const ClerkStore: React.FC<{ stores: Store[], company: Company }> = ({ stores, company }) => {
-  console.log("stores,", stores);
-  console.log("company,", company);
   const DEFAULT = stores;
   const [seeMore, setSeeMore] = useState<boolean>(false)
   const [seeStores, setSeeStores] = useState<Store[]>(stores);
