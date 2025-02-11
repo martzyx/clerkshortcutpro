@@ -1,0 +1,52 @@
+// Use browser.storage.sync for Firefox
+browser.storage.sync.get(
+    {
+        getClientInfo: true, // default value
+    }
+).then((items) => {
+    if (items.getClientInfo) {
+        contextMenuClientInfo();
+    }
+});
+
+// Enable/disable if the storage variable changes
+browser.storage.onChanged.addListener((changes) => {
+    if ("getClientInfo" in changes) {
+        let storageChange = changes.getClientInfo;
+        if (storageChange.newValue) {
+            contextMenuClientInfo();
+        } else {
+            browser.contextMenus.remove("getClientInfoCMenu");
+        }
+    }
+});
+
+function contextMenuClientInfo() {
+    browser.contextMenus.create({
+        id: "getClientInfoCMenu",
+        title: "Get API keys",
+        contexts: ["link"],
+        documentUrlPatterns: ["*://hq.clerk.io/*", "*://old-hq.clerk.io/*", "*://new-hq.clerk.io/*"],
+    });
+}
+
+browser.contextMenus.onClicked.addListener((info, tab) => {
+    if (info.menuItemId === "getClientInfoCMenu" && info.linkUrl) {
+        getApiUrlWithClientKey(info.linkUrl);
+    }
+});
+
+function getApiUrlWithClientKey(url) {
+    const pattern = /client_key=([^&]+)/;
+    const match = url.match(pattern);
+
+    if (match && match[1]) {
+        // Replace CLIENT_KEY in the API URL with the actual client_key
+        const apiUrl = "https://api.clerk.io/v2/client/info?secure=false&client_key=CLIENT_KEY";
+        const newApiUrl = apiUrl.replace("CLIENT_KEY", match[1]);
+
+        browser.tabs.create({ url: newApiUrl });
+    } else {
+        console.log("No client_key found in the URL");
+    }
+}

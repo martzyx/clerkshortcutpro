@@ -1,0 +1,46 @@
+{
+    "manifest_version": 3,
+    "name": "Clerk Shortcut Pro",
+    "version": "1.0",
+    "description": "",
+    "action": {
+        "default_title": "Clerk Shortcut Pro",
+        "default_popup": "index.html"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+          "matches": ["<all_urls>"],
+          "run_at": "document_start",
+          "all_frames": true,
+          "js": ["contentScript.js"]
+        }
+      ],
+      "web_accessible_resources": [
+        {
+            "resources": ["webResource.js"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "permissions": [
+        "scripting",
+        "tabs",
+        "webRequest",
+        "commands",
+        "background",
+        "activeTab",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://*/*",
+        "http://*/*"
+    ],
+    "icons": {
+      "16": "/assets/icons/color/16.png",
+      "32": "/assets/icons/color/32.png",
+      "48": "/assets/icons/color/48.png",
+      "128": "/assets/icons/color/128.png"
+    }
+  }
