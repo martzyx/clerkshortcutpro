@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
+<div align="center">
+<img src="src/assets//icons//color/32.png" alt="logo"/>
+<h1>ClerkShortcutPRO<br/></h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![](https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![](https://badges.aleen42.com/src/vitejs.svg)
+</div>
 
-Currently, two official plugins are available:
+## Intro <a name="intro"></a>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ClerkShotcutPro is a assistant tool for Clerk. It is a chrome extension that helps you to work more efficiently by providing various functions such as client infomation at a glance!
 
-## Expanding the ESLint configuration
+## Install <a name="install"></a>
+Clone this repository and run `npm install` to install the dependencies.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**Build the project**
+`````
+npm run build
+`````
 
-- Configure the top-level `parserOptions` property like this:
+### For Chrome: <a name="chrome"></a>
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Open Chrome and go to the extensions page (`chrome://extensions`)
+2. Enable Developer Mode
+3. Click on "Load unpacked"
+4. Select the `dist` folder in this project directory
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### For Firefox: <a name="firefox"></a>
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+TBA
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Structure <a name="structure"></a>
+
+### Chrome Extension <a name="chrome-extension"></a>
+
+- `manifest.js` - manifest for chrome extension
+- `extension/background.ts` - [background script](https://developer.chrome.com/docs/extensions/mv3/background_pages/) for chrome
+  extension (`background.service_worker` in
+  manifest.json)
+- `extension/content.ts` - [content script](https://developer.chrome.com/docs/extensions/mv3/content_scripts/) for chrome
+  extension (`content_scripts` in manifest.json)
+
+- `extension/webResources/*` - Injected resources for chrome extension (`web_accessible_resources` in manifest.json)
+
+---
+
+Made by [Johannes](https://github.com/johannes67890) :)
