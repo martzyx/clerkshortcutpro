@@ -287,7 +287,6 @@ function getContentKind(contentData: MyClerkContent): ClerkContentKinds {
     throw new Error("[ClerkShortcut] Content Kind not found");
 }
 
-async function main() {
   if (document.URL.includes('https://my.clerk.io/')) {
     const observer = new MutationObserver(async (mutations) => {
       await waitForMessage();
@@ -295,11 +294,8 @@ async function main() {
     });
 
     observer.observe(document.body, {
-      attributes: false,
+      attributes: true,
       childList: true,
       subtree: true,
     });
   }
-}
-
-main();
