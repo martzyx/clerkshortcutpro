@@ -194,10 +194,10 @@ function waitForMessage(): Promise<void> {
   });
 }
 
-function handleMutations(mutations: MutationRecord[]){   
-  for (const mutation of mutations) {
-    if (mutation.nextSibling?.baseURI?.includes('/content')) {
-      document.querySelectorAll("p").forEach(async p => {
+function handleMutations(){   
+  console.log("mutation")
+      document.querySelectorAll("p").forEach(p => {
+        console.log(p)
         if (p.innerHTML == "headline") {
           const input = p.closest("div")?.querySelector("input") as HTMLInputElement;
           if (!input) return;
@@ -224,9 +224,9 @@ function handleMutations(mutations: MutationRecord[]){
           return;
         };
       });
-    }
+    
     return;
-  }
+  
 }
 
 function handleGenerate(input: HTMLInputElement | undefined, kind: ClerkContentKinds, type: ClerkContentType, language: string ) {
@@ -287,15 +287,25 @@ function getContentKind(contentData: MyClerkContent): ClerkContentKinds {
     throw new Error("[ClerkShortcut] Content Kind not found");
 }
 
-  if (document.URL.includes('https://my.clerk.io/')) {
-    const observer = new MutationObserver(async (mutations) => {
-      await waitForMessage();
-      handleMutations(mutations);
-    });
+waitForMessage();
+navigation.addEventListener("navigatesuccess", e => {
+    const currentPage = e.currentTarget.currentEntry.url;
 
-    observer.observe(document.body, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-    });
+    if (currentPage.includes('https://my.clerk.io/') && currentPage.includes('/content')) {
+      const requestObserver = new PerformanceObserver(waitForNetworkRequests)
+      requestObserver.observe({ entryTypes: ['resource'] })
+    }
+});
+
+async function waitForNetworkRequests(entries: PerformanceObserverEntryList, observer: PerformanceObserver) {
+  const loadedResources: PerformanceEntryList = entries.getEntries()
+
+  const apiCall = "https://api.clerk.io/v2/client/account/content/template/list"
+  for (const entry of loadedResources) {
+    if (entry.name.includes(apiCall)) {
+      handleMutations();
+      observer.disconnect();
+      return
+    } 
   }
+}
