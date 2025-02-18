@@ -1,5 +1,5 @@
 import DTO, { MyClerkContent, MyClerkStoreInfo } from "../../DTO";
-
+import AIstar from "../../assets/AIstar.svg"
 enum ClerkContentKinds {
     CART = "Cart",
     CATEGORY_PAGE = "Category Page",
@@ -194,15 +194,11 @@ function waitForMessage(): Promise<void> {
   });
 }
 
-function handleMutations(mutations: MutationRecord[]) {   
-  
-  for (const mutation of mutations) {
-    if (mutation.nextSibling?.baseURI?.includes('/content')) {
-      document.querySelectorAll("p").forEach(async p => {
+function handleMutations(){   
+      document.querySelectorAll("p").forEach(p => {
         if (p.innerHTML == "headline") {
-          const input = p.closest("div")?.querySelector("input");
+          const input = p.closest("div")?.querySelector("input") as HTMLInputElement;
           if (!input) return;
-
 
           if (!MY_CLERK_CONTENT || !MY_CLERK_INFO) {
             throw new Error("[ClerkShortcut] Clerk content or store info is missing.");
@@ -222,13 +218,50 @@ function handleMutations(mutations: MutationRecord[]) {
           if (input.value.length === 0) {
             input.value = translatedText; // Set the translation
           }
+          handleGenerate(input, contentKind, contentType, storeLanguage);
           return;
         };
       });
-      return;
-    }
- 
-  }
+    
+    return;
+  
+}
+
+function handleGenerate(input: HTMLInputElement | undefined, kind: ClerkContentKinds, type: ClerkContentType, language: string ) {
+  if (!input) return;
+  if(document.getElementById("ClerkShortcutGenerate") != undefined) return;
+
+  // Create a new HTML element
+  const container = document.createElement('button');
+
+  container.style.width = "200px";
+  container.style.padding = "10px";
+  container.style.margin = "10px 0";
+  container.style.display = "flex";
+  container.style.border = "1px solid cornflowerblue";
+  container.style.borderRadius = "15px";
+  container.style.fontSize = "15px";
+  container.style.color = "cornflowerblue";
+  container.style.fontWeight = "500";
+  container.onclick = () => {
+    const translation = getTranslation(kind, type, language);
+    input.value = translation;
+  };
+
+  const newElement = document.createElement('div');
+  newElement.id = "ClerkShortcutGenerate"
+  newElement.className = "daterange"
+  newElement.style.width = "20px"
+  newElement.innerHTML = AIstar 
+
+  const text = document.createElement('span');
+  text.innerText = "Generate headline"
+  text.style.margin = "0 15px"
+
+  container.append(newElement);
+  container.append(text)
+  // Insert the new element after the input element
+  input.insertAdjacentElement('afterend', container);
 }
 
 function getContentType(contentData: MyClerkContent): ClerkContentType {
@@ -251,21 +284,26 @@ function getContentKind(contentData: MyClerkContent): ClerkContentKinds {
     throw new Error("[ClerkShortcut] Content Kind not found");
 }
 
-async function main() {
-  if (document.URL.includes('https://my.clerk.io/')) {
-    
+waitForMessage();
+// @ts-expect-error navigation is only avaliable on chrome
+navigation.addEventListener("navigatesuccess", e => {
+    const currentPage = e.currentTarget.currentEntry.url;
 
-    const observer = new MutationObserver(async (mutations) => {
-       await waitForMessage();
-       handleMutations(mutations);
-    });
+    if (currentPage.includes('https://my.clerk.io/') && currentPage.includes('/content')) {
+      const requestObserver = new PerformanceObserver(waitForNetworkRequests)
+      requestObserver.observe({ entryTypes: ['resource'] })
+    }
+});
 
-    observer.observe(document.body, {
-      attributes: false,
-      childList: true,
-      subtree: true,
-    });
+function waitForNetworkRequests(entries: PerformanceObserverEntryList, observer: PerformanceObserver) {
+  const loadedResources: PerformanceEntryList = entries.getEntries()
+
+  const apiCall = "https://api.clerk.io/v2/client/account/content/template/list"
+  for (const entry of loadedResources) {
+    if (entry.name.includes(apiCall)) {
+      handleMutations();
+      observer.disconnect();
+      return
+    } 
   }
 }
-
-main();
