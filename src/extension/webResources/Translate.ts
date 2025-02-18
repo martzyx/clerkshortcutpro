@@ -195,9 +195,7 @@ function waitForMessage(): Promise<void> {
 }
 
 function handleMutations(){   
-  console.log("mutation")
       document.querySelectorAll("p").forEach(p => {
-        console.log(p)
         if (p.innerHTML == "headline") {
           const input = p.closest("div")?.querySelector("input") as HTMLInputElement;
           if (!input) return;
@@ -230,7 +228,6 @@ function handleMutations(){
 }
 
 function handleGenerate(input: HTMLInputElement | undefined, kind: ClerkContentKinds, type: ClerkContentType, language: string ) {
-  console.log(input)
   if (!input) return;
   if(document.getElementById("ClerkShortcutGenerate") != undefined) return;
 
@@ -298,7 +295,7 @@ navigation.addEventListener("navigatesuccess", e => {
     }
 });
 
-async function waitForNetworkRequests(entries: PerformanceObserverEntryList, observer: PerformanceObserver) {
+function waitForNetworkRequests(entries: PerformanceObserverEntryList, observer: PerformanceObserver) {
   const loadedResources: PerformanceEntryList = entries.getEntries()
 
   const apiCall = "https://api.clerk.io/v2/client/account/content/template/list"
