@@ -288,6 +288,7 @@ function getContentKind(contentData: MyClerkContent): ClerkContentKinds {
 }
 
 waitForMessage();
+// @ts-expect-error navigation is only avaliable on chrome
 navigation.addEventListener("navigatesuccess", e => {
     const currentPage = e.currentTarget.currentEntry.url;
 
